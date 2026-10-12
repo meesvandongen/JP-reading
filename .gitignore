@@ -1,0 +1,9 @@
+node_modules
+dist
+.cache
+public/data/dict
+public/data/library
+public/kuromoji
+dev-dist
+*.local
+.DS_Store
