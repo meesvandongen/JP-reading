@@ -1,0 +1,38 @@
+{
+  "name": "jp-reading",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Read Japanese with tap-to-look-up dictionary, furigana, audio and SRS flashcards. A PWA hosted on GitHub Pages.",
+  "scripts": {
+    "dev": "npm run build:content && vite",
+    "data": "node scripts/build-dict.mjs",
+    "build:content": "tsx scripts/build-content.ts",
+    "build": "npm run build:content && tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@patdx/kuromoji": "^1.0.4",
+    "@preact/signals": "^2.11.3",
+    "idb": "^8.0.4",
+    "marked": "^18.1.1",
+    "preact": "^11.0.1",
+    "wanakana": "^5.3.1"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.10.6",
+    "@types/node": "^26.6.5",
+    "@types/sax": "^1.2.7",
+    "@types/wanakana": "^4.0.6",
+    "sax": "^1.6.1",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4",
+    "vite-plugin-pwa": "^2.0.0",
+    "vitest": "^5.0.4",
+    "workbox-window": "^7.4.1",
+    "yaml": "^2.9.1"
+  }
+}

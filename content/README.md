@@ -1,0 +1,117 @@
+# Content library
+
+Everything under `content/` is plain text that lives in git. The build step
+(`npm run build:content`) turns it into JSON (pre-tokenized, with furigana,
+dictionary forms and keyword lists) that the app loads.
+
+```
+content/
+  stories/<level>/<slug>.md   reading texts
+  grammar/<id>.md             grammar articles
+```
+
+Adding a text is a pull request that adds one Markdown file. No code changes.
+
+## Stories
+
+Path: `content/stories/<level>/<slug>.md`. The slug (file name without `.md`)
+is the story id and must be unique across all levels. Use lowercase ASCII and
+dashes, e.g. `rainy-day-cafe.md`.
+
+### Levels
+
+| level folder   | label        | approx. JLPT | typical length          |
+| -------------- | ------------ | ------------ | ----------------------- |
+| `beginner-1`   | Beginner 1   | N5 (early)   | 5–12 short sentences    |
+| `beginner-2`   | Beginner 2   | N5           | 10–20 sentences         |
+| `beginner-3`   | Beginner 3   | N5–N4        | 15–25 sentences         |
+| `elementary`   | Elementary   | N4           | 20–35 sentences         |
+| `intermediate` | Intermediate | N3           | 30–50 sentences         |
+| `advanced`     | Advanced     | N2           | 40–70 sentences         |
+| `master`       | Master       | N1 / native  | anything, incl. classics |
+
+### Categories
+
+Use one of: `daily-life`, `food`, `travel`, `culture`, `folktale`, `history`,
+`nature`, `school`, `work`, `society`, `science`, `humor`, `literature`,
+`news-style`, `conversation`.
+
+### File format
+
+```markdown
+---
+title: 雨の日のカフェ
+title_en: A Rainy Day Café
+level: beginner-2
+category: daily-life
+tags: [cafe, weather]
+summary: Yuki spends a rainy afternoon in a small café.
+author: JP Reading (original)
+license: CC BY 4.0
+keywords:
+  - 雨|あめ|rain
+  - 喫茶店|きっさてん|coffee shop, café
+---
+
+## 第一章
+
+今日は雨です。
+> Today it is raining.
+ゆきさんは喫茶店に行きます。
+> Yuki goes to a café.
+
+店の中は静かです。
+> It is quiet inside the shop.
+```
+
+Rules:
+
+- **Front matter** is YAML. Required: `title`, `level`, `category`.
+  Recommended: `title_en`, `summary`, `author`, `license`, `tags`.
+  For public-domain texts also set `source` (URL) and `year`.
+  Quote values that contain `:`.
+- **`keywords`** (optional) is the pre-reading vocabulary list shown before the
+  story, one `word|reading|meaning` per item. If omitted, the build picks
+  keywords automatically from the text.
+- **One sentence per line.** A line of Japanese is one sentence.
+- **Translation**: a line starting with `> ` directly after a Japanese line is
+  that sentence's English translation. Translations are optional (classic
+  literature usually has none) but every original graded story should have
+  them for every sentence.
+- **Paragraphs** are separated by a blank line.
+- **Chapters**: a line starting with `## ` starts a new chapter (the audio
+  player can start from any chapter). `# ` lines are ignored (the title comes
+  from the front matter).
+- **Reading hints (ruby)**: the tokenizer guesses readings. Where it would be
+  wrong (names, rare readings), add Aozora-style ruby:
+  `｜朱鷺《とき》`, or `朱鷺《とき》` (the reading applies to the run of kanji
+  directly before `《`). Use ruby for every personal name written in kanji.
+- Dialogue in 「」 is fine. Keep 「」 on the same line as the rest of the
+  sentence.
+- Use full-width Japanese punctuation (。、「」！？).
+
+## Grammar articles
+
+Path: `content/grammar/<id>.md`. The id is referenced from the reader's
+grammar breakdown, so keep ids stable.
+
+```markdown
+---
+title: Te-form
+title_jp: て形
+jlpt: N5
+order: 10
+summary: Connects actions, makes requests and builds many other forms.
+---
+
+Body in Markdown. Japanese example sentences in a list, with an em dash
+before the translation:
+
+- 窓を開けて、外を見ました。 — I opened the window and looked outside.
+```
+
+## Licensing
+
+Original texts in this repository are licensed CC BY 4.0 unless the front
+matter says otherwise. Texts from Aozora Bunko are public domain in Japan;
+keep their `source` URL.

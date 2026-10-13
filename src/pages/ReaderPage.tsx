@@ -1,0 +1,630 @@
+import { useEffect, useMemo, useRef, useState } from 'preact/hooks'
+import type { Sentence, StoryDoc, Word } from '../lib/types'
+import { isLookupWord, lemmaKey, sentenceText } from '../lib/analyze'
+import { hasKanji, isKana, toHiragana, toRomaji } from '../lib/kana'
+import { levelInfo } from '../lib/levels'
+import { getStory, library } from '../services/library'
+import { cards, known, logActivity, progress, updateProgress } from '../state/db'
+import { settings, FONTS } from '../state/settings'
+import { playing, playQueue, pauseQueue, resumeQueue, seekQueue, stopQueue, ttsSupported } from '../services/tts'
+import { saveKeyword, cardId } from '../services/cards'
+import { back, navigate } from '../router'
+import { accentClass } from '../components/PitchAccent'
+import { Icon } from '../components/Icon'
+import { JlptBadge, LevelBadge } from '../components/Badges'
+import { WordPopup } from '../components/WordPopup'
+import { ReaderSettings } from '../components/ReaderSettings'
+import { Sheet } from '../components/Sheet'
+import { recommend } from './LibraryPage'
+import { StoryCard } from '../components/StoryCard'
+import { grammarTitle } from '../services/library'
+
+interface Flat {
+  s: Sentence
+  ci: number
+  pi: number
+  si: number
+}
+
+export function ReaderPage({ id }: { id: string }) {
+  const [doc, setDoc] = useState<StoryDoc | null>(null)
+  const [error, setError] = useState<string | null>(null)
+  useEffect(() => {
+    setDoc(null)
+    setError(null)
+    getStory(id).then(setDoc, (e) => setError(e.message))
+    return () => stopQueue()
+  }, [id])
+  if (error)
+    return (
+      <div class="page">
+        <div class="notice">{error}</div>
+        <button class="btn" onClick={() => navigate('/')}>
+          Back to library
+        </button>
+      </div>
+    )
+  if (!doc) return <div class="page loading">Loading story…</div>
+  return <Reader doc={doc} />
+}
+
+function Reader({ doc }: { doc: StoryDoc }) {
+  const id = doc.meta.id
+  const s = settings.value
+  const [popup, setPopup] = useState<{ word: Word; sentence: Sentence; rest: string } | null>(null)
+  const [showSettings, setShowSettings] = useState(false)
+  const [hub, setHub] = useState(false)
+  const [current, setCurrent] = useState(-1)
+  const [revealed, setRevealed] = useState<Set<number>>(new Set())
+  const textRef = useRef<HTMLDivElement>(null)
+  const prog = progress.value.get(id)
+
+  // Flatten sentences for audio and progress
+  const flat = useMemo(() => {
+    const out: Flat[] = []
+    doc.chapters.forEach((c, ci) => c.p.forEach((p, pi) => p.s.forEach((s, si) => out.push({ s, ci, pi, si }))))
+    return out
+  }, [doc])
+  const flatIndex = useMemo(() => {
+    const m = new Map<Sentence, number>()
+    flat.forEach((f, i) => m.set(f.s, i))
+    return m
+  }, [flat])
+
+  // Saved / known lookups for highlighting and adaptive reading aids
+  const savedEntries = useMemo(() => {
+    const set = new Set<number>()
+    const mature = new Set<number>()
+    for (const c of cards.value.values()) {
+      if (c.entryId) {
+        set.add(c.entryId)
+        if (c.interval >= 21) mature.add(c.entryId)
+      }
+    }
+    return { set, mature }
+  }, [cards.value])
+  const knownMap = known.value
+
+  // Mark started, restore position
+  useEffect(() => {
+    updateProgress(id, { lastRead: Date.now() })
+    const pos = progress.value.get(id)?.position ?? 0
+    if (pos > 0 && !progress.value.get(id)?.completedAt) {
+      requestAnimationFrame(() => {
+        textRef.current?.querySelector(`[data-si="${pos}"]`)?.scrollIntoView({ block: 'center' })
+      })
+    }
+  }, [id])
+
+  // Track reading position
+  useEffect(() => {
+    const root = textRef.current
+    if (!root) return
+    let best = 0
+    let timer: ReturnType<typeof setTimeout> | null = null
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            const i = Number((e.target as HTMLElement).dataset.si)
+            if (i > best) best = i
+          }
+        }
+        if (timer) clearTimeout(timer)
+        timer = setTimeout(() => updateProgress(id, { position: best }), 800)
+      },
+      { threshold: 0.6 },
+    )
+    root.querySelectorAll('[data-si]').forEach((el) => io.observe(el))
+    return () => {
+      io.disconnect()
+      if (timer) clearTimeout(timer)
+    }
+  }, [doc, s.translation, s.vertical])
+
+  // Time spent reading (only while visible and recently active)
+  useEffect(() => {
+    let lastActive = Date.now()
+    const poke = () => (lastActive = Date.now())
+    const evs = ['pointerdown', 'scroll', 'keydown', 'wheel']
+    evs.forEach((e) => window.addEventListener(e, poke, { passive: true }))
+    const t = setInterval(() => {
+      const listening = playing.value && !playing.value.paused
+      if (document.visibilityState === 'visible' && (Date.now() - lastActive < 90_000 || listening)) {
+        logActivity({ seconds: 15, storyId: id })
+        const p = progress.value.get(id)
+        updateProgress(id, { seconds: (p?.seconds ?? 0) + 15 })
+      }
+    }, 15_000)
+    return () => {
+      clearInterval(t)
+      evs.forEach((e) => window.removeEventListener(e, poke))
+    }
+  }, [id])
+
+  // Follow audio
+  useEffect(() => {
+    if (current < 0 || !s.autoScroll) return
+    const el = textRef.current?.querySelector(`[data-si="${current}"]`)
+    el?.scrollIntoView({ block: 'center', behavior: 'smooth' })
+  }, [current])
+  useEffect(() => {
+    if (!playing.value) setCurrent(-1)
+  }, [playing.value])
+
+  const startAudio = (from: number) => {
+    playQueue(
+      flat.map((f) => ({ text: sentenceText(f.s).replace(/[「」『』（）()]/g, ' ') })),
+      from,
+      (i) => setCurrent(i),
+      { title: doc.meta.title, artist: doc.meta.author },
+    )
+  }
+
+  const onTextClick = (e: MouseEvent) => {
+    const el = (e.target as HTMLElement).closest<HTMLElement>('[data-w]')
+    if (el) {
+      const [si, wi] = el.dataset.w!.split('.').map(Number)
+      const sentence = flat[si].s
+      const word = sentence.w[wi]
+      const rest = sentence.w
+        .slice(wi)
+        .map((w) => w.s)
+        .join('')
+      setPopup({ word, sentence, rest })
+      return
+    }
+    const tr = (e.target as HTMLElement).closest<HTMLElement>('[data-tr]')
+    if (tr) {
+      const i = Number(tr.dataset.tr)
+      const next = new Set(revealed)
+      if (next.has(i)) next.delete(i)
+      else next.add(i)
+      setRevealed(next)
+    }
+  }
+
+  const aidHidden = (w: Word): boolean => {
+    if (s.aidScope === 'all') return false
+    if (s.aidScope === 'jlpt') return !!w.j && w.j >= s.aidJlpt
+    // unknown-only
+    return knownMap.get(lemmaKey(w))?.status === 'known' || (!!w.e && savedEntries.mature.has(w.e))
+  }
+
+  const renderWord = (w: Word, si: number, wi: number) => {
+    if (!isLookupWord(w)) return w.s
+    const cls = ['w']
+    if (s.jlptHighlight && w.j) cls.push(`jl-${w.j}`)
+    if (s.pitchAccent && w.a && !w.b) cls.push(accentClass(w.r ?? toHiragana(w.s), w.a))
+    if (s.highlightSaved && w.e && savedEntries.set.has(w.e)) cls.push('saved')
+    if (popup?.word === w) cls.push('active')
+    let inner: preact.ComponentChildren = w.s
+    const reading = w.pr ?? w.r ?? toHiragana(w.s)
+    if (hasKanji(w.s)) {
+      if (!aidHidden(w)) {
+        if (s.kanjiAid === 'furigana' && w.f) {
+          inner = w.f.map(([t, r]) =>
+            r ? (
+              <ruby>
+                {t}
+                <rt>{r}</rt>
+              </ruby>
+            ) : (
+              t
+            ),
+          )
+        } else if (s.kanjiAid === 'romaji') {
+          inner = (
+            <ruby>
+              {w.s}
+              <rt class="rt-romaji">{toRomaji(reading)}</rt>
+            </ruby>
+          )
+        }
+      }
+    } else if (s.kanaAid === 'romaji' && isKana(w.s) && !aidHidden(w)) {
+      inner = (
+        <ruby>
+          {w.s}
+          <rt class="rt-romaji">{toRomaji(reading)}</rt>
+        </ruby>
+      )
+    }
+    return (
+      <span class={cls.join(' ')} data-w={`${si}.${wi}`}>
+        {inner}
+      </span>
+    )
+  }
+
+  const renderSentence = (sent: Sentence) => {
+    const si = flatIndex.get(sent)!
+    return (
+      <span class={`sent ${current === si ? 'playing' : ''}`} data-si={si}>
+        {sent.w.map((w, wi) => renderWord(w, si, wi))}
+      </span>
+    )
+  }
+
+  const finish = async () => {
+    const p = progress.value.get(id)
+    const first = !p?.completedAt
+    await updateProgress(id, { completedAt: Date.now(), timesCompleted: (p?.timesCompleted ?? 0) + 1, position: 0 })
+    await logActivity({ stories: 1, chars: doc.meta.chars, storyId: id })
+    if (first) window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
+  }
+
+  const completed = !!prog?.completedAt
+  const font = FONTS[s.fontFamily].css
+  const style = { fontFamily: font, fontSize: `${s.fontSize}px`, lineHeight: s.lineHeight }
+  const next = useMemo(() => recommend(4, id), [id, progress.value])
+  const grammarInStory = useMemo(() => {
+    const counts = new Map<string, number>()
+    for (const f of flat) for (const w of f.s.w) for (const g of w.t ?? []) counts.set(g, (counts.get(g) ?? 0) + 1)
+    return [...counts.entries()].sort((a, b) => b[1] - a[1])
+  }, [flat])
+  const savedFromStory = [...cards.value.values()].filter((c) => c.storyId === id)
+
+  return (
+    <div class={`reader ${s.vertical ? 'vertical' : ''}`}>
+      <header class="topbar reader-bar">
+        <button class="icon-btn" onClick={() => back('/')} aria-label="Back">
+          <Icon name="back" />
+        </button>
+        <div class="topbar-title" lang="ja">
+          {doc.meta.title}
+        </div>
+        <button
+          class={`icon-btn ${s.translation !== 'off' ? 'on' : ''}`}
+          aria-label="Toggle translations"
+          title="Translations"
+          disabled={!doc.meta.translated && !flat.some((f) => f.s.en)}
+          onClick={() => settings.value = { ...s, translation: s.translation === 'off' ? 'sentence' : 'off' }}
+        >
+          <Icon name="translate" />
+        </button>
+        <button class="icon-btn" aria-label="Resources" title="Keywords, saved words, grammar" onClick={() => setHub(true)}>
+          <Icon name="list" />
+        </button>
+        <button class="icon-btn text-btn" aria-label="Reading settings" title="Reading settings" onClick={() => setShowSettings(true)}>
+          Aa
+        </button>
+      </header>
+
+      <div class="reader-scroll">
+        <div class="reader-head">
+          <div class="reader-meta">
+            <LevelBadge level={doc.meta.level} />
+            <span class="muted small">
+              {doc.meta.chars.toLocaleString()} characters · ~{Math.max(1, Math.round(doc.meta.chars / (levelInfo(doc.meta.level).jlpt >= 4 ? 150 : 300)))} min
+            </span>
+          </div>
+          <h1 lang="ja" style={{ fontFamily: font }}>
+            {doc.meta.title}
+          </h1>
+          {doc.meta.title_en && <div class="subtitle">{doc.meta.title_en}</div>}
+          {doc.meta.author && <div class="muted small">{doc.meta.author}</div>}
+          {doc.keywords.length > 0 && !prog?.position && (
+            <details class="keywords-card" open={!prog?.completedAt}>
+              <summary>Keywords · {doc.keywords.length}</summary>
+              <KeywordList doc={doc} />
+            </details>
+          )}
+        </div>
+
+        <div ref={textRef} class={`reader-text tr-${s.translation}`} style={style} lang="ja" onClick={onTextClick}>
+          {doc.chapters.map((c) => (
+            <section class="chapter">
+              {c.title && <h2 class="chapter-title">{c.title}</h2>}
+              {c.p.map((p) =>
+                s.translation === 'sentence' ? (
+                  <div class="para">
+                    {p.s.map((sent) => {
+                      const si = flatIndex.get(sent)!
+                      return (
+                        <div class="sent-block">
+                          {renderSentence(sent)}
+                          {sent.en && (
+                            <div class={`tr ${revealed.has(si) ? 'shown' : ''}`} lang="en" data-tr={si}>
+                              {sent.en}
+                            </div>
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
+                ) : (
+                  <div class="para">
+                    <p>{p.s.map(renderSentence)}</p>
+                    {s.translation === 'paragraph' && p.s.some((x) => x.en) && (
+                      <div class="tr shown" lang="en">
+                        {p.s.map((x) => x.en).filter(Boolean).join(' ')}
+                      </div>
+                    )}
+                  </div>
+                ),
+              )}
+            </section>
+          ))}
+        </div>
+
+        <div class="reader-end">
+          {completed ? (
+            <div class="done-card">
+              <div class="done-icon">
+                <Icon name="check" size={32} />
+              </div>
+              <div>
+                <b>Finished!</b> {prog?.timesCompleted && prog.timesCompleted > 1 ? `Read ${prog.timesCompleted} times.` : ''}
+              </div>
+              <button class="btn ghost" onClick={finish}>
+                Read again ✓
+              </button>
+            </div>
+          ) : (
+            <button class="btn primary big" onClick={finish}>
+              <Icon name="check" /> Mark as finished
+            </button>
+          )}
+          {doc.meta.source && (
+            <p class="muted small">
+              Source:{' '}
+              <a href={doc.meta.source} target="_blank" rel="noopener noreferrer">
+                {doc.meta.source}
+              </a>{' '}
+              · {doc.meta.license}
+            </p>
+          )}
+          {completed && next.length > 0 && (
+            <div class="next-up">
+              <h3>Read next</h3>
+              <div class="story-grid">
+                {next.map((m) => (
+                  <StoryCard meta={m} />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {ttsSupported && (
+        <AudioBar
+          playingState={playing.value}
+          onPlay={() => {
+            if (playing.value?.paused) resumeQueue()
+            else startAudio(Math.max(0, prog?.completedAt ? 0 : prog?.position ?? 0))
+          }}
+          onPause={pauseQueue}
+          onStop={stopQueue}
+          onPrev={() => seekQueue((playing.value?.index ?? 1) - 1)}
+          onNext={() => seekQueue((playing.value?.index ?? -1) + 1)}
+          chapters={doc.chapters.map((c, ci) => ({ title: c.title ?? `Part ${ci + 1}`, start: flat.findIndex((f) => f.ci === ci) }))}
+          onChapter={(i) => startAudio(i)}
+        />
+      )}
+
+      {popup && (
+        <WordPopup
+          word={popup.word}
+          sentence={popup.sentence}
+          rest={popup.rest}
+          storyId={id.startsWith('my-') ? undefined : id}
+          onClose={() => setPopup(null)}
+          onPlayFrom={ttsSupported ? () => startAudio(flatIndex.get(popup.sentence) ?? 0) : undefined}
+        />
+      )}
+      <ReaderSettings open={showSettings} onClose={() => setShowSettings(false)} />
+      <Sheet open={hub} onClose={() => setHub(false)} title="Resources">
+        <ResourceHub doc={doc} grammar={grammarInStory} saved={savedFromStory} />
+      </Sheet>
+    </div>
+  )
+}
+
+function KeywordList({ doc }: { doc: StoryDoc }) {
+  return (
+    <ul class="keyword-list">
+      {doc.keywords.map((k) => {
+        const saved = cards.value.has(cardId(k.w, k.r || k.w))
+        return (
+          <li>
+            <div>
+              <span class="kw-word" lang="ja">
+                {k.w}
+              </span>{' '}
+              {k.r && k.r !== k.w && (
+                <span class="muted" lang="ja">
+                  {k.r}
+                </span>
+              )}{' '}
+              <JlptBadge level={k.j} />
+              <div class="small">{k.m}</div>
+            </div>
+            <button
+              class={`icon-btn save ${saved ? 'on' : ''}`}
+              aria-label={saved ? 'Remove from flashcards' : 'Save to flashcards'}
+              onClick={() => saveKeyword(k.w, k.r, k.m, k.j, doc.meta.id.startsWith('my-') ? undefined : doc.meta.id)}
+            >
+              <Icon name="star" fill={saved} />
+            </button>
+          </li>
+        )
+      })}
+    </ul>
+  )
+}
+
+function ResourceHub({ doc, grammar, saved }: { doc: StoryDoc; grammar: [string, number][]; saved: { id: string; word: string; reading: string; meaning: string }[] }) {
+  const [tab, setTab] = useState<'keywords' | 'saved' | 'grammar' | 'info'>(doc.keywords.length ? 'keywords' : 'grammar')
+  const known = library.value?.grammar
+  return (
+    <div class="hub">
+      <div class="tabs">
+        {(['keywords', 'saved', 'grammar', 'info'] as const).map((t) => (
+          <button class={`tab ${tab === t ? 'on' : ''}`} onClick={() => setTab(t)}>
+            {t === 'keywords' ? 'Keywords' : t === 'saved' ? `Saved (${saved.length})` : t === 'grammar' ? 'Grammar' : 'About'}
+          </button>
+        ))}
+      </div>
+      {tab === 'keywords' && (doc.keywords.length ? <KeywordList doc={doc} /> : <p class="muted">No keywords for this text.</p>)}
+      {tab === 'saved' &&
+        (saved.length ? (
+          <ul class="word-list">
+            {saved.map((c) => (
+              <li>
+                <b lang="ja">{c.word}</b> <span class="muted" lang="ja">{c.reading !== c.word ? c.reading : ''}</span>
+                <div class="small">{c.meaning}</div>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="muted">Tap a word and press ★ to save it to your flashcards.</p>
+        ))}
+      {tab === 'grammar' && (
+        <ul class="grammar-used">
+          {grammar
+            .filter(([g]) => known?.some((k) => k.id === g))
+            .map(([g, n]) => (
+              <li>
+                <button class="link" onClick={() => navigate(`/grammar/${g}`)}>
+                  {grammarTitle(g)}
+                </button>{' '}
+                <span class="muted small">×{n}</span>
+              </li>
+            ))}
+        </ul>
+      )}
+      {tab === 'info' && (
+        <div class="story-info">
+          {doc.meta.summary && <p>{doc.meta.summary}</p>}
+          <p class="small">
+            <LevelBadge level={doc.meta.level} /> {doc.meta.sentences} sentences · {doc.meta.chars.toLocaleString()} characters
+            {doc.meta.lemmas ? ` · ${doc.meta.lemmas} unique words` : ''}
+          </p>
+          {doc.meta.jlpt && <JlptBar dist={doc.meta.jlpt} />}
+          {doc.meta.author && <p class="small">Author: {doc.meta.author}</p>}
+          {doc.meta.license && <p class="small">License: {doc.meta.license}</p>}
+          {doc.meta.source && (
+            <p class="small">
+              Source: <a href={doc.meta.source} target="_blank" rel="noopener noreferrer">{doc.meta.source}</a>
+            </p>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
+export function JlptBar({ dist }: { dist: number[] }) {
+  const total = dist.reduce((a, b) => a + b, 0) || 1
+  const order = [5, 4, 3, 2, 1, 0]
+  return (
+    <div>
+      <div class="jlpt-bar" role="img" aria-label="Vocabulary by JLPT level">
+        {order.map((l) => (dist[l] ? <span class={`seg jl-bg-${l}`} style={{ width: `${(dist[l] / total) * 100}%` }} title={`${l ? 'N' + l : 'Other'}: ${dist[l]}`} /> : null))}
+      </div>
+      <div class="jlpt-legend small">
+        {order.map((l) =>
+          dist[l] ? (
+            <span>
+              <i class={`dot jl-bg-${l}`} /> {l ? `N${l}` : 'Other'} {Math.round((dist[l] / total) * 100)}%
+            </span>
+          ) : null,
+        )}
+      </div>
+    </div>
+  )
+}
+
+function AudioBar({
+  playingState,
+  onPlay,
+  onPause,
+  onStop,
+  onPrev,
+  onNext,
+  chapters,
+  onChapter,
+}: {
+  playingState: { index: number; total: number; paused: boolean } | null
+  onPlay: () => void
+  onPause: () => void
+  onStop: () => void
+  onPrev: () => void
+  onNext: () => void
+  chapters: { title: string; start: number }[]
+  onChapter: (start: number) => void
+}) {
+  const s = settings.value
+  const [chOpen, setChOpen] = useState(false)
+  const active = !!playingState
+  const isPlaying = active && !playingState!.paused
+  const RATES = [0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.25, 1.5]
+  return (
+    <div class={`audio-bar ${active ? 'active' : ''}`}>
+      {active && (
+        <button class="icon-btn" onClick={onPrev} aria-label="Previous sentence">
+          <Icon name="prev" />
+        </button>
+      )}
+      <button class="icon-btn play" onClick={isPlaying ? onPause : onPlay} aria-label={isPlaying ? 'Pause' : 'Listen'}>
+        <Icon name={isPlaying ? 'pause' : 'play'} fill />
+      </button>
+      {active && (
+        <button class="icon-btn" onClick={onNext} aria-label="Next sentence">
+          <Icon name="next" />
+        </button>
+      )}
+      {active ? (
+        <div class="audio-progress">
+          <div class="bar">
+            <span style={{ width: `${((playingState!.index + 1) / playingState!.total) * 100}%` }} />
+          </div>
+          <span class="small muted">
+            {playingState!.index + 1}/{playingState!.total}
+          </span>
+        </div>
+      ) : (
+        <span class="audio-hint small muted">Listen to this story</span>
+      )}
+      <select
+        class="rate"
+        value={String(s.rate)}
+        aria-label="Speed"
+        onChange={(e) => (settings.value = { ...s, rate: Number((e.target as HTMLSelectElement).value) })}
+      >
+        {RATES.map((r) => (
+          <option value={String(r)}>{r}×</option>
+        ))}
+      </select>
+      {chapters.length > 1 && (
+        <button class="icon-btn" onClick={() => setChOpen(true)} aria-label="Chapters">
+          <Icon name="list" />
+        </button>
+      )}
+      {active && (
+        <button class="icon-btn" onClick={onStop} aria-label="Stop">
+          <Icon name="stop" />
+        </button>
+      )}
+      <Sheet open={chOpen} onClose={() => setChOpen(false)} title="Listen from chapter">
+        <ul class="chapter-list">
+          {chapters.map((c) => (
+            <li>
+              <button
+                class="link"
+                onClick={() => {
+                  setChOpen(false)
+                  onChapter(c.start)
+                }}
+              >
+                <Icon name="play" size={14} /> <span lang="ja">{c.title}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      </Sheet>
+    </div>
+  )
+}
