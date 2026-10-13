@@ -941,6 +941,21 @@ textarea {
   max-width: 760px;
   margin: 0 auto;
   padding: 8px 20px 40px;
+  /* taps and press-and-hold are handled by the reader: no browser text selection,
+     callout or (on Android) web search of the selection */
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+.reader-scroll a {
+  -webkit-touch-callout: default;
+}
+.reader-text {
+  touch-action: manipulation;
+}
+/* room to scroll the last sentences above the lookup panel */
+.reader.lookup-open {
+  padding-bottom: max(calc(80px + env(safe-area-inset-bottom)), calc(var(--panel-h, 0px) + 24px));
 }
 .reader-head h1 {
   font-size: 1.8rem;
@@ -1034,8 +1049,10 @@ ruby {
   border-radius: 4px;
   transition: background 0.12s;
 }
-.w:hover {
-  background: var(--surface-2);
+@media (hover: hover) {
+  .w:hover {
+    background: var(--surface-2);
+  }
 }
 .w.active {
   background: var(--mark);
@@ -1096,10 +1113,28 @@ ruby {
 .pa-odaka {
   color: var(--pa-odaka);
 }
+.sent.playing,
+.sent.sel-word,
+.sent.sel-sentence {
+  border-radius: 4px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
 .sent.playing {
   background: var(--playing);
-  border-radius: 4px;
   box-shadow: 0 0 0 3px var(--playing);
+}
+/* the sentence of the looked-up word stays visible and marked above the panel */
+.sent.sel-word {
+  background: color-mix(in srgb, var(--mark) 28%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--mark) 28%, transparent);
+}
+.sent.sel-sentence {
+  background: color-mix(in srgb, var(--mark) 70%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--mark) 70%, transparent);
+}
+.sent.sel-word .w.active {
+  background: var(--mark);
 }
 .sent-block {
   margin-bottom: 0.5em;
@@ -1119,7 +1154,6 @@ ruby {
 }
 .tr-sentence .tr.shown {
   filter: none;
-  user-select: auto;
 }
 .reader.vertical .reader-text {
   writing-mode: vertical-rl;
@@ -1436,6 +1470,187 @@ ruby {
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+}
+
+/* ---------- lookup panel (non-modal, docked) ---------- */
+.lookup-panel {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+  z-index: 40;
+  width: 100%;
+  max-width: 640px;
+  max-height: min(45dvh, 420px);
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-bottom: 0;
+  border-radius: 18px 18px 0 0;
+  box-shadow: 0 -6px 24px rgb(0 0 0 / 14%);
+  padding-bottom: env(safe-area-inset-bottom);
+  animation: up 0.18s ease-out;
+  transition: max-height 0.2s ease-out;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+.lookup-panel.expanded {
+  max-height: 88dvh;
+}
+.lp-grip {
+  flex: none;
+  touch-action: none;
+}
+.lp-handle {
+  height: 16px;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lp-handle::before {
+  content: '';
+  width: 40px;
+  height: 4px;
+  border-radius: 9px;
+  background: var(--border);
+}
+.lp-head {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 6px 6px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.lp-tabs {
+  flex: 0 1 240px;
+  margin-right: auto;
+}
+.lp-tabs button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.lp-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 8px 16px 16px;
+}
+.lp-surface {
+  margin-bottom: 2px;
+}
+.word-view .entry-word {
+  font-size: 1.6rem;
+}
+.bd-chain {
+  font-size: 0.92rem;
+  margin: 2px 0 4px;
+}
+.bd-base {
+  font-weight: 700;
+}
+.lp-more {
+  margin-top: 4px;
+}
+.lp-hint {
+  margin: 10px 0 0;
+}
+.lp-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.lp-translation {
+  margin-bottom: 12px;
+}
+.lp-translation p {
+  font-size: 1.05rem;
+  margin: 2px 0 6px;
+  -webkit-user-select: text;
+  user-select: text;
+}
+.lp-links {
+  margin-top: 4px;
+}
+.gloss-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.gloss-row {
+  display: grid;
+  grid-template-columns: 7em 1fr;
+  gap: 12px;
+  align-items: baseline;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  padding: 7px 4px;
+  cursor: pointer;
+}
+.gloss-row:hover,
+.gloss-row.on {
+  background: var(--surface-2);
+}
+.gl-word {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+.gl-reading {
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--muted);
+}
+.gl-meaning {
+  font-size: 0.92rem;
+  min-width: 0;
+}
+.gl-grammar {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+@media (min-width: 900px) {
+  .lookup-panel {
+    top: 0;
+    left: auto;
+    width: 420px;
+    max-width: none;
+    max-height: none;
+    border-radius: 0;
+    border: 0;
+    border-left: 1px solid var(--border);
+    animation: left 0.2s ease-out;
+  }
+  .lookup-panel.expanded {
+    max-height: none;
+  }
+  .lp-handle,
+  .lp-expand {
+    display: none;
+  }
+  .lp-head {
+    padding-top: max(8px, env(safe-area-inset-top));
+  }
+  /* text moves left so the panel never covers it */
+  .reader.lookup-open {
+    padding-right: 420px;
+  }
+  .reader.lookup-open .audio-bar {
+    left: calc(50% - 210px);
+    width: min(560px, calc(100vw - 444px));
+  }
 }
 
 /* ---------- dictionary ---------- */

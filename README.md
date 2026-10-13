@@ -20,8 +20,15 @@ desktop and it works offline.
 
 **Reader**
 - Tap any word for its meaning, reading, romaji, pitch accent, JLPT level,
-  part of speech, other forms, the kanji it uses (with stroke order animation)
-  and the sentence it's in.
+  part of speech, other forms and the kanji it uses (with stroke order
+  animation). The lookup opens as a small panel that keeps the sentence in view
+  above it, and you can tap the next word without closing it. Swipe the panel up
+  (or press "More details") for everything.
+- Press and hold any word to select its sentence: the full translation, a
+  word-by-word breakdown, audio and copy. Texts without a translation use the
+  browser's on-device translator where available, or offer Google Translate and
+  DeepL links. Press and hold no longer starts the browser's text selection
+  (or Android's web search).
 - A grammar breakdown for conjugated words, e.g.
   食べさせられました → 食べる + causative + passive + polite + past, with links
   to grammar articles.
