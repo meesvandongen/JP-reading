@@ -26,7 +26,7 @@ keywords:
 > After driving about thirty minutes, we came to a small river in the mountains.
 
 車を止めて、父はライトを消しました。
-> We stopped the car, and Dad turned off the lights.
+> Dad stopped the car and turned off the headlights.
 「ホタルは明るいところが苦手なんだ。」
 > "Fireflies don't like bright places."
 まわりはまっくらで、川の音しか聞こえません。
@@ -52,24 +52,24 @@ keywords:
 光は熱くないので、さわってもやけどはしません。
 > The light isn't hot, so you won't get burned even if you touch it.
 それに、ホタルはきれいな川の近くにしか住めないそうです。
-> Also, fireflies can only live near clean rivers.
+> Also, apparently fireflies can only live near clean rivers.
 「昔はこのあたりにも、もっとたくさんいたんだよ。」と父は言いました。
 > "There used to be many more around here," Dad said.
 町に家や道ができて、川が汚くなったからです。
-> That's because houses and roads were built in the area, and the rivers got dirty.
-でも、町の人たちが川をそうじして、ホタルが少しずつもどってきたそうです。
-> But people in the town cleaned the river, and the fireflies have slowly been coming back.
+> That's because houses and roads were built in the town, and the river got dirty.
+でも、町の人たちが川を掃除して、ホタルが少しずつもどってきたそうです。
+> But apparently the townspeople cleaned up the river, and little by little the fireflies came back.
 
-一ぴきのホタルが、ぼくの手の上にとまりました。
+一匹のホタルが、ぼくの手の上にとまりました。
 > One firefly landed on my hand.
 近くで見ると、とても小さい虫です。
 > Seen up close, it was a very small insect.
 おしりが、ゆっくり光っていました。
-> Its tail was glowing slowly.
+> Its tail end was slowly glowing.
 ぼくは息を止めて、じっと見ていました。
-> I held my breath and watched it closely.
+> I held my breath and watched it without moving.
 やがて、ホタルはまた空に飛んでいきました。
-> Before long, the firefly flew back up into the sky.
+> Before long, the firefly flew off into the sky again.
 
 帰りの車の中で、ぼくは「来年もまた来たい。」と言いました。
 > In the car on the way home, I said, "I want to come again next year."

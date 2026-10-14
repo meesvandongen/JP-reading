@@ -26,10 +26,10 @@ keywords:
 ピンクの花です。
 > They are pink flowers.
 
-夏、木の下はすずしいです。
+夏《なつ》、｜木の下《きのした》はすずしいです。
 > In summer, it is cool under the tree.
 
-秋、葉《は》は赤と黄色です。
+秋《あき》、葉《は》は赤と黄色です。
 > In autumn, the leaves are red and yellow.
 
 冬、木は少しさびしいです。
@@ -37,7 +37,7 @@ keywords:
 でも、木の上に小さい家《いえ》があります。
 > But there is a small house up in the tree.
 鳥の家《いえ》です。
-> It is a bird's house.
+> It is a birdhouse.
 
 春、家《いえ》の中に小さい鳥が三羽《さんわ》います。
 > In spring, there are three little birds in the house.

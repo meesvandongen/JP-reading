@@ -4,7 +4,7 @@ title_en: A Fortune in Kyoto
 level: beginner-2
 category: travel
 tags: [kyoto, temple, omikuji, rain, kindness]
-summary: Emma draws the worst possible fortune at a Kyoto temple, but the day turns out better than she expected.
+summary: Emma draws a bad-luck fortune at a Kyoto temple, but the day turns out better than she expected.
 author: JP Reading (original)
 license: CC BY 4.0
 keywords:
@@ -40,17 +40,17 @@ keywords:
 午後、雨がふりました。
 > In the afternoon, it rained.
 エマさんはかさを持っていません。
-> Emma doesn't have an umbrella.
+> Emma didn't have an umbrella.
 そのとき、おばあさんが来ました。
 > Just then, an old woman came over.
 「どうぞ。いっしょに行きましょう。」
 > "Here. Let's go together."
-二人は一つのかさで駅まで歩きました。
+二人《ふたり》は一つのかさで駅まで歩きました。
 > The two of them walked to the station under one umbrella.
 
 おばあさんの家《いえ》は、駅の近くのお茶の店でした。
 > The old woman's home was a tea shop near the station.
-エマさんはそこで、おいしいお茶を飲みました。
-> There, Emma drank some delicious tea.
+エマさんはその店で、おいしいお茶を飲みました。
+> At the shop, Emma drank some delicious tea.
 「今日は凶《きょう》じゃありません。大吉《だいきち》です！」
 > "Today isn't bad luck. It's great luck!"

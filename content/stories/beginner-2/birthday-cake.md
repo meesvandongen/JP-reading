@@ -8,7 +8,7 @@ summary: Yui bakes a strawberry cake for her mother's birthday, but the dog gets
 author: JP Reading (original)
 license: CC BY 4.0
 keywords:
-  - たんじょうび|たんじょうび|birthday
+  - 誕生日|たんじょうび|birthday
   - 作ります|つくります|to make
   - いちご|いちご|strawberry
   - ろうそく|ろうそく|candle
@@ -16,42 +16,42 @@ keywords:
   - 雪|ゆき|snow
 ---
 
-今日はお母さんのたんじょうびです。
+今日はお母さんの誕生日《たんじょうび》です。
 > Today is Mom's birthday.
-ゆいさんはケーキを作ります。
+結衣《ゆい》さんはケーキを作ります。
 > Yui is going to make a cake.
-たまごとさとうと小麦粉《こむぎこ》を使います。
-> She uses eggs, sugar, and flour.
-ゆいさんは一時間がんばりました。
+卵《たまご》と砂糖《さとう》と小麦粉《こむぎこ》を使います。
+> She used eggs, sugar, and flour.
+結衣《ゆい》さんは一時間がんばりました。
 > Yui worked hard for an hour.
 白くて大きいケーキができました。
 > A big white cake was finished.
 上にいちごを八《やっ》つのせました。
 > She put eight strawberries on top.
 
-ゆいさんはろうそくを取りに行きました。
+結衣《ゆい》さんはろうそくを取りに行きました。
 > Yui went to get the candles.
 すぐにもどりました。
 > She came right back.
 あれ？
 > Huh?
 いちごが一つもありません。
-> There isn't a single strawberry left.
+> There wasn't a single strawberry left.
 いぬのポチの口が赤いです。
-> Pochi the dog's mouth is red.
+> Pochi the dog's mouth was red.
 
 そのとき、お母さんが帰ってきました。
 > Just then, Mom came home.
-ゆいさんはかなしい顔をしました。
+結衣《ゆい》さんはかなしい顔をしました。
 > Yui made a sad face.
 お母さんはケーキを見て、言いました。
 > Mom looked at the cake and said:
 「わあ、雪の山のケーキね！」
 > "Wow, a snowy mountain cake!"
-「ありがとう、ゆい。」
+「ありがとう、結衣《ゆい》。」
 > "Thank you, Yui."
 
 みんなでケーキを食べました。
 > Everyone ate the cake together.
-ポチはテーブルの下でしずかに寝ていました。
-> Pochi slept quietly under the table.
+ポチはテーブルの下で静《しず》かに寝ていました。
+> Pochi was sleeping quietly under the table.

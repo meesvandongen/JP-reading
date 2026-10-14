@@ -68,44 +68,86 @@ function applyPartialHints(words: Word[], hints: Hint[]) {
   let pos = 0
   for (const w of words) {
     const start = pos
-    const end = pos + w.s.length
-    pos = end
-    for (const h of hints) {
-      if (h.start < start || h.end > end) continue
-      const before = w.s.slice(0, h.start - start)
-      const middle = w.s.slice(h.start - start, h.end - start)
-      const after = w.s.slice(h.end - start)
-      const seg = (text: string): Furigana | null => {
-        if (!text) return []
-        if (!hasKanji(text)) return [[text]]
-        return null
-      }
-      const b = seg(before)
-      const a = seg(after)
-      const f: Furigana = []
-      if (b) f.push(...b)
-      else if (w.f) {
-        // keep existing ruby for the part before the hint when it lines up
-        let acc = ''
-        for (const s of w.f) {
-          if (acc.length >= before.length) break
-          f.push(s)
-          acc += s[0]
-        }
-        if (acc !== before) f.splice(0, f.length, [before])
-      } else f.push([before])
-      f.push([middle, h.reading])
-      if (a) f.push(...a)
-      else f.push([after])
-      w.f = f.filter((x) => x[0])
-      w.r = f.map(([t, r]) => toHiragana(r ?? t)).join('')
+    pos += w.s.length
+    const inside = hints.filter((h) => h.start >= start && h.end <= pos).sort((x, y) => x.start - y.start)
+    if (!inside.length) continue
+    // existing furigana segments with their offsets in the word
+    const segs: { from: number; to: number; seg: Furigana[number] }[] = []
+    let o = 0
+    for (const seg of w.f ?? [[w.s, w.r] as Furigana[number]]) {
+      segs.push({ from: o, to: o + seg[0].length, seg })
+      o += seg[0].length
     }
+    const f: Furigana = []
+    // text between hints keeps its ruby where the old segments line up with it
+    const gap = (from: number, to: number) => {
+      if (from >= to) return
+      const text = w.s.slice(from, to)
+      if (!hasKanji(text)) return void f.push([text])
+      const inner = segs.filter((x) => x.from >= from && x.to <= to)
+      if (inner.reduce((n, x) => n + x.to - x.from, 0) === to - from) f.push(...inner.map((x) => x.seg))
+      else f.push([text])
+    }
+    let cur = 0
+    for (const h of inside) {
+      gap(cur, h.start - start)
+      f.push([w.s.slice(h.start - start, h.end - start), h.reading])
+      cur = h.end - start
+    }
+    gap(cur, w.s.length)
+    w.f = f.filter((x) => x[0])
+    w.r = w.f.map(([t, r]) => toHiragana(r ?? t)).join('')
   }
+}
+
+const WEATHER = new Set(['雨', '雪', 'あめ', 'ゆき', '雹', 'みぞれ', '霰'])
+
+/** Fix tokenizer choices that are wrong in an obvious context. */
+function fixTokens(tokens: KToken[]): KToken[] {
+  return tokens.map((t, i) => {
+    // 雨が降ります: IPADIC picks 降りる (おります, "get off") over 降る
+    if (t.basic_form === '降りる' && t.surface_form.startsWith('降り') && t.surface_form.length <= 3) {
+      const p = tokens[i - 1]
+      const n = tokens[i - 2]
+      if (p?.pos === '助詞' && ['が', 'も', 'は'].includes(p.surface_form) && n && WEATHER.has(n.surface_form)) {
+        const rest = t.surface_form.slice(2)
+        return { ...t, basic_form: '降る', conjugated_type: '五段・ラ行', reading: 'フリ' + rest, pronunciation: 'フリ' + rest }
+      }
+    }
+    return t
+  })
+}
+
+/** Kana words the tokenizer splits wrongly (き + びだんご…): kept whole. */
+const USER_WORDS = ['きびだんご']
+
+function tokenize(tokenizer: Tokenizer, text: string): KToken[] {
+  const re = new RegExp(USER_WORDS.join('|'), 'g')
+  const out: KToken[] = []
+  let last = 0
+  for (const m of text.matchAll(re)) {
+    if (m.index > last) out.push(...tokenizer.tokenize(text.slice(last, m.index)))
+    out.push({
+      surface_form: m[0],
+      pos: '名詞',
+      pos_detail_1: '一般',
+      pos_detail_2: '*',
+      pos_detail_3: '*',
+      conjugated_type: '*',
+      conjugated_form: '*',
+      basic_form: m[0],
+      reading: toKatakana(m[0]),
+      pronunciation: toKatakana(m[0]),
+    } as KToken)
+    last = m.index + m[0].length
+  }
+  if (last < text.length) out.push(...tokenizer.tokenize(text.slice(last)))
+  return out
 }
 
 export function analyzeSentence(tokenizer: Tokenizer, text: string): Word[] {
   const { plain, hints } = extractRuby(text)
-  const raw = tokenizer.tokenize(plain)
+  const raw = fixTokens(tokenize(tokenizer, plain))
   const { tokens, partial } = applyTokenHints(raw, hints)
   const words = groupTokens(tokens).map(buildWord)
   applyPartialHints(words, partial)

@@ -12,7 +12,7 @@ keywords:
   - 面接|めんせつ|interview
   - 先輩|せんぱい|senior (at school or work)
   - 自己紹介|じこしょうかい|self-introduction
-  - 理由|りゆう|reason
+  - 当社|とうしゃ|our company (formal)
   - 短所|たんしょ|weak point, flaw
   - 心配性|しんぱいしょう|worrier, prone to worry
   - 準備|じゅんび|preparation
@@ -26,11 +26,11 @@ keywords:
 不安になった陽菜《ひな》は、大学の先輩の拓也《たくや》に練習を頼んだ。
 > Feeling nervous, Hina asked Takuya, her senpai from university, to help her practice.
 拓也《たくや》は去年、旅行会社に就職したばかりだ。
-> Takuya just started working at a travel company last year.
+> Takuya only joined a travel company last year.
 「じゃあ、ぼくが面接官をやるね。」
 > "Okay, I'll be the interviewer."
 「よろしくお願いします！」
-> "Thank you, I'm in your hands!"
+> "Thanks so much!"
 拓也《たくや》はコーヒーを一口飲んでから、急にまじめな顔になった。
 > Takuya took a sip of coffee, then suddenly put on a serious face.
 
@@ -44,7 +44,7 @@ keywords:
 > "I study economics at university, and I've worked part-time at a café for three years."
 「なるほど、では、どうして当社を選んだんですか。」
 > "I see. Then, why did you choose our company?"
-「えっと……旅行が好きだからです。」
+「えーと……旅行が好きだからです。」
 > "Um... because I like traveling."
 拓也《たくや》はすぐに「はい、ストップ。」と言った。
 > Takuya immediately said, "Okay, stop."
@@ -70,8 +70,8 @@ keywords:
 「短所がない人なんていないよ。」
 > "There's no such thing as a person without weaknesses."
 「大切なのは、その短所をどうやって直そうとしているかを話すことなんだ。」
-> "The important thing is to talk about how you're trying to deal with it."
-「じゃあ……心配性なところです。」
+> "The important thing is to talk about how you're trying to work on it."
+「じゃあ……心配性《しんぱいしょう》なところです。」
 > "Then... I'm a worrier."
 「でも、心配だからこそ、準備はいつもしっかりします。」
 > "But precisely because I worry, I always prepare thoroughly."
@@ -83,7 +83,7 @@ keywords:
 ## 第三章　一週間後
 
 面接の日、陽菜《ひな》は拓也《たくや》に教えてもらったことを思い出しながら話した。
-> On the day of the interview, Hina spoke while remembering what Takuya had taught her.
+> On the day of the interview, Hina kept in mind what Takuya had taught her as she answered.
 最後に、面接官が「何か質問はありますか。」と聞いた。
 > At the end, the interviewer asked, "Do you have any questions?"
 陽菜《ひな》は少し考えてから、「入社までに勉強しておいたほうがいいことはありますか。」と聞いた。

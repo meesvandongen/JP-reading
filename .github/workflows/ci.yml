@@ -48,6 +48,9 @@ jobs:
       - name: Test
         run: npm test
 
+      - name: Check content
+        run: npm run audit -- --errors
+
       - name: Build site
         run: npm run build
 

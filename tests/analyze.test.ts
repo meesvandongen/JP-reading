@@ -25,6 +25,32 @@ describe('furigana', () => {
   })
 })
 
+describe('readings', () => {
+  it('reads 日本 as にほん', () => {
+    expect(find(words('日本の夏は暑い。'), '日本')!.r).toBe('にほん')
+  })
+
+  it('reads 色 as a suffix as いろ', () => {
+    expect(find(words('オレンジ色の空。'), '色')!.r).toBe('いろ')
+  })
+
+  it('applies the sound changes of numbers and counters', () => {
+    const cases: [string, string][] = [
+      ['二人', 'ふたり'], ['一人', 'ひとり'], ['四人', 'よにん'], ['何人', 'なんにん'],
+      ['一匹', 'いっぴき'], ['三匹', 'さんびき'], ['六本', 'ろっぽん'], ['十一匹', 'じゅういっぴき'],
+      ['三百年', 'さんびゃくねん'], ['六百', 'ろっぴゃく'], ['八百円', 'はっぴゃくえん'], ['三千円', 'さんぜんえん'],
+      ['二十日', 'はつか'], ['十四日', 'じゅうよっか'], ['四時', 'よじ'], ['九時間', 'くじかん'],
+      ['三階', 'さんがい'], ['三分', 'さんぷん'], ['二十分', 'にじゅっぷん'], ['八歳', 'はっさい'],
+      ['二十歳', 'はたち'], ['一晩', 'ひとばん'], ['三羽', 'さんば'], ['六羽', 'ろっぱ'],
+      ['5月', 'ごがつ'], ['12月', 'じゅうにがつ'], ['2026年', 'にせんにじゅうろくねん'], ['第三', 'だいさん'],
+    ]
+    for (const [text, reading] of cases) {
+      const w = words(`${text}です。`)[0]
+      expect([w.s, w.r]).toEqual([text, reading])
+    }
+  })
+})
+
 describe('word grouping', () => {
   it('groups conjugated verbs with their auxiliaries', () => {
     const ws = words('食べさせられませんでした。')

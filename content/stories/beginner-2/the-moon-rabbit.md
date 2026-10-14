@@ -4,7 +4,7 @@ title_en: The Rabbit in the Moon
 level: beginner-2
 category: folktale
 tags: [folktale, moon, rabbit, kindness]
-summary: A retelling of the old tale of why a rabbit lives on the moon.
+summary: A monkey, a fox and a rabbit try to feed a hungry old man, but the rabbit has nothing to give except itself. This old tale explains why there is a rabbit in the moon.
 author: JP Reading (original)
 license: CC BY 4.0
 keywords:

@@ -21,9 +21,9 @@ keywords:
 今日はメロンパンを二つ買いました。
 > Today I bought two melon breads.
 一つはわたしのパンです。
-> One is my bread.
+> One is mine.
 一つは母のパンです。
-> One is my mother's bread.
+> The other is my mother's.
 
 パンはまだあたたかいです。
 > The bread is still warm.

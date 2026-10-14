@@ -82,6 +82,14 @@ export function headword(e: Entry, preferKana = false): { word: string; reading:
 }
 
 /** Does the entry's part of speech fit the word from the text? */
+/** Common kana words whose usual meaning the frequency data gets wrong. */
+const PREFERRED: Record<string, string> = {
+  なる: '成る', // not 生る "bear fruit"
+  かく: '書く', // not 掻く "scratch"
+  いし: '石', // not 意思
+  やさしい: '優しい', // "kind" is the more common sense in stories
+}
+
 function posMatches(e: Entry, w: Partial<Pick<Word, 'c' | 'p'>>): boolean {
   const tags = e.s.flatMap((s) => s.p)
   if (w.c) {
@@ -211,11 +219,22 @@ export class Dictionary {
       if (!entries.length) continue
       if (reading) {
         const rh = toHiragana(reading)
+        // A word the text writes in kana is most likely one usually written in kana:
+        // いちご is 苺 (strawberry), not 一期; くれる is "to give", not 暮れる
+        const kanaKey = !hasKanji(key)
         let best: { entry: Entry; reading: RawReading; score: number } | undefined
         entries.forEach((e, rank) => {
           const r = readings(e).find((x) => toHiragana(x.t) === rh)
           if (!r) return
-          const score = rank + (posMatches(e, word) ? 0 : 20)
+          // common words written in hiragana: usually-kana words and kana-only entries
+          // (not katakana loanwords that happen to read the same, ナカ, カゼ)
+          const kanaWord = e.c && (e.uk || (!e.k.length && r.t === key))
+          // old, irregular or ateji readings (机 read つき, 他人 read ひと) are a last resort
+          const odd = r.f?.some((f) => ['ok', 'ik', 'sk', 'rk', 'gikun'].includes(f)) ? 15 : 0
+          // basic words first for kana: うえ is 上 before 飢え, なか is 中 before 仲
+          const basic = kanaKey ? (e.j ?? 0) * 3 : 0
+          const preferred = kanaKey && PREFERRED[key] && kanjiForms(e).some((k) => k.t === PREFERRED[key]) ? 30 : 0
+          const score = rank + (posMatches(e, word) ? 0 : 20) + (kanaKey && !kanaWord ? 10 : 0) + odd - basic - preferred
           if (!best || score < best.score) best = { entry: e, reading: r, score }
         })
         if (best) return { entry: best.entry, reading: best.reading }
@@ -223,6 +242,10 @@ export class Dictionary {
       // No reading match: only trust it when the key is a kanji form, or we have no reading
       const e = entries[0]
       if (!reading || hasKanji(key)) return { entry: e, reading: readings(e)[0] }
+    }
+    // する verbs are listed under their noun: 紹介する → 紹介
+    if (word.b && word.b.length > 2 && word.b.endsWith('する')) {
+      return this.bestEntry({ s: word.b.slice(0, -2), r: word.br?.replace(/する$/, '') })
     }
     return undefined
   }

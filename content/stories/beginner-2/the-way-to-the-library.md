@@ -11,8 +11,8 @@ keywords:
   - 図書館|としょかん|library
   - 道|みち|road, street, way
   - まっすぐ|まっすぐ|straight ahead
-  - かど|かど|corner
-  - まがります|まがります|to turn
+  - 角|かど|corner
+  - 曲がります|まがります|to turn
   - となり|となり|next to
 ---
 
@@ -24,9 +24,9 @@ keywords:
 > "The library? Go straight down this street."
 「はい。」
 > "Okay."
-「それから、二つ目のかどを右にまがってください。」
+「それから、二つ目の角《かど》を右に曲がってください。」
 > "Then turn right at the second corner."
-「二つ目のかどを右ですね。」
+「二つ目の角《かど》を右ですね。」
 > "Right at the second corner, got it."
 「そうです。本屋のとなりですよ。」
 > "That's right. It's next to the bookstore."
@@ -37,18 +37,18 @@ keywords:
 > Sakura walked.
 おじいさんも歩きました。
 > The old man walked, too.
-さくらさんは右にまがりました。
+さくらさんは右に曲がりました。
 > Sakura turned right.
-おじいさんも右にまがりました。
+おじいさんも右に曲がりました。
 > The old man turned right, too.
 さくらさんは少しこわくなりました。
 > Sakura got a little scared.
-「あの……どうしていっしょに来ますか。」
+「あの……どうしていっしょに来るんですか。」
 > "Um... why are you coming with me?"
 
 おじいさんはわらいました。
 > The old man laughed.
 「わたしは図書館の人ですよ。今から仕事です。」
 > "I work at the library. I'm on my way to work."
-二人はいっしょに図書館に入りました。
+二人《ふたり》はいっしょに図書館に入りました。
 > The two of them went into the library together.

@@ -17,16 +17,16 @@ keywords:
   - おみやげ|おみやげ|souvenir
 ---
 
-ゆかさん、お元気ですか。
+由香《ゆか》さん、お元気ですか。
 > Yuka, how are you?
-わたしは今、北海道《ほっかいどう》の小さい町にいます。
-> I'm in a small town in Hokkaido right now.
+今、北海道《ほっかいどう》の小さい町からこの手紙を書いています。
+> I'm writing this letter from a small town in Hokkaido.
 先週、東京から飛行機で来ました。
 > I came here from Tokyo by plane last week.
 ここはとても寒いですが、空気がきれいです。
 > It's very cold here, but the air is clean.
 
-きのうは朝早く起きて、牧場《ぼくじょう》に行きました。
+昨日《きのう》は朝早く起きて、牧場《ぼくじょう》に行きました。
 > Yesterday I got up early and went to a ranch.
 牛がたくさんいて、びっくりしました。
 > There were so many cows that I was surprised.
@@ -50,7 +50,7 @@ keywords:
 > I could see lots of stars that you can't see in Tokyo.
 とても静かで、少しさびしかったです。
 > It was very quiet, and a little lonely.
-ゆかさんといっしょに見たいと思いました。
+由香《ゆか》さんといっしょに見たいと思いました。
 > I wished I could see them with you.
 
 来週の金曜日に東京に帰ります。

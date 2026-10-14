@@ -109,7 +109,7 @@ async function main() {
       added: (fm.added ? String(fm.added) : undefined) ?? gitAddedDate(file) ?? new Date().toISOString(),
     }
 
-    const keywords = await buildKeywords(fm.keywords, words, level, dict)
+    const keywords = await buildKeywords(tokenizer, fm.keywords, words, level, dict)
     const doc: StoryDoc = { meta, keywords, chapters }
     writeFileSync(join(OUT, 'stories', `${id}.json`), JSON.stringify(doc))
     stories.push(meta)
@@ -158,6 +158,7 @@ async function main() {
 }
 
 async function buildKeywords(
+  tokenizer: Tokenizer,
   given: unknown,
   words: Word[],
   level: string,
@@ -170,7 +171,13 @@ async function buildKeywords(
       if (!w) continue
       const kw: Keyword = { w, r: r ?? '', m: m ?? '' }
       if (dict) {
-        const hit = await dict.bestEntry({ s: w, r: r || undefined })
+        // keywords may be given conjugated (寝ます, ていねいに): fall back to the lemma
+        const [head, ...rest] = tokenizer.tokenize(w)
+        const inflected = rest.every((t, i) => t.pos === '助動詞' || (t.surface_form === 'に' && i === rest.length - 1))
+        const lemma = inflected ? head?.basic_form : undefined
+        const hit =
+          (await dict.bestEntry({ s: w, r: r || undefined })) ??
+          (lemma && lemma !== '*' && lemma !== w ? await dict.bestEntry({ s: lemma }) : undefined)
         if (hit?.entry.j) kw.j = hit.entry.j
         if (!kw.m && hit) kw.m = hit.entry.s[0].g.slice(0, 3).join('; ')
         if (!kw.r && hit) kw.r = hit.reading.t

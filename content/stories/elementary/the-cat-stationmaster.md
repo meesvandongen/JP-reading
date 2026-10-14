@@ -50,14 +50,14 @@ keywords:
 週末になると、遠くの町からもたくさんの人が来るようになりました。
 > On weekends, many people started coming even from faraway towns.
 みんな、コハク駅長に会うために電車に乗ります。
-> They all ride the train to meet Stationmaster Kohaku.
+> They all come by train to meet Stationmaster Kohaku.
 駅の前には、ねこの形のおかしを売る店もできました。
 > A shop selling cat-shaped sweets even opened in front of the station.
 
 でも、コハク駅長はあまり仕事をしません。
 > However, Stationmaster Kohaku doesn't do much work.
 電車が来ても、ベンチでねています。
-> Even when the train comes, it sleeps on the bench.
+> Even when a train comes in, Kohaku just sleeps on the bench.
 お客さんが写真をとっても、目を開けません。
 > Even when visitors take pictures, it doesn't open its eyes.
 ある日、子どもが森《もり》さんに聞きました。
@@ -74,6 +74,6 @@ keywords:
 森《もり》さんは、もうさびしくありません。
 > Mr. Mori isn't lonely anymore.
 コハクの給料は、毎月いちばん高いキャットフードです。
-> Kohaku's salary is the most expensive cat food, every month.
+> Every month, Kohaku is paid in the most expensive cat food.
 森《もり》さんは、ときどきそれがうらやましいそうです。
-> Mr. Mori says he sometimes envies that.
+> They say Mr. Mori is sometimes jealous of that.
