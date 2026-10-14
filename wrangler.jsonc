@@ -11,5 +11,8 @@
     "not_found_handling": "none"
   },
   "workers_dev": true,
-  "preview_urls": true
+  "preview_urls": true,
+  // Required by `wrangler preview` (the Workers Builds Preview command for
+  // non-production branches). Empty: Previews use the top-level settings.
+  "previews": {}
 }

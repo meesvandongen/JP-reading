@@ -210,12 +210,12 @@ export function EntryView({
         <JlptBadge level={entry.j} />
         {entry.c && <span class="badge common">common</span>}
       </div>
-      {r.a && <PitchDiagram reading={r.t} accent={r.a} />}
+      {r.a && !compact && <PitchDiagram reading={r.t} accent={r.a} />}
       <ol class="senses">
         {entry.s
           .filter((s) => !s.sk || s.sk.includes(head.word) || entry.uk)
           .filter((s) => !s.sr || s.sr.includes(r.t))
-          .slice(0, compact ? 4 : undefined)
+          .slice(0, compact ? 3 : undefined)
           .map((s) => (
             <li>
               <TagList tags={s.p} class="pos" />
@@ -235,12 +235,12 @@ export function EntryView({
             </li>
           ))}
       </ol>
-      {(otherForms.length > 0 || otherReadings.length > 0) && (
+      {!compact && (otherForms.length > 0 || otherReadings.length > 0) && (
         <div class="muted small other-forms" lang="ja">
           Other forms: {[...otherForms.map((k) => k.t), ...otherReadings.map((x) => x.t)].join('、')}
         </div>
       )}
-      <KanjiPanel chars={kanjiChars} />
+      {!compact && <KanjiPanel chars={kanjiChars} />}
     </div>
   )
 }

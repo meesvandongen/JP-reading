@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'preact/hooks'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'preact/hooks'
 import type { Sentence, StoryDoc, Word } from '../lib/types'
 import { isLookupWord, lemmaKey, sentenceText } from '../lib/analyze'
 import { hasKanji, isKana, toHiragana, toRomaji } from '../lib/kana'
@@ -12,7 +12,7 @@ import { back, navigate } from '../router'
 import { accentClass } from '../components/PitchAccent'
 import { Icon } from '../components/Icon'
 import { JlptBadge, LevelBadge } from '../components/Badges'
-import { WordPopup } from '../components/WordPopup'
+import { LookupPanel, markHoldHintSeen, type LookupView } from '../components/LookupPanel'
 import { ReaderSettings } from '../components/ReaderSettings'
 import { Sheet } from '../components/Sheet'
 import { recommend } from './LibraryPage'
@@ -51,13 +51,19 @@ export function ReaderPage({ id }: { id: string }) {
 function Reader({ doc }: { doc: StoryDoc }) {
   const id = doc.meta.id
   const s = settings.value
-  const [popup, setPopup] = useState<{ word: Word; sentence: Sentence; rest: string } | null>(null)
+  // Lookup selection: a word (wi) in a sentence (si), shown as word details or the whole sentence
+  const [sel, setSel] = useState<{ si: number; wi: number | null; view: LookupView } | null>(null)
+  const [panel, setPanel] = useState({ height: 0, expanded: false })
+  // set when a press-and-hold opened the sentence, so the click that ends it is ignored
+  const held = useRef(false)
   const [showSettings, setShowSettings] = useState(false)
   const [hub, setHub] = useState(false)
   const [current, setCurrent] = useState(-1)
   const [revealed, setRevealed] = useState<Set<number>>(new Set())
   const textRef = useRef<HTMLDivElement>(null)
   const prog = progress.value.get(id)
+  // Decided once: hiding the card when the position is first saved would make the text jump
+  const [showKeywords] = useState(() => !prog?.position)
 
   // Flatten sentences for audio and progress
   const flat = useMemo(() => {
@@ -162,16 +168,14 @@ function Reader({ doc }: { doc: StoryDoc }) {
   }
 
   const onTextClick = (e: MouseEvent) => {
+    if (held.current) {
+      held.current = false
+      return
+    }
     const el = (e.target as HTMLElement).closest<HTMLElement>('[data-w]')
     if (el) {
       const [si, wi] = el.dataset.w!.split('.').map(Number)
-      const sentence = flat[si].s
-      const word = sentence.w[wi]
-      const rest = sentence.w
-        .slice(wi)
-        .map((w) => w.s)
-        .join('')
-      setPopup({ word, sentence, rest })
+      setSel({ si, wi, view: 'word' })
       return
     }
     const tr = (e.target as HTMLElement).closest<HTMLElement>('[data-tr]')
@@ -181,8 +185,95 @@ function Reader({ doc }: { doc: StoryDoc }) {
       if (next.has(i)) next.delete(i)
       else next.add(i)
       setRevealed(next)
+      return
     }
+    // Tapping outside the words dismisses the lookup
+    setSel(null)
   }
+
+  // Press and hold selects the whole sentence. This replaces the browser's own
+  // long-press (text selection, and on Android a web search of the selection).
+  useEffect(() => {
+    const root = textRef.current
+    if (!root) return
+    let timer: ReturnType<typeof setTimeout> | undefined
+    let start = { x: 0, y: 0 }
+    const openSentence = (target: EventTarget | null) => {
+      const el = (target as HTMLElement | null)?.closest<HTMLElement>('[data-w], [data-si], [data-tr]')
+      if (!el) return false
+      const [si, wi] = el.dataset.w ? el.dataset.w.split('.').map(Number) : [Number(el.dataset.si ?? el.dataset.tr), null]
+      held.current = true
+      markHoldHintSeen()
+      setSel({ si, wi, view: 'sentence' })
+      return true
+    }
+    const cancel = () => {
+      clearTimeout(timer)
+      timer = undefined
+    }
+    const down = (e: PointerEvent) => {
+      held.current = false
+      cancel()
+      if (e.button !== 0) return
+      start = { x: e.clientX, y: e.clientY }
+      const target = e.target
+      timer = setTimeout(() => {
+        timer = undefined
+        if (openSentence(target)) navigator.vibrate?.(10)
+      }, 450)
+    }
+    const move = (e: PointerEvent) => {
+      if (timer && Math.hypot(e.clientX - start.x, e.clientY - start.y) > 10) cancel()
+    }
+    // Right click, and the platform's own long-press gesture
+    const menu = (e: MouseEvent) => {
+      e.preventDefault()
+      cancel()
+      if (!held.current) openSentence(e.target)
+    }
+    root.addEventListener('pointerdown', down)
+    root.addEventListener('pointermove', move)
+    root.addEventListener('pointerup', cancel)
+    root.addEventListener('pointercancel', cancel)
+    root.addEventListener('contextmenu', menu)
+    window.addEventListener('scroll', cancel, { passive: true })
+    return () => {
+      cancel()
+      root.removeEventListener('pointerdown', down)
+      root.removeEventListener('pointermove', move)
+      root.removeEventListener('pointerup', cancel)
+      root.removeEventListener('pointercancel', cancel)
+      root.removeEventListener('contextmenu', menu)
+      window.removeEventListener('scroll', cancel)
+    }
+  }, [doc])
+
+  // Keep the selected sentence visible above the lookup panel
+  useEffect(() => {
+    if (!sel || panel.expanded) return
+    const t = setTimeout(() => {
+      const root = textRef.current
+      const sentEl = root?.querySelector(`[data-si="${sel.si}"]`)
+      if (!sentEl) return
+      const wordEl = sel.wi !== null ? root!.querySelector(`[data-w="${sel.si}.${sel.wi}"]`) : null
+      if (s.vertical) {
+        ;(wordEl ?? sentEl).scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' })
+        return
+      }
+      const top = (document.querySelector('.reader-bar')?.getBoundingClientRect().bottom ?? 0) + 8
+      const bottom = window.innerHeight - panel.height - 24
+      let r = sentEl.getBoundingClientRect()
+      // A sentence taller than the free space: keep at least the word in view
+      if (r.height > bottom - top && wordEl) r = wordEl.getBoundingClientRect()
+      let dy = 0
+      if (r.bottom > bottom) dy = r.bottom - bottom
+      if (r.top - dy < top) dy = r.top - top
+      if (Math.abs(dy) > 2) window.scrollBy({ top: dy, behavior: 'smooth' })
+    }, 80)
+    return () => clearTimeout(t)
+  }, [sel?.si, sel?.wi, panel.height, panel.expanded])
+
+  const closeLookup = useCallback(() => setSel(null), [])
 
   const aidHidden = (w: Word): boolean => {
     if (s.aidScope === 'all') return false
@@ -197,7 +288,7 @@ function Reader({ doc }: { doc: StoryDoc }) {
     if (s.jlptHighlight && w.j) cls.push(`jl-${w.j}`)
     if (s.pitchAccent && w.a && !w.b) cls.push(accentClass(w.r ?? toHiragana(w.s), w.a))
     if (s.highlightSaved && w.e && savedEntries.set.has(w.e)) cls.push('saved')
-    if (popup?.word === w) cls.push('active')
+    if (sel?.view === 'word' && sel.si === si && sel.wi === wi) cls.push('active')
     let inner: preact.ComponentChildren = w.s
     const reading = w.pr ?? w.r ?? toHiragana(w.s)
     if (hasKanji(w.s)) {
@@ -240,7 +331,7 @@ function Reader({ doc }: { doc: StoryDoc }) {
   const renderSentence = (sent: Sentence) => {
     const si = flatIndex.get(sent)!
     return (
-      <span class={`sent ${current === si ? 'playing' : ''}`} data-si={si}>
+      <span class={`sent ${current === si ? 'playing' : ''} ${sel?.si === si ? `sel-${sel.view}` : ''}`} data-si={si}>
         {sent.w.map((w, wi) => renderWord(w, si, wi))}
       </span>
     )
@@ -266,7 +357,10 @@ function Reader({ doc }: { doc: StoryDoc }) {
   const savedFromStory = [...cards.value.values()].filter((c) => c.storyId === id)
 
   return (
-    <div class={`reader ${s.vertical ? 'vertical' : ''}`}>
+    <div
+      class={`reader ${s.vertical ? 'vertical' : ''} ${sel ? 'lookup-open' : ''}`}
+      style={sel ? { '--panel-h': `${panel.height}px` } : undefined}
+    >
       <header class="topbar reader-bar">
         <button class="icon-btn" onClick={() => back('/')} aria-label="Back">
           <Icon name="back" />
@@ -304,7 +398,7 @@ function Reader({ doc }: { doc: StoryDoc }) {
           </h1>
           {doc.meta.title_en && <div class="subtitle">{doc.meta.title_en}</div>}
           {doc.meta.author && <div class="muted small">{doc.meta.author}</div>}
-          {doc.keywords.length > 0 && !prog?.position && (
+          {doc.keywords.length > 0 && showKeywords && (
             <details class="keywords-card" open={!prog?.completedAt}>
               <summary>Keywords · {doc.keywords.length}</summary>
               <KeywordList doc={doc} />
@@ -404,14 +498,33 @@ function Reader({ doc }: { doc: StoryDoc }) {
         />
       )}
 
-      {popup && (
-        <WordPopup
-          word={popup.word}
-          sentence={popup.sentence}
-          rest={popup.rest}
+      {sel && (
+        <LookupPanel
+          sentence={flat[sel.si].s}
+          word={sel.wi !== null ? flat[sel.si].s.w[sel.wi] : null}
+          rest={
+            sel.wi !== null
+              ? flat[sel.si].s.w
+                  .slice(sel.wi)
+                  .map((w) => w.s)
+                  .join('')
+              : ''
+          }
+          view={sel.view}
           storyId={id.startsWith('my-') ? undefined : id}
-          onClose={() => setPopup(null)}
-          onPlayFrom={ttsSupported ? () => startAudio(flatIndex.get(popup.sentence) ?? 0) : undefined}
+          onView={(view) => setSel({ ...sel, view })}
+          onWord={(wi) => setSel({ si: sel.si, wi, view: 'word' })}
+          onClose={closeLookup}
+          onPlayFrom={
+            ttsSupported
+              ? () => {
+                  const from = sel.si
+                  setSel(null)
+                  startAudio(from)
+                }
+              : undefined
+          }
+          onLayout={setPanel}
         />
       )}
       <ReaderSettings open={showSettings} onClose={() => setShowSettings(false)} />

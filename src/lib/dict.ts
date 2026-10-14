@@ -111,6 +111,10 @@ function posMatches(e: Entry, w: Partial<Pick<Word, 'c' | 'p'>>): boolean {
       return tags.includes('prt') || tags.includes('conj')
     case 'aux':
       return tags.some((t) => t.startsWith('aux') || t === 'cop')
+    case 'suf':
+      return tags.some((t) => t === 'suf' || t === 'ctr')
+    case 'pre':
+      return tags.includes('pref')
   }
   return true
 }
