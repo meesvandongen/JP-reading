@@ -3,13 +3,15 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Read Japanese with tap-to-look-up dictionary, furigana, audio and SRS flashcards. A PWA hosted on GitHub Pages.",
+  "description": "Read Japanese with tap-to-look-up dictionary, furigana, audio and SRS flashcards. A PWA hosted on Cloudflare Workers.",
   "scripts": {
     "dev": "npm run build:content && vite",
     "data": "node scripts/build-dict.mjs",
     "build:content": "tsx scripts/build-content.ts",
     "build": "npm run build:content && tsc --noEmit && vite build",
+    "build:cf": "(git rev-parse --is-shallow-repository | grep -q true && git fetch --unshallow --quiet); npm run data && npm run build",
     "preview": "vite preview",
+    "deploy": "wrangler deploy",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
@@ -33,6 +35,7 @@
     "vite-plugin-pwa": "^2.0.0",
     "vitest": "^5.0.4",
     "workbox-window": "^7.4.1",
+    "wrangler": "^4.151.0",
     "yaml": "^2.9.1"
   }
 }

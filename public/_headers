@@ -1,0 +1,9 @@
+# Cloudflare Workers static assets headers. Not served as a file.
+
+# Vite output is content-hashed.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# The service worker must always be revalidated so updates are picked up.
+/sw.js
+  Cache-Control: no-cache
