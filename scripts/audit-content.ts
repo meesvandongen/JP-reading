@@ -148,9 +148,14 @@ async function main() {
         const stem = w.replace(/(する|います|ます|る|う|く|ぐ|す|つ|ぬ|ぶ|む|い|な|だ)$/, '')
         if (!text.includes(w) && !lemmas.has(w) && !(stem.length >= 1 && text.includes(stem)))
           errors.push(`keyword not in text: ${w}`)
-        const hit = await dict.bestEntry({ s: w, r: r || undefined })
+        // same fallback as the build: conjugated keywords (寝ます) are looked up by lemma
+        const [head, ...rest] = tk.tokenize(w)
+        const inflected = rest.every((t, i) => t.pos === '助動詞' || (t.surface_form === 'に' && i === rest.length - 1))
+        const lemma = inflected && head?.basic_form !== '*' && head?.basic_form !== w ? head?.basic_form : undefined
+        const direct = await dict.bestEntry({ s: w, r: r || undefined })
+        const hit = direct ?? (lemma ? await dict.bestEntry({ s: lemma }) : undefined)
         if (!hit) notes.push(`keyword not in dictionary: ${w}`)
-        else if (r && hasKanji(w)) {
+        else if (direct && r && hasKanji(w)) {
           const readings = hit.entry.r.map((x) => hira(typeof x === 'string' ? x : x.t))
           if (readings.length && !readings.includes(hira(r))) notes.push(`keyword reading ${w}|${r}: dictionary has ${readings.join('/')}`)
         }

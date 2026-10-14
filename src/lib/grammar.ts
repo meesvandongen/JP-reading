@@ -4,6 +4,7 @@
 
 import { alignFurigana, type Furigana } from './furigana'
 import { hasKanji, toHiragana } from './kana'
+import { numberGroupReading } from './numbers'
 import type { KToken, Pos, Step, Word } from './types'
 
 // ---------------------------------------------------------------------------
@@ -95,9 +96,12 @@ function shouldAttach(group: KToken[], t: KToken): boolean {
   }
 
   if (t.pos === '名詞') {
+    // 降りそう, おいしそう, 降るそう: そう attaches to the verb or adjective
+    if (t.surface_form === 'そう' && t.pos_detail_2 === '助動詞語幹')
+      return isVerb(pt) || isAdj(pt) || isAux(pt) || pt.pos_detail_1 === '形容動詞語幹'
     // number + counter (三人), multi-part numbers (二十五)
     if (pt.pos === '名詞' && pt.pos_detail_1 === '数') {
-      return t.pos_detail_1 === '数' || (t.pos_detail_1 === '接尾' && t.pos_detail_2 === '助数詞')
+      return t.pos_detail_1 === '数' || (t.pos_detail_1 === '接尾' && t.pos_detail_2 === '助数詞') || t.surface_form === '月'
     }
   }
   return false
@@ -119,6 +123,8 @@ export function groupTokens(tokens: KToken[]): KToken[][] {
 export function tokenReading(t: KToken): string {
   // IPADIC reads 日本 as にっぽん; にほん is the everyday reading
   if (t.surface_form === '日本') return 'にほん'
+  // 色 as a suffix (オレンジ色, 何色) is いろ; IPADIC says しょく
+  if (t.surface_form === '色' && t.pos_detail_1 === '接尾' && t.pos_detail_2 !== '助数詞') return 'いろ'
   const r = t.reading && t.reading !== '*' ? t.reading : t.surface_form
   return toHiragana(r)
 }
@@ -296,6 +302,8 @@ function auxLabel(t: KToken, prev: KToken | undefined, next: KToken | undefined)
     case '名詞':
       if (t.pos_detail_1 === '非自立' && (surf === 'ん' || surf === 'の')) return { l: 'explanatory ん/の', g: 'n-desu' }
       if (t.pos_detail_2 === '助数詞') return { l: 'counter', g: 'counters' }
+      if (surf === 'そう' && t.pos_detail_2 === '助動詞語幹')
+        return t.pos_detail_1 === '特殊' ? { l: 'I hear that (そうだ)', g: 'sou-da' } : { l: 'looks like (そう)', g: 'sou-da' }
       return { l: 'noun' }
   }
   return { l: surf }
@@ -341,13 +349,17 @@ function particleGrammar(t: KToken): string | undefined {
 export function buildWord(group: KToken[]): Word {
   const head = group.find((t) => t.pos !== '接頭詞') ?? group[0]
   const surface = group.map((t) => t.surface_form).join('')
-  const reading = group.map(tokenReading).join('')
+  // numbers and counters: 二人 → ふたり, 三匹 → さんびき
+  const numeric = numberGroupReading(group)
+  const reading = numeric ?? group.map(tokenReading).join('')
   const word: Word = { s: surface, p: posOf(head) }
   if (head.pos === '名詞' && head.pos_detail_1 === '形容動詞語幹') word.p = 'na'
   if (reading !== toHiragana(surface)) word.r = reading
 
   if (hasKanji(surface)) {
-    word.f = mergeFurigana(group.flatMap((t) => alignFurigana(t.surface_form, tokenReading(t))))
+    word.f = numeric
+      ? alignFurigana(surface, numeric)
+      : mergeFurigana(group.flatMap((t) => alignFurigana(t.surface_form, tokenReading(t))))
   }
 
   // pronunciation of particles は / へ
