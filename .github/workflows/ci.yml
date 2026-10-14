@@ -1,4 +1,4 @@
-name: Build and deploy
+name: CI
 
 on:
   push:
@@ -6,13 +6,14 @@ on:
   pull_request:
   workflow_dispatch:
 
+# Deployment is done by Cloudflare Workers Builds (see README), which also
+# posts preview URLs on pull requests. This workflow only tests and builds.
+
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages-${{ github.ref }}
+  group: ci-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -26,7 +27,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version-file: .node-version
           cache: npm
 
       - run: npm ci
@@ -50,18 +51,5 @@ jobs:
       - name: Build site
         run: npm run build
 
-      - uses: actions/upload-pages-artifact@v3
-        if: github.event_name != 'pull_request'
-        with:
-          path: dist
-
-  deploy:
-    if: github.event_name != 'pull_request'
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Check Worker config
+        run: npx wrangler deploy --dry-run

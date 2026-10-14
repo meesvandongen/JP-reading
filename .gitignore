@@ -7,3 +7,4 @@ public/kuromoji
 dev-dist
 *.local
 .DS_Store
+.wrangler
