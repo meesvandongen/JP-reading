@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // Must match the Worker's name in the Cloudflare dashboard (Workers Builds checks this).
+  "name": "jp-reading",
+  "compatibility_date": "2026-10-01",
+  // Static assets only, no Worker script. Routing is hash-based (#/review etc.),
+  // so unknown paths should 404 rather than fall back to index.html: a missing
+  // dictionary shard must not come back as HTML with a 200.
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "none"
+  },
+  "workers_dev": true,
+  "preview_urls": true
+}

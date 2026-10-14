@@ -3,7 +3,7 @@ import preact from '@preact/preset-vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
-  // Relative base so the site works on GitHub Pages under /<repo>/ and on any host.
+  // Relative base so the site works under any path prefix and on any host.
   base: './',
   worker: { format: 'es' },
   build: { target: 'es2022', chunkSizeWarningLimit: 800 },

@@ -1,7 +1,7 @@
 # 読む読む JP Reading
 
 A free, open-source Japanese graded reader in the spirit of Yomu Yomu. It's a
-Progressive Web App hosted on GitHub Pages: install it on your phone or
+Progressive Web App hosted on Cloudflare Workers: install it on your phone or
 desktop and it works offline.
 
 ## Features
@@ -116,9 +116,27 @@ How it works:
 
 ## Deployment
 
-`.github/workflows/deploy.yml` builds and tests on every push and pull
-request, and deploys `main` to GitHub Pages. In the repository settings, set
-**Pages → Source** to **GitHub Actions**.
+The site is served as [Workers static assets](https://developers.cloudflare.com/workers/static-assets/)
+from the Worker `jp-reading` (see [`wrangler.jsonc`](wrangler.jsonc)).
+[Workers Builds](https://developers.cloudflare.com/workers/ci-cd/builds/)
+deploys `main` to production, and builds every other branch as a Preview whose
+URL it posts as a comment on the pull request.
+
+Workers Builds settings (**Workers & Pages → jp-reading → Settings → Build**):
+
+| Setting | Value |
+| --- | --- |
+| Build command | `npm run build:cf` |
+| Deploy command | `npx wrangler deploy` |
+| Preview command | `npx wrangler preview` (with preview builds enabled for all non-production branches) |
+| Root directory | `/` |
+
+`npm run build:cf` unshallows the clone (stories get their "added" date from
+git history), downloads the dictionary sources and builds into `dist/`.
+`.github/workflows/ci.yml` runs the tests and the build on every push and pull
+request.
+
+To deploy by hand: `npm run data && npm run build && npm run deploy`.
 
 ## Credits
 
