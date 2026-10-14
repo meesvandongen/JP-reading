@@ -117,6 +117,8 @@ export function groupTokens(tokens: KToken[]): KToken[][] {
 // Readings
 
 export function tokenReading(t: KToken): string {
+  // IPADIC reads 日本 as にっぽん; にほん is the everyday reading
+  if (t.surface_form === '日本') return 'にほん'
   const r = t.reading && t.reading !== '*' ? t.reading : t.surface_form
   return toHiragana(r)
 }

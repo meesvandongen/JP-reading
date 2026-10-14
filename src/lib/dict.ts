@@ -224,6 +224,10 @@ export class Dictionary {
       const e = entries[0]
       if (!reading || hasKanji(key)) return { entry: e, reading: readings(e)[0] }
     }
+    // する verbs are listed under their noun: 紹介する → 紹介
+    if (word.b && word.b.length > 2 && word.b.endsWith('する')) {
+      return this.bestEntry({ s: word.b.slice(0, -2), r: word.br?.replace(/する$/, '') })
+    }
     return undefined
   }
 

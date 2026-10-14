@@ -25,6 +25,12 @@ describe('furigana', () => {
   })
 })
 
+describe('readings', () => {
+  it('reads 日本 as にほん', () => {
+    expect(find(words('日本の夏は暑い。'), '日本')!.r).toBe('にほん')
+  })
+})
+
 describe('word grouping', () => {
   it('groups conjugated verbs with their auxiliaries', () => {
     const ws = words('食べさせられませんでした。')

@@ -8,6 +8,7 @@
     "dev": "npm run build:content && vite",
     "data": "node scripts/build-dict.mjs",
     "build:content": "tsx scripts/build-content.ts",
+    "audit": "tsx scripts/audit-content.ts",
     "build": "npm run build:content && tsc --noEmit && vite build",
     "build:cf": "(git rev-parse --is-shallow-repository | grep -q true && git fetch --unshallow --quiet); npm run data && npm run build",
     "preview": "vite preview",

@@ -82,7 +82,8 @@ Everything runs client-side. Your data stays in your browser (IndexedDB).
 Texts are Markdown files in [`content/stories/<level>/`](content/stories). See
 [`content/README.md`](content/README.md) for the format: YAML front matter,
 one sentence per line, `> ` translation lines, `## ` chapters, and
-`漢字《かんじ》` reading hints. Open a pull request. CI validates the files, and
+`漢字《かんじ》` reading hints, and [`content/STYLE.md`](content/STYLE.md) for
+the house style. Check a story with `npm run audit -- <slug>`. Open a pull request. CI validates the files, and
 the text appears in the app after merge.
 
 Public-domain texts from Aozora Bunko can be imported with:
@@ -99,6 +100,7 @@ npm install
 npm run data         # download sources and build the dictionary into public/data/dict (~25 s)
 npm run dev          # tokenizes content/ into public/data/library, then starts Vite
 npm test
+npm run audit        # content quality report (translations, readings, keywords, level)
 npm run build        # content + typecheck + production build into dist/
 ```
 

@@ -11,6 +11,9 @@ content/
 ```
 
 Adding a text is a pull request that adds one Markdown file. No code changes.
+For how to write a good story and translation, see [STYLE.md](STYLE.md).
+`npm run audit -- <slug>` reports missing translations, keywords that aren't in
+the text, readings the tokenizer guessed, and vocabulary above the level.
 
 ## Stories
 
