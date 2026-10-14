@@ -19,7 +19,7 @@ keywords:
 > Grandpa's glasses are missing.
 「めがねはどこですか。」
 > "Where are my glasses?"
-つくえの上にありません。
+机《つくえ》の上にありません。
 > They are not on the desk.
 テレビの前にもありません。
 > They are not in front of the TV, either.
@@ -27,7 +27,7 @@ keywords:
 > They are not in the bag, either.
 
 おばあさんが来ました。
-> Grandma came.
+> Grandma came in.
 「おじいさん、頭の上ですよ。」
 > "Grandpa, they're on your head."
 
@@ -37,5 +37,5 @@ keywords:
 > "Where are my glasses?"
 「おばあさん、頭の上ですよ。」
 > "Grandma, they're on your head."
-二人はわらいました。
+二人《ふたり》はわらいました。
 > The two of them laughed.

@@ -24,7 +24,7 @@ keywords:
 長い休みが明けた月曜日、日本の職場では、ある光景がよく見られる。
 > On the Monday after a long holiday, a certain scene is common in Japanese workplaces.
 休暇を取っていた社員が、一人一人の机を回って、小さな菓子を配っているのだ。
-> Employees who had taken time off go from desk to desk, handing out small sweets.
+> Employees who have been on leave go from desk to desk, handing out small sweets.
 「お休みをいただき、ありがとうございました」という一言とともに置かれるのは、旅先で買ってきたおみやげである。
 > What they leave, along with a word of thanks for "letting me take time off," is a souvenir bought on their trip.
 外国から来た同僚の中には、この習慣に驚く人も少なくない。
@@ -51,7 +51,7 @@ keywords:
 > In the Edo period, a long journey was a major event that ordinary people might experience once in a lifetime, if at all.
 特に人気があったのが、伊勢神宮《いせじんぐう》へのお参りである。
 > Especially popular was the pilgrimage to Ise Grand Shrine.
-「お伊勢参り」は庶民の間で大流行し、多い年には数百万人が伊勢を訪れたとも言われる。
+「お伊勢参り」は庶民の間《あいだ》で大流行し、多い年には数百万人が伊勢を訪れたとも言われる。
 > The Ise pilgrimage became a craze among commoners, and in peak years several million people are said to have visited Ise.
 しかし旅には多くの費用がかかるため、村の人々がお金を出し合って、代表者を送り出すこともあった。
 > But since travel was expensive, villagers sometimes pooled their money to send off a representative.
@@ -63,9 +63,9 @@ keywords:
 > It was considered proper for those who received senbetsu to bring back goods from their destination in return.
 ただし、歩いて旅をする以上、重い物や傷みやすい物を運ぶことはできない。
 > But when traveling on foot, one could hardly carry anything heavy or perishable.
-そのため、お札や薬、軽い工芸品などが好まれたという。
+そのため、｜お札《おふだ》や薬、軽い工芸品などが好まれたという。
 > So talismans, medicines and lightweight crafts were favored, it is said.
-一説には、神社でもらったお札を入れる箱を「宮笥《みやげ》」と呼び、それが「みやげ」という言葉の語源になったともいう。
+一説には、神社でもらった｜お札《おふだ》を入れる箱を「宮笥《みやげ》」と呼び、それが「みやげ」という言葉の語源になったともいう。
 > According to one theory, the boxes for holding talismans received at shrines were called "miyage," and this became the origin of the word.
 つまりおみやげは、もともと旅の幸運を、自分を送り出してくれた人々と分け合うためのものだったのだ。
 > In other words, omiyage were originally a way to share the good fortune of a journey with the people who had sent you off.
@@ -84,9 +84,9 @@ keywords:
 ほとんどの菓子が、一つずつ小さな袋に包まれているのだ。
 > Almost all the sweets are individually wrapped in small packets.
 これは、職場や学校で配りやすくするための工夫である。
-> This is a device to make them easy to hand out at work or school.
+> This is designed to make them easy to hand out at work or school.
 同時に、衛生的で日持ちがするという利点もある。
-> It also has the advantages of being hygienic and keeping well.
+> It also has the advantages of being hygienic and having a long shelf life.
 大きなケーキを一つもらっても、切り分けるのは手間がかかるし、その場にいない人には渡せない。
 > If you receive one big cake, cutting it up is a hassle, and you can't give any to people who aren't there.
 個包装なら、忙しい人も好きな時に食べられるし、出張中の人の机にも置いておける。
@@ -112,11 +112,11 @@ keywords:
 > Some companies have even introduced a "no omiyage necessary" rule.
 また、同僚に気をつかわせたくないからと、旅行に行ったこと自体を職場で話さない人もいる。
 > There are also people who don't mention their trips at work at all, so as not to make their colleagues feel obliged.
-形だけの習慣になってしまえば、それは本来の意味を失ってしまうだろう。
-> If it becomes a custom in form only, it will lose its original meaning.
+形だけの習慣になってしまえば、それはもう思いやりではなく、ただの義務だろう。
+> Once it becomes a mere formality, it is no longer thoughtfulness, just an obligation.
 それでも私は、この小さな箱の文化を、簡単に捨ててしまうのは惜しいと思う。
 > Still, I think it would be a shame to casually throw away this culture of the little box.
-何も持たずに休み明けの職場へ戻ることもできるが、たった一個の菓子が、休んでいた間に生まれた距離を一瞬で縮めてくれることもある。
+何も持たずに休み明けの職場へ戻ることもできるが、たった一個の菓子が、休んでいた間《あいだ》に生まれた距離を一瞬で縮めてくれることもある。
 > You could return to work empty-handed after a holiday, but sometimes a single sweet can instantly close the distance that grew while you were away.
 大切なのは何を渡すかではなく、誰かが自分を支えてくれていたことに気づく、その心のほうである。
 > What matters is not what you hand over, but the awareness that someone was supporting you.

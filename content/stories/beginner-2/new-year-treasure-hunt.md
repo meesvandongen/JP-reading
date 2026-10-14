@@ -9,7 +9,7 @@ author: JP Reading (original)
 license: CC BY 4.0
 keywords:
   - お正月|おしょうがつ|New Year
-  - おせち料理|おせちりょうり|traditional New Year's food
+  - お節料理|おせちりょうり|osechi, traditional New Year's food
   - お年玉|おとしだま|New Year's money gift
   - 紙|かみ|paper
   - こたつ|こたつ|heated low table
@@ -17,42 +17,42 @@ keywords:
   - 運動|うんどう|exercise
 ---
 
-一月｜一日《ついたち》です。
-> It is January 1st.
+一月｜一日《ついたち》、お正月です。
+> It is January 1st, New Year's Day.
 わたしは家族とおじいさんの家《いえ》に行きました。
 > I went to Grandpa's house with my family.
 みんなで「あけましておめでとうございます」と言いました。
 > We all said, "Happy New Year."
-テーブルの上には、おせち料理があります。
-> On the table there is osechi, the special New Year's food.
-えびや黒豆《くろまめ》があります。
-> There are shrimp, black beans, and more.
+テーブルの上には、お節《せち》料理があります。
+> On the table there was osechi, the special New Year's food.
+海老《えび》や黒豆《くろまめ》があります。
+> There were shrimp, black beans, and more.
 とてもきれいで、おいしいです。
-> It is very pretty and delicious.
+> It was very pretty and delicious.
 
-ごはんのあと、おじいさんがふくろをくれました。
-> After the meal, Grandpa gave me a little envelope.
+ごはんのあと、おじいさんが袋《ふくろ》をくれました。
+> After the meal, Grandpa gave me an envelope.
 お年玉《としだま》です！
 > It's otoshidama, New Year's money!
 でも、中はお金じゃありません。
-> But inside, there is no money.
+> But there was no money inside.
 小さい紙です。
-> It is a small piece of paper.
+> It was a small piece of paper.
 紙には「こたつの中を見てください。」と書いてあります。
-> On the paper it says, "Look inside the kotatsu."
+> The paper said, "Look inside the kotatsu."
 
 わたしはこたつの中を見ました。
 > I looked inside the kotatsu.
 みかんが一つあります。
-> There is one mandarin orange.
+> There was one mandarin orange.
 みかんにも紙があります。
-> There is a paper on the orange, too.
-「つぎは、げんかんです。」
-> "Next: the front door."
+> There was a piece of paper on the orange, too.
+「つぎは、玄関《げんかん》です。」
+> "Next: the front entrance."
 
 わたしは家《いえ》の中を走りました。
-> I ran all around the house.
-さいごに、ほんとうのお年玉《としだま》がありました。
+> I ran around the house.
+最後《さいご》に、ほんとうのお年玉《としだま》がありました。
 > At last, I found the real otoshidama.
 おじいさんのポケットの中でした。
 > It was in Grandpa's pocket.

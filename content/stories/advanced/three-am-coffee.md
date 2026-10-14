@@ -27,7 +27,7 @@ keywords:
 大学院の研究はうまく進まず、昼間は眠り、夜はレジに立つ生活が続いていた。
 > My graduate research wasn't going well, and I had settled into a life of sleeping by day and standing at the register by night.
 午前三時ごろになると、店にはほとんど客が来なくなる。
-> Around three in the morning, almost no customers come into the store.
+> By around three in the morning, customers would all but stop coming in.
 棚に商品を並べながら、自分はいったい何をしているのだろうと考えることが多かった。
 > Stocking the shelves, I often wondered what on earth I was doing with my life.
 
@@ -37,7 +37,7 @@ keywords:
 > He would come slowly into the store, wearing a gray windbreaker.
 買うのは、決まって温かい缶コーヒーが一本だけだ。
 > What he bought was always just one can of hot coffee.
-支払いを済ませると、彼は店の外に出て、駐車場の端で十分ほど空を見上げてから帰っていく。
+支払いを済ませると、彼は店の外に出て、駐車場の端で十分《じゅっぷん》ほど空を見上げてから帰っていく。
 > After paying, he would step outside, gaze up at the sky from the edge of the parking lot for ten minutes or so, and then go home.
 雨の夜も、雪の夜も、それは変わらなかった。
 > Rainy nights or snowy nights, it never changed.
@@ -100,7 +100,7 @@ keywords:
 
 十日目の夜、ドアが開いて、見知らぬ中年の女性が入ってきた。
 > On the tenth night, the door opened and a middle-aged woman I didn't know walked in.
-「夜勤の、眼鏡をかけた方ですよね。」
+「夜勤の、眼鏡をかけた方《かた》ですよね。」
 > "You're the one with glasses who works nights, aren't you?"
 女性は、老人の娘だと名乗った。
 > She introduced herself as the old man's daughter.

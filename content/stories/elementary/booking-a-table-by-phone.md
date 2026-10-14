@@ -9,7 +9,7 @@ author: JP Reading (original)
 license: CC BY 4.0
 keywords:
   - 予約|よやく|reservation
-  - 何名様|なんめいさま|how many people (polite)
+  - 何名|なんめい|how many people (formal)
   - 満席|まんせき|fully booked, all seats taken
   - 申し訳ございません|もうしわけございません|I'm very sorry (very polite)
   - 用意|ようい|preparation
@@ -23,22 +23,22 @@ keywords:
 わたしは、駅の近くのイタリア料理の店に電話をかけました。
 > I called an Italian restaurant near the station.
 
-「お電話ありがとうございます、レストラン・ソーレでございます。」
+「お電話ありがとうございます、レストラン『ソーレ』でございます。」
 > "Thank you for calling, this is Restaurant Sole."
 「すみません、来週の土曜日の夜に予約をしたいんですが。」
 > "Excuse me, I'd like to make a reservation for next Saturday evening."
-「はい、何名様でしょうか。」
+「はい、何名《なんめい》様でしょうか。」
 > "Certainly. For how many people?"
 「四人です。」
 > "Four."
-「お時間は何時がよろしいですか。」
+「お時間は何時《なんじ》がよろしいですか。」
 > "What time would suit you?"
 「七時はどうですか。」
 > "How about seven?"
 「申し訳ございません、七時は満席でございます。」
 > "I'm very sorry, we're fully booked at seven."
 「六時半でしたら、窓の近くのお席をご用意できますが。」
-> "If six-thirty is all right, we can prepare a table by the window."
+> "If six-thirty works for you, we can have a table by the window ready."
 「じゃあ、六時半でお願いします。」
 > "Then six-thirty, please."
 
@@ -63,19 +63,19 @@ keywords:
 少し待つと、店の人がもどってきました。
 > After a short wait, the staff member came back.
 「シェフが、ぜひ作りたいと言っています。」
-> "The chef says he'd love to make it."
+> "The chef says they'd love to make it."
 「本当ですか、ありがとうございます！」
 > "Really? Thank you so much!"
 
 土曜日、母はきのこのパスタを食べて、とても喜びました。
 > On Saturday, my mother ate the mushroom pasta and was delighted.
 最後に、名前の書いてあるケーキが出てきました。
-> At the end, a cake with her name on it came out.
+> At the end, a cake with her name on it was brought out.
 でも、ケーキには「まゆみ」ではなく「まゆこ」と書いてありました。
 > But the cake said "Mayuko," not "Mayumi."
 家族はみんな笑いました。
 > The whole family laughed.
 母は「新しい名前もいいわね。」と言って、写真をとりました。
-> Mom said, "A new name is nice too," and took a photo.
+> My mother said, "A new name is nice too," and took a photo.
 電話では、名前をはっきり言わなければいけませんね。
-> On the phone, you really have to say names clearly, don't you?
+> On the phone, you really do have to say names clearly.

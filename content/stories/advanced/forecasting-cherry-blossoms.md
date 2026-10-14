@@ -25,8 +25,8 @@ keywords:
 > As spring approaches, Japanese TV and newspapers give extensive coverage to "cherry blossom forecasts."
 南から北へと開花が進む様子は、天気図の前線にたとえて「桜前線」と呼ばれる。
 > The way blooming advances from south to north is likened to a front on a weather map and called the "cherry blossom front."
-桜前線は三月の下旬ごろに九州や四国から動き始め、五月には北海道に到達する。
-> The front starts moving from Kyushu and Shikoku around late March and reaches Hokkaido in May.
+桜前線は例年、三月の中旬から下旬にかけて九州や四国、本州の太平洋側から北上を始め、五月には北海道の東部に達する。
+> Each year, the front starts moving north from Kyushu, Shikoku and the Pacific side of Honshu in mid-to-late March, and reaches eastern Hokkaido in May.
 花見の計画を立てる人にとっても、観光地や飲食店にとっても、開花日は重要な情報だ。
 > The blooming date is important information for people planning hanami, as well as for tourist spots and restaurants.
 桜の開花は、春の訪れを告げる国民的なニュースなのである。
@@ -42,7 +42,7 @@ keywords:
 > In fact, Somei Yoshino trees all over Japan were propagated by grafting and are thought to be genetically almost identical.
 つまり、同じ条件なら同じように咲くはずなのだ。
 > In other words, under the same conditions, they should bloom in the same way.
-木ごとの個性による差が小さいため、気温の影響だけを比べやすいのだ。
+木ごとの個性による差が小さいので、気温の影響だけを比べやすい。
 > Because there is little variation between individual trees, it's easy to isolate the effect of temperature.
 この性質が、開花予想を可能にしている大きな理由の一つである。
 > This property is one of the main reasons blooming can be forecast at all.
@@ -59,11 +59,11 @@ keywords:
 > If they kept growing on warm autumn days, any flowers that opened would be killed by the winter cold.
 実際、台風で葉が落ちてしまった年などには、秋に花が咲く「狂い咲き」が見られることもある。
 > In fact, in years when typhoons strip the trees of their leaves, out-of-season blooming in autumn is sometimes seen.
-この眠りから目を覚ますには、冬の間に一定の期間、低い気温にさらされる必要がある。
+この眠りから目を覚ますには、冬の間《あいだ》に一定の期間、低い気温にさらされる必要がある。
 > To wake from this sleep, the buds must be exposed to low temperatures for a certain period over the winter.
 これを「休眠打破《きゅうみんだは》」という。
 > This is called "breaking dormancy."
-休眠打破《きゅうみんだは》が起きた後、気温が上がるにつれて、花芽《はなめ》は再び成長を始める。
+休眠打破《きゅうみんだは》が起きた後《あと》、気温が上がるにつれて、花芽《はなめ》は再び成長を始める。
 > Once dormancy has been broken, the buds begin to grow again as temperatures rise.
 
 ここで興味深いのは、暖かい冬が必ずしも早い開花につながるわけではないということだ。
@@ -77,13 +77,13 @@ keywords:
 
 ## 三　「600度の法則」と標本木
 
-休眠打破《きゅうみんだは》の後の成長の速さは、主に気温によって決まる。
+休眠打破《きゅうみんだは》の後《あと》の成長の速さは、主に気温によって決まる。
 > How fast the buds grow after dormancy breaks depends mainly on temperature.
 そこで、気温の記録を使った簡単な予想方法がいくつも考えられてきた。
 > So a number of simple forecasting methods using temperature records have been devised.
 その中でよく知られているのが「600度の法則」である。
 > One well-known method is the "600-degree rule."
-2月1日から毎日の最高気温を足していき、合計が600度を超えたころに開花する、というものだ。
+｜2月《にがつ》｜1日《ついたち》から毎日の最高気温を足していき、合計が600度を超えたころに開花する、というものだ。
 > You add up the daily high temperatures from February 1, and the trees bloom around when the total passes 600 degrees.
 たとえば、最高気温が平均12度の日が50日続けば、合計はちょうど600度になる。
 > For example, fifty days with an average high of 12 degrees add up to exactly 600 degrees.
@@ -105,7 +105,7 @@ keywords:
 一方、気象庁は今も各地の開花を観測し、発表している。
 > Meanwhile, the JMA still observes and announces when the trees bloom in each region.
 各地には「標本木《ひょうほんぼく》」と呼ばれる特定の木があり、その木で五、六輪以上の花が咲いた日を開花日とするのである。
-> Each region has a designated "sample tree," and the day five or six or more blossoms open on that tree is declared the blooming date.
+> Each region has a designated "sample tree," and the day at least five or six blossoms have opened on that tree is declared the blooming date.
 東京の標本木《ひょうほんぼく》は、靖国神社《やすくにじんじゃ》の境内にある。
 > Tokyo's sample tree stands in the grounds of Yasukuni Shrine.
 開花日から一週間ほどで、花の八割以上が開く「満開」を迎えるのが一般的だ。
@@ -113,8 +113,8 @@ keywords:
 
 近年は地球温暖化の影響で、開花日が全体として早まる傾向にある。
 > In recent years, global warming has caused blooming dates to come earlier overall.
-東京では、この七十年ほどで開花日が一週間近く早くなったというデータもある。
-> There is data showing that in Tokyo, the blooming date has moved nearly a week earlier over the past seventy years or so.
+気象庁によると、ソメイヨシノの開花日は、全国平均で十年に約一日のペースで早まっている。
+> According to the JMA, Somei Yoshino blooming dates have been getting earlier at a rate of about one day per decade, averaged across the country.
 その一方で、暖かい地域では休眠打破《きゅうみんだは》が不十分になり、花がそろって咲かない例も報告されている。
 > At the same time, in warm regions, cases have been reported where insufficient dormancy breaking keeps the flowers from blooming in unison.
 小さなつぼみの中では、冬の寒さと春の暖かさをめぐる、精密な計算が行われているのだ。

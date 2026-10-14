@@ -4,7 +4,7 @@ title_en: The Case of the Vanished Pudding
 level: intermediate
 category: humor
 tags: [mystery, office, food, detective]
-summary: A limited-edition pudding disappears from the office fridge over the weekend, and a young mystery fan sets out to find the culprit.
+summary: A limited-edition pudding vanishes from the office fridge, and a young mystery fan sets out to find the culprit.
 author: JP Reading (original)
 license: CC BY 4.0
 keywords:
@@ -22,10 +22,10 @@ keywords:
 ## 第一章　事件
 
 月曜日の朝、会社の小さな台所から大きな声が聞こえてきた。
-> On Monday morning, a loud voice came from the small office kitchen.
+> On Monday morning, a shout came from the office's small kitchen.
 「ない！わたしのプリンがない！」
 > "It's gone! My pudding is gone!"
-声の主は、経理の佐藤《さとう》さんだった。
+声の主《ぬし》は、経理の佐藤《さとう》さんだった。
 > The voice belonged to Ms. Sato from accounting.
 佐藤《さとう》さんは金曜日の夜、駅前の有名な店で限定のプリンを買って、冷蔵庫に入れておいたそうだ。
 > Apparently, on Friday evening she had bought a limited-edition pudding at a famous shop in front of the station and put it in the fridge.
@@ -41,7 +41,7 @@ keywords:
 「この事件は、ぼくが解決します。」
 > "I'll solve this case."
 佐藤《さとう》さんは少し不安そうな顔をしたが、「お願い。」とだけ言った。
-> Ms. Sato looked a little doubtful, but said only, "Please."
+> Ms. Sato looked a little uneasy, but said only, "Please."
 
 ## 第二章　容疑者
 
@@ -49,7 +49,7 @@ keywords:
 > First, Kobayashi looked into who had stayed latest at the office on Friday night.
 一人目は、甘いものが大好きな山口《やまぐち》課長だ。
 > The first was Section Chief Yamaguchi, who loves sweets.
-課長の机の上には、空のプリンの容器があった。
+課長の机の上には、空《から》のプリンの容器があった。
 > On the chief's desk there was an empty pudding container.
 「課長、これは何ですか。」
 > "Chief, what is this?"
@@ -59,13 +59,13 @@ keywords:
 > Sure enough, the container had the convenience store's name on it.
 
 二人目は、新入社員の田中《たなか》さんだ。
-> The second was Tanaka, a new employee.
+> The second was Mr. Tanaka, a new employee.
 田中《たなか》さんは、土曜日も仕事のために会社に来ていた。
-> Tanaka had also come into the office on Saturday to work.
+> Mr. Tanaka had come into the office on Saturday, too, to work.
 「プリンなんて見ていませんよ、土曜日は冷蔵庫を開けてもいませんし。」
 > "I didn't see any pudding. I didn't even open the fridge on Saturday."
 田中《たなか》さんの目は、うそを言っているようには見えなかった。
-> Tanaka's eyes didn't look like they were lying.
+> Mr. Tanaka didn't have the eyes of someone telling a lie.
 小林《こばやし》は台所のゴミ箱も調べたが、プリンの容器は見つからなかった。
 > Kobayashi also checked the kitchen trash can, but found no pudding container.
 「犯人は、容器を持って帰ったのか……？」
@@ -101,8 +101,8 @@ keywords:
 「あれ、意外とおいしい。」
 > "Huh, it's surprisingly good."
 次の日から、会社の冷凍庫には「凍らせプリン」がいくつも並ぶようになった。
-> From the next day on, several "frozen puddings" began to appear lined up in the office freezer.
+> From the next day on, there were always several "frozen puddings" lined up in the office freezer.
 そして小林《こばやし》は、社内で「名探偵」と呼ばれるようになった。
 > And Kobayashi came to be known around the office as "the great detective."
 犯人は、結局一人も見つからなかったのだが。
-> Even though, in the end, he never found a single culprit.
+> Even though, in the end, not a single culprit was ever found.

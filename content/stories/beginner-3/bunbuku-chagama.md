@@ -13,12 +13,13 @@ keywords:
   - 茶釜|ちゃがま|tea kettle
   - おれい|おれい|thanks, a reward
   - お寺|おてら|temple
-  - おしょうさん|おしょうさん|Buddhist priest
+  - 和尚|おしょう|Buddhist priest (of a temple)
   - お湯|おゆ|hot water
-  - つなわたり|つなわたり|tightrope walking
+  - 綱渡り|つなわたり|tightrope walking
+  - 見世物|みせもの|show, street performance
 ---
 
-むかしむかし、ある村に、まずしい男の人がすんでいました。
+むかしむかし、ある村に、まずしい男の人が住んでいました。
 > Once upon a time, a poor man lived in a certain village.
 ある日、男の人は山で、わなにかかったたぬきを見つけました。
 > One day, on the mountain, the man found a tanuki caught in a trap.
@@ -35,27 +36,27 @@ keywords:
 > "To thank you, I will turn into a tea kettle."
 「この茶釜《ちゃがま》をお寺に売ってください。」
 > "Please sell this kettle to the temple."
-たぬきはくるっと回って、りっぱな茶釜《ちゃがま》になりました。
+たぬきはくるりと回って、りっぱな茶釜《ちゃがま》になりました。
 > The tanuki spun around and became a fine tea kettle.
 
-男の人は、茶釜《ちゃがま》をお寺のおしょうさんに売りました。
+男の人は、茶釜《ちゃがま》をお寺の和尚《おしょう》さんに売りました。
 > The man sold the kettle to the priest at the temple.
-おしょうさんは喜んで、すぐに茶釜《ちゃがま》でお湯をわかしました。
+和尚《おしょう》さんは喜んで、すぐに茶釜《ちゃがま》でお湯をわかしました。
 > The priest was delighted and right away boiled water in the kettle.
 すると、茶釜《ちゃがま》が「あつい、あつい！」とさけびました。
 > Then the kettle shouted, "Hot! Hot!"
 茶釜《ちゃがま》から、たぬきの頭と足としっぽが出てきました。
 > A tanuki's head, legs, and tail popped out of the kettle.
-おしょうさんはびっくりして、茶釜《ちゃがま》を男の人に返しました。
+和尚《おしょう》さんはびっくりして、茶釜《ちゃがま》を男の人に返しました。
 > The priest was shocked and gave the kettle back to the man.
 
 たぬきは「やっぱり、あついのはだめでした。」と言いました。
 > The tanuki said, "Hot things are no good for me after all."
-「じゃあ、わたしはつなわたりをします。」
+「じゃあ、わたしは綱渡《つなわた》りをします。」
 > "Then I'll walk the tightrope instead."
-男の人とたぬきは、町でみせものを始めました。
+男の人とたぬきは、町で見世物《みせもの》を始めました。
 > The man and the tanuki started a show in town.
-茶釜《ちゃがま》のたぬきは、つなの上を歩いたり、おどったりしました。
+茶釜《ちゃがま》のたぬきは、綱《つな》の上を歩いたり、おどったりしました。
 > The tea-kettle tanuki walked along the rope and danced.
 みんなはわらって、たくさんお金をはらいました。
 > Everyone laughed and paid lots of money.
@@ -64,7 +65,7 @@ keywords:
 
 たぬきがつかれたとき、男の人はたぬきをお寺に連れていきました。
 > When the tanuki grew tired, the man took it back to the temple.
-そして、おしょうさんに「もうお湯はわかさないでください。」とたのみました。
+そして、和尚《おしょう》さんに「もうお湯はわかさないでください。」とたのみました。
 > And he asked the priest, "Please don't boil water in it anymore."
 たぬきの茶釜《ちゃがま》は、今もそのお寺にあるそうです。
 > They say the tanuki's tea kettle is still at that temple today.

@@ -28,7 +28,7 @@ keywords:
 山田《やまだ》先生は「おはようございます」と言いました。
 > Mr. Yamada said, "Good morning."
 でも、声がとても小さいです。
-> But his voice is very small.
+> But his voice is very quiet.
 顔も赤いです。
 > His face is red, too.
 

@@ -36,8 +36,8 @@ keywords:
 タオルとせっけんは、少しのお金で借りることができました。
 > They could rent a towel and soap for a small fee.
 
-服をぬいで、ロッカーに入れます。
-> You take off your clothes and put them in a locker.
+二人は服をぬいで、ロッカーに入れました。
+> They took off their clothes and put them in a locker.
 エマさんは少し恥ずかしかったです。
 > Emma was a little embarrassed.
 由香《ゆか》さんは「だいじょうぶ、だれも気にしないよ。」と言いました。
@@ -51,8 +51,10 @@ keywords:
 > After washing, the two of them got into the big tub.
 お湯はとても熱かったですが、すぐに気持ちよくなりました。
 > The water was very hot, but it soon felt good.
+エマさんは思わず「ああ、気持ちいい。」と言いました。
+> Without thinking, Emma said, "Ahh, this feels so good."
 
-かべには、大きな富士山の絵がかいてありました。
+壁には、大きな富士山の絵がかいてありました。
 > A big picture of Mount Fuji was painted on the wall.
 となりのおばあさんが「外国の人？どこから来たの？」と聞きました。
 > An old woman next to them asked, "Are you from abroad? Where are you from?"
@@ -64,7 +66,7 @@ keywords:
 おふろから出たあと、由香《ゆか》さんは冷たい牛乳を二本買いました。
 > After getting out of the bath, Yuka bought two bottles of cold milk.
 「銭湯のあとは、これを飲むのが決まりなの。」
-> "After the sento, drinking this is the rule."
+> "Drinking this after the sento is the rule."
 二人は腰に手を当てて、牛乳を一気に飲みました。
 > The two of them put their hands on their hips and drank the milk in one go.
 エマさんの部屋のおふろは、次の週に直りました。

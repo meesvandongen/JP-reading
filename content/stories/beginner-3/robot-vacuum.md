@@ -8,8 +8,8 @@ summary: Dad buys a robot vacuum so he never has to clean again. It doesn't quit
 author: JP Reading (original)
 license: CC BY 4.0
 keywords:
-  - そうじき|そうじき|vacuum cleaner
-  - そうじ|そうじ|cleaning
+  - 掃除機|そうじき|vacuum cleaner
+  - 掃除|そうじ|cleaning
   - 名前をつける|なまえをつける|to give a name
   - ぶつかる|ぶつかる|to bump into
   - くつした|くつした|sock
@@ -18,20 +18,20 @@ keywords:
 ---
 
 父は新しいものが大好きです。
-> Dad loves new gadgets.
-先週、父はロボットそうじきを買ってきました。
+> Dad loves anything new.
+先週、父はロボット掃除機《そうじき》を買ってきました。
 > Last week, Dad came home with a robot vacuum.
-「これで、もうそうじをしなくてもいいよ。」と父はうれしそうに言いました。
+「これで、もう掃除《そうじ》をしなくてもいいよ。」と父はうれしそうに言いました。
 > "Now we won't have to clean anymore," Dad said happily.
 ロボットは丸くて、小さくて、とてもかわいいです。
-> The robot is round, small, and very cute.
+> The robot was round, small, and very cute.
 父はロボットに「マル」という名前をつけました。
 > Dad named the robot "Maru."
 
-次の朝、マルはそうじを始めました。
+次の朝、マルは掃除《そうじ》を始めました。
 > The next morning, Maru started cleaning.
 マルはゆっくり部屋の中を回ります。
-> Maru slowly goes around the room.
+> Maru moved slowly around the room.
 でも、すぐにいすの足にぶつかって、止まってしまいました。
 > But it soon bumped into a chair leg and stopped.
 父はいすを全部テーブルの上に上げました。
@@ -43,15 +43,15 @@ keywords:
 そのあと、ねこのミケがマルの上に乗りました。
 > Then Mike the cat climbed on top of Maru.
 ミケは楽しそうに、家《いえ》の中をドライブしています。
-> Mike is happily driving around the house.
+> Mike was happily driving around the house.
 
 夜になりました。
 > Night came.
 父は「マルのために、部屋をきれいにしておこう。」と言って、床《ゆか》の物を全部かたづけました。
 > Dad said, "Let's tidy the room up for Maru," and picked up everything on the floor.
-次の日も、その次の日も、父はマルのためにそうじをしました。
+次の日も、その次の日も、父はマルのために掃除《そうじ》をしました。
 > The next day, and the day after that, Dad cleaned for Maru.
-母は「お父さん、前よりたくさんそうじをしていますね。」とわらいました。
+母は「お父さん、前よりたくさん掃除《そうじ》をしていますね。」とわらいました。
 > Mom laughed, "Dad, you're cleaning more than you used to."
 父は何も言いませんでした。
 > Dad didn't say a word.

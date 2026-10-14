@@ -29,7 +29,7 @@ keywords:
 > "Coffee?"
 「はい。お父さんとおなじです。」
 > "Yes. The same as my dad."
-うしろにお父さんがいます。
+後《うし》ろにお父さんがいます。
 > His dad is behind him.
 お父さんはわらいました。
 > His dad laughed.
@@ -37,6 +37,6 @@ keywords:
 店の人は男の子にカップをあげました。
 > The clerk gave the boy a cup.
 中は白いミルクです。
-> Inside is white milk.
+> Inside, there is white milk.
 男の子は「おいしい！ぼくもおとなです。」と言いました。
 > The boy said, "Delicious! I'm a grown-up too."

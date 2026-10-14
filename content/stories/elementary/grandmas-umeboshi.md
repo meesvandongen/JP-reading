@@ -15,7 +15,8 @@ keywords:
   - 干す|ほす|to dry (in the sun)
   - 酸っぱい|すっぱい|sour
   - 間に合う|まにあう|to make it in time
-  - 毎年|まいとし|every year
+  - ざる|ざる|bamboo draining basket
+  - 交互|こうご|alternating, in turn
 ---
 
 わたしの祖母は、毎年六月に梅干しを作ります。
@@ -34,20 +35,20 @@ keywords:
 わたしたちは木から梅をとって、大きなかごに入れました。
 > We picked the plums from the tree and put them in a big basket.
 
-まず、梅を水で洗って、小さいへたを一つずつ取ります。
+まず、梅を水で洗って、小さいへたを一つずつ取りました。
 > First, we washed the plums and removed the little stems one by one.
-次に、梅と塩を交互に、大きなつぼに入れます。
+次に、梅と塩を交互に、大きな壺《つぼ》に入れました。
 > Next, we put plums and salt into a big jar in alternating layers.
 「塩はたくさん使うのよ。」と祖母は笑いました。
 > "We use a lot of salt," Grandma said with a laugh.
-それから、重い石をのせて、一か月ぐらい待ちます。
+それから、重い石をのせて、一か月ぐらい待ちました。
 > Then we put a heavy stone on top and waited about a month.
 六月の終わりに、赤いしその葉も入れました。
 > At the end of June, we also added red shiso leaves.
 
 七月の終わり、梅雨が明けてから、もう一度祖母の家に行きました。
 > At the end of July, after the rainy season was over, I went to Grandma's house again.
-今度は、梅を外で三日間干します。
+今度は、梅を外で三日間《みっかかん》干しました。
 > This time, we dried the plums outside for three days.
 朝、ざるに梅を一つずつならべました。
 > In the morning, I lined the plums up one by one on bamboo trays.
@@ -63,7 +64,7 @@ keywords:
 三日目、梅は赤くて、しわしわになっていました。
 > On the third day, the plums were red and wrinkly.
 一つ食べてみると、とても酸っぱくて、目が小さくなりました。
-> When I tried one, it was so sour that my eyes squeezed shut.
+> When I tried one, it was so sour that I screwed up my eyes.
 祖母は「すぐに食べないで、一年待つともっとおいしくなるよ。」と言いました。
 > Grandma said, "Don't eat them right away. If you wait a year, they get even tastier."
 一年も待つのは長いと思いました。
@@ -71,9 +72,9 @@ keywords:
 でも祖母は、「いいものは時間がかかるの。」と言いました。
 > But Grandma said, "Good things take time."
 
-今、わたしの部屋には、小さいつぼが一つあります。
+今、わたしの部屋には、小さい壺《つぼ》が一つあります。
 > Now there is one small jar in my room.
 中には、祖母と作った梅干しが入っています。
 > Inside are the umeboshi I made with Grandma.
 来年の夏、二人でいっしょに食べるつもりです。
-> Next summer, we plan to eat them together.
+> Next summer, the two of us plan to eat them together.

@@ -22,7 +22,7 @@ keywords:
 
 ## 第一章　五十歳の弟子
 
-江戸時代の後半、日本中を歩いて、驚くほど正確な地図を作った人物がいる。
+江戸時代の後半、日本中《にほんじゅう》を歩いて、驚くほど正確な地図を作った人物がいる。
 > In the latter half of the Edo period, there was a man who walked all over Japan and made an astonishingly accurate map.
 伊能忠敬《いのうただたか》である。
 > His name was Inō Tadataka.
@@ -35,15 +35,15 @@ keywords:
 > He lost his mother when he was small, and is said to have had a hard childhood.
 十七歳で佐原《さわら》の商家である伊能家《いのうけ》の婿養子となり、傾きかけていた家業を立て直した。
 > At seventeen, he married into the Inō family, merchants in Sawara, as an adopted son-in-law, and revived the struggling family business.
-酒造りや米の売買で財産を築き、飢饉の際には村人を助けた彼は、地元で尊敬される存在だった。
+酒造りや米《こめ》の売買で財産を築き、飢饉の際には村人を助けた彼は、地元で尊敬される存在だった。
 > Having built a fortune through sake brewing and the rice trade, and having helped the villagers in times of famine, he was a respected figure locally.
 しかし忠敬《ただたか》には、若いころから心に秘めた夢があった。
 > But Tadataka had harbored a dream since his youth.
 天文学、つまり星や暦の学問を深く学ぶことである。
 > To study astronomy — the science of the stars and the calendar — in depth.
 
-四十九歳で家を息子に譲ると、忠敬《ただたか》は江戸に出た。
-> At forty-nine, after handing the household over to his son, Tadataka moved to Edo.
+四十九歳で家業を息子に譲り、翌年、忠敬《ただたか》は江戸に出た。
+> At forty-nine he handed the family business over to his son, and the following year Tadataka moved to Edo.
 そして、幕府の天文方《てんもんかた》であった高橋至時《たかはしよしとき》に弟子入りした。
 > There he became the pupil of Takahashi Yoshitoki, an official astronomer to the shogunate.
 至時《よしとき》は、忠敬《ただたか》より十九歳も年下だった。
@@ -63,10 +63,10 @@ keywords:
 > Tadataka first tried measuring the distance from his home in Fukagawa to the astronomical bureau in Asakusa by counting his own steps.
 しかし至時《よしとき》は、そんな短い距離では誤差が大きすぎると答えたという。
 > But Yoshitoki is said to have replied that over such a short distance, the margin of error would be far too large.
-もっと長い距離、たとえば江戸から蝦夷地《えぞち》までを測れば、正確な値が出るはずだ、と。
-> If one measured a much longer distance — say, from Edo to Ezo — one should get an accurate value.
+もっと長い距離、たとえば江戸から蝦夷地《えぞち》までを測れば、正確な値《あたい》が出るはずだ、と。
+> Measuring a much longer distance — say, from Edo to Ezo — should give an accurate value, he said.
 
-とはいえ、勝手に国中を測量して歩くことは許されていなかった。
+とはいえ、勝手に国中《くにじゅう》を測量して歩くことは許されていなかった。
 > However, surveying one's way across the country without permission was not allowed.
 そこで二人が考えたのが、「蝦夷地《えぞち》の地図を作る」という名目だった。
 > So the pretext the two of them came up with was "making a map of Ezo."
@@ -84,21 +84,21 @@ keywords:
 昼は縄や鎖を使って距離を測り、道が曲がるたびに方角を記録する。
 > By day they measured distances with ropes and chains, recording the bearing every time the road turned.
 夜は星の高さを観測して、その土地の緯度を確かめる。
-> By night they observed the height of the stars to confirm the latitude of each place.
+> By night they measured the altitude of the stars to confirm the latitude of each place.
 雨の日も、風の強い海岸でも、この作業は続けられた。
 > The work went on through rainy days and along windswept coasts.
-測量は全部で十回に及び、その期間は十七年にもなった。
+測量は全部で十回行われ、その期間は十七年にもなった。
 > There were ten survey expeditions in all, spanning seventeen years.
 歩いた距離は合わせて約四万キロメートル、ほぼ地球一周分だと言われている。
 > The total distance walked is said to have been about forty thousand kilometers — roughly once around the Earth.
 
-測量の結果、忠敬《ただたか》は緯度一度の距離を「二十八里二分《にじゅうはちりにぶ》」、つまり約百十キロメートルと算出した。
-> From his surveys, Tadataka calculated the length of one degree of latitude as "28.2 ri," or about 110 kilometers.
+初期の測量の結果をもとに、忠敬《ただたか》は緯度一度の距離を「二十八里二分《にじゅうはちりにぶ》」、つまり約百十キロメートルと算出した。
+> Based on his early surveys, Tadataka calculated the length of one degree of latitude as "28.2 ri," or about 110 kilometers.
 至時《よしとき》は初め、この数字をなかなか信じなかった。
 > At first, Yoshitoki was reluctant to believe this figure.
-しかし後に、オランダ経由で伝わった西洋の天文学の本の値とほぼ一致することが分かり、二人は大いに喜んだという。
+しかし後《のち》に、オランダ経由で伝わった西洋の天文学の本の値《あたい》とほぼ一致することが分かり、二人は大いに喜んだという。
 > But later, when it turned out to agree almost exactly with the value in a Western astronomy book that had arrived via the Dutch, the two of them are said to have been overjoyed.
-現在の値とくらべても、その差はごくわずかである。
+現在の値《あたい》とくらべても、その差はごくわずかである。
 > Even compared with today's value, the difference is very small.
 
 ## 第四章　師の死と完成した地図
@@ -109,9 +109,9 @@ keywords:
 > His disciples, however, kept their master's death a secret for a time and carried on the work.
 そして1821年、ついに「大日本沿海輿地全図《だいにほんえんかいよちぜんず》」が完成し、幕府に納められた。
 > Then in 1821, the "Complete Map of the Coastal Regions of Great Japan" was finally finished and presented to the shogunate.
-その正確さは、後の時代の人々をも驚かせた。
+その正確さは、後《のち》の時代の人々をも驚かせた。
 > Its accuracy amazed people in later ages, too.
-1828年には、この地図の写しを国外に持ち出そうとしたドイツ人医師シーボルトが、後に国外追放される事件も起きている。
+1828年には、この地図の写しを国外に持ち出そうとしたドイツ人医師シーボルトが、後《のち》に国外追放される事件も起きている。
 > In 1828, there was even an incident in which the German physician Siebold, who had tried to take a copy of the map out of the country, was later expelled.
 明治時代になっても、伊能図《いのうず》はさまざまな地図のもとになった。
 > Even in the Meiji era, the Inō maps served as the basis for many other maps.

@@ -8,12 +8,12 @@ summary: Shota wants to learn the secret of a tiny ramen shop's soup, so he star
 author: JP Reading (original)
 license: CC BY 4.0
 keywords:
-  - ひみつ|ひみつ|secret
+  - 秘密|ひみつ|secret
   - 列|れつ|line, queue
   - 主人|しゅじん|shop owner
   - 教える|おしえる|to teach, to tell
   - アルバイト|アルバイト|part-time job
-  - ていねいに|ていねいに|carefully, politely
+  - ていねい|ていねい|careful, polite
   - 野菜|やさい|vegetables
 ---
 
@@ -26,17 +26,17 @@ keywords:
 店の主人は大野《おおの》さんです。
 > The owner of the shop is Mr. Ono.
 みんなが、大野《おおの》さんのスープはとてもおいしいと言います。
-> Everyone says Mr. Ono's soup is delicious.
+> Everyone says Mr. Ono's soup is really delicious.
 
 大学生の翔太《しょうた》さんは、この店が大好きです。
 > Shota, a university student, loves this shop.
 毎週、ラーメンを食べに来ます。
 > He comes to eat ramen every week.
-翔太《しょうた》さんは、スープのひみつが知りたいと思っていました。
-> Shota had always wanted to know the secret of the soup.
+翔太《しょうた》さんは、スープの秘密《ひみつ》が知りたいと思っていました。
+> Shota wanted to know the secret of the soup.
 ある日、翔太《しょうた》さんは大野《おおの》さんに聞きました。
 > One day, Shota asked Mr. Ono.
-「スープのひみつを教えてください。」
+「スープの秘密《ひみつ》を教えてください。」
 > "Please tell me the secret of your soup."
 大野《おおの》さんはわらって、「店で働いたら、教えるよ。」と言いました。
 > Mr. Ono laughed and said, "If you work at the shop, I'll tell you."
@@ -48,13 +48,13 @@ keywords:
 毎日とてもいそがしかったです。
 > Every day was very busy.
 大野《おおの》さんは毎朝、野菜を一つ一つていねいに見ます。
-> Every morning, Mr. Ono carefully checks the vegetables one by one.
+> Every morning, Mr. Ono carefully checked the vegetables one by one.
 そして、八時間スープをにます。
-> Then he simmers the soup for eight hours.
+> Then he simmered the soup for eight hours.
 
 一か月後、翔太《しょうた》さんはまた聞きました。
 > A month later, Shota asked again.
-「ひみつは何《なん》ですか。」
+「秘密《ひみつ》は何《なん》ですか。」
 > "What is the secret?"
 大野《おおの》さんは「もう知っているよ。」と言いました。
 > Mr. Ono said, "You already know it."
@@ -62,5 +62,5 @@ keywords:
 > Shota thought for a moment.
 そして、自分の手を見て、わかりました。
 > Then he looked at his own hands and understood.
-ひみつは、毎日ていねいに働くことでした。
+秘密《ひみつ》は、毎日ていねいに働くことでした。
 > The secret was working carefully, every single day.

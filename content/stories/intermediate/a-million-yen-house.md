@@ -16,35 +16,37 @@ keywords:
   - 付き合い|つきあい|relationship, socializing
   - 慣れる|なれる|to get used to
   - 孫|まご|grandchild
+  - 移住|いじゅう|moving (to settle somewhere new)
+  - 自治体|じちたい|local government
 ---
 
 ## 第一章　一軒百万円
 
-大阪《おおさか》で働いていた健二《けんじ》と早紀《さき》は、去年、岡山《おかやま》県の山の中の小さな村に引っ越した。
-> Kenji and Saki, who used to work in Osaka, moved last year to a small mountain village in Okayama Prefecture.
+大阪《おおさか》で働いていた健二《けんじ》と早紀《さき》は、三年前、岡山《おかやま》県の山の中の小さな村に引っ越した。
+> Kenji and Saki, who used to work in Osaka, moved three years ago to a small mountain village in Okayama Prefecture.
+二人とも都会の生活に疲れていて、いつか自然の中で暮らしたいと話していた。
+> Both of them were tired of city life and had talked about living close to nature someday.
 きっかけは、インターネットで見つけた一軒の古い家だった。
 > It all started with an old house they found on the internet.
-二人とも都会の生活に疲れていて、いつか自然の中で暮らしたいと話していた。
-> Both of them were tired of city life and had often talked about living close to nature someday.
-「庭つき、畑つき、百万円」と書いてあったのだ。
+「庭付き、畑付き、百万円」と書いてあったのだ。
 > The listing said, "Garden and field included, one million yen."
 最初は冗談だと思ったが、村の「空き家バンク」に問い合わせてみると、本当だった。
 > At first they thought it was a joke, but when they contacted the village's "vacant house bank," it turned out to be true.
 持ち主は、亡くなった母親の家を、誰かに大切に使ってほしいと考えていたのだ。
-> The owner wanted someone to take good care of the house that had belonged to his late mother.
+> The owner hoped someone would take good care of their late mother's house.
 空き家バンクとは、住む人がいなくなった家を、新しく住みたい人に紹介する仕組みである。
 > A vacant house bank is a system that introduces homes no one lives in anymore to people who want to move in.
 
 日本では今、空き家が大きな問題になっている。
 > Vacant houses are now a big problem in Japan.
 2023年の調査では、全国の空き家は約900万戸で、住宅のおよそ七軒に一軒が空き家だという。
-> According to a 2023 survey, there are about 9 million vacant homes nationwide, roughly one in every seven houses.
+> According to a 2023 survey, there are about 9 million vacant homes nationwide — roughly one in every seven.
 特に地方では、若い人が都会に出ていき、親の家に住む人がいなくなることが多い。
 > Especially in rural areas, young people leave for the cities, and often no one is left to live in their parents' homes.
 人が住まない家は、すぐに傷んでしまう。
 > A house nobody lives in quickly falls into disrepair.
 屋根や柱が弱くなり、やがて町の景色や安全にも影響が出る。
-> The roof and pillars weaken, and eventually it affects the look and even the safety of the area.
+> The roof and pillars weaken, and eventually it affects the look and even the safety of the town.
 そこで多くの自治体が空き家バンクを作り、地方に移住する人を支援しているのである。
 > That's why many local governments have set up vacant house banks to support people moving to the countryside.
 
@@ -57,7 +59,7 @@ keywords:
 修理には、家の値段より多いお金がかかった。
 > The repairs cost more than the house itself.
 「百万円の家に、二百万円の修理か。」と健二《けんじ》は苦笑いした。
-> "Two million yen of repairs for a one-million-yen house," Kenji said with a wry smile.
+> "A one-million-yen house and two million in repairs, huh," Kenji said with a wry smile.
 古い家を直してくれる大工さんを探すのにも、三か月かかった。
 > Even finding a carpenter who would fix up the old house took three months.
 いちばん近いスーパーまで車で四十分もかかるし、冬は雪で道が通れなくなる日もある。
@@ -80,7 +82,7 @@ keywords:
 早紀《さき》がパンを焼いて持っていくと、松本《まつもと》さんは「こんなにうまいパンは初めてだ。」と喜んだ。
 > When Saki baked some bread and brought it over, Mr. Matsumoto was delighted, saying, "I've never had bread this good."
 それをきっかけに、早紀《さき》は家の一部を小さなパン屋にすることにした。
-> That inspired Saki to turn part of the house into a small bakery.
+> That gave Saki the idea of turning part of the house into a small bakery.
 店の名前は、松本《まつもと》さんがつけてくれた「山のパン」だ。
 > The shop is called "Mountain Bread," a name Mr. Matsumoto came up with.
 週に二日しか開かない店だが、今では遠くの町からも客が来る。

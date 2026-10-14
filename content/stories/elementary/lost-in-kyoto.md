@@ -4,7 +4,7 @@ title_en: Lost in Kyoto
 level: elementary
 category: travel
 tags: [kyoto, school-trip, temple, kindness]
-summary: On a school trip, a boy loses his group on a crowded slope in Kyoto, and a kind woman in a kimono shows him the way.
+summary: On a school trip, a boy loses his group on a crowded slope in Kyoto, and a kind old woman in a kimono shows him the way.
 author: JP Reading (original)
 license: CC BY 4.0
 keywords:
@@ -25,14 +25,16 @@ keywords:
 ぼくたちのグループは、清水寺《きよみずでら》に行くことにしました。
 > Our group decided to go to Kiyomizu-dera.
 
-二年坂《にねんざか》には、古い店がたくさんならんでいました。
-> Along Ninenzaka, there were many old shops in a row.
+二年坂《にねんざか》には、古い店がたくさん並んでいました。
+> Ninenzaka was lined with old shops.
 ぼくは、おみやげの店で小さい木の人形を見ていました。
 > I was looking at little wooden dolls in a souvenir shop.
 顔を上げると、友だちはもういませんでした。
 > When I looked up, my friends were gone.
 道は観光客でいっぱいで、みんながどこにいるか分かりませんでした。
 > The street was packed with tourists, and I had no idea where everyone was.
+ぼくは迷子になってしまったのです。
+> I was lost.
 
 ぼくはスマホを出しましたが、電池が切れていました。
 > I took out my phone, but the battery was dead.
@@ -43,26 +45,26 @@ keywords:
 
 その時、着物を着たおばあさんが「どうしたの？」と声をかけてくれました。
 > Just then, an old woman in a kimono called out to me, "What's the matter?"
-ぼくが話すと、おばあさんは「清水寺《きよみずでら》なら、この坂を上ればすぐよ。」と教えてくれました。
-> When I explained, she told me, "If it's Kiyomizu-dera you want, it's just up this slope."
+ぼくが話すと、おばあさんは「清水寺《きよみずでら》なら、この坂をずっと上っていけば着くわよ。」と教えてくれました。
+> When I explained, she told me, "If it's Kiyomizu-dera you want, just keep going up the hill."
 「わたしも同じ方に行くから、いっしょに行きましょう。」
 > "I'm going the same way, so let's go together."
 おばあさんは歩きながら、京都の古い話をたくさんしてくれました。
 > As we walked, she told me lots of old stories about Kyoto.
 この坂でころぶと悪いことがある、という話もありました。
-> One was a story that if you fall on this slope, something bad will happen.
+> One of them was that if you fall on this slope, something bad will happen to you.
 ぼくはゆっくり、気をつけて歩きました。
 > I walked slowly and carefully.
 
 清水寺《きよみずでら》の門の前に、グループのみんながいました。
-> In front of Kiyomizu-dera's gate, my whole group was there.
-「どこに行ってたの！」と田村《たむら》さんがおこりました。
-> "Where did you go?!" Tamura said angrily.
+> My whole group was there in front of the gate of Kiyomizu-dera.
+「どこにいたの！」と田村《たむら》さんがおこりました。
+> "Where were you?!" Tamura said angrily.
 でも、すぐに「よかった。」と言って、笑いました。
-> But then she said, "Thank goodness," and smiled.
-ぼくがふり返ると、おばあさんはもういませんでした。
+> But right after that, Tamura said, "Thank goodness," and smiled.
+ぼくが振り返ると、おばあさんはもういませんでした。
 > When I turned around, the old woman was already gone.
 お礼を言うことができなかったのが、少し残念です。
-> I'm a little sad that I wasn't able to thank her.
+> It's a bit of a shame that I never got to thank her.
 京都に行くと、ぼくは今でもあの坂で着物の人をさがします。
 > Whenever I go to Kyoto, I still look for a woman in a kimono on that slope.
