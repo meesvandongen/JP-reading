@@ -132,6 +132,27 @@ export interface StoryMeta {
   lemmas?: number
   /** date added (ISO) */
   added?: string
+  /** id of the series this story is an episode of */
+  series?: string
+  /** episode number within the series (1-based) */
+  episode?: number
+}
+
+/** A series (連載): stories at one level that are read in order and tell one bigger story. */
+export interface SeriesMeta {
+  id: string
+  title: string
+  title_en?: string
+  level: Level
+  category: string
+  summary?: string
+  author?: string
+  /** episode story ids, in reading order */
+  episodes: string[]
+  /** total characters of all episodes */
+  chars: number
+  /** date the newest episode was added (ISO) */
+  added?: string
 }
 
 export interface StoryDoc {
@@ -143,6 +164,7 @@ export interface StoryDoc {
 export interface LibraryIndex {
   built: string
   stories: StoryMeta[]
+  series: SeriesMeta[]
   grammar: GrammarMeta[]
 }
 

@@ -17,7 +17,7 @@
 // --errors prints only those (used in CI).
 
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
-import { basename, dirname, join, relative } from 'node:path'
+import { dirname, join, relative, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parse as parseYaml } from 'yaml'
 import * as kuromoji from '@patdx/kuromoji'
@@ -72,7 +72,9 @@ async function main() {
     const notes: string[] = []
     const { front, body } = splitFrontMatter(readFileSync(file, 'utf8'))
     const fm = (parseYaml(front) ?? {}) as Record<string, unknown>
-    const level = String(fm.level ?? basename(dirname(file)))
+    // content/stories/<level>/[<series>/]<slug>.md
+    const levelDir = relative(join(ROOT, 'content', 'stories'), file).split(sep)[0]
+    const level = String(fm.level ?? levelDir)
     const original = !fm.source
     const raw = parseStoryBody(body)
     const sentences = raw.flatMap((c) => c.p.flatMap((p) => p.s))
@@ -92,7 +94,7 @@ async function main() {
 
     for (const k of ['title', 'title_en', 'level', 'category', 'summary', 'author', 'license'])
       if (!fm[k]) notes.push(`front matter: no ${k}`)
-    if (level !== basename(dirname(file))) errors.push(`level "${level}" does not match folder`)
+    if (level !== levelDir) errors.push(`level "${level}" does not match folder`)
 
     for (const s of sentences) {
       const plain = extractRuby(s.text).plain

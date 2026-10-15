@@ -7,6 +7,7 @@ import { offlineReady, online, updateAvailable } from './services/pwa'
 import { Icon } from './components/Icon'
 import { LibraryPage } from './pages/LibraryPage'
 import { ReaderPage } from './pages/ReaderPage'
+import { SeriesPage } from './pages/SeriesPage'
 import { ImportPage } from './pages/ImportPage'
 import { ReviewPage } from './pages/ReviewPage'
 import { DictionaryPage } from './pages/DictionaryPage'
@@ -17,7 +18,7 @@ import { SettingsPage } from './pages/SettingsPage'
 import { AboutPage } from './pages/AboutPage'
 
 const TABS = [
-  { path: '/', icon: 'book', label: 'Read', match: (p: string) => p === '/' || p.startsWith('/import') },
+  { path: '/', icon: 'book', label: 'Read', match: (p: string) => p === '/' || p.startsWith('/import') || p.startsWith('/series') },
   { path: '/review', icon: 'cards', label: 'Flashcards', match: (p: string) => p.startsWith('/review') },
   { path: '/dictionary', icon: 'search', label: 'Dictionary', match: (p: string) => p.startsWith('/dictionary') || p.startsWith('/kanji') },
   { path: '/grammar', icon: 'grammar', label: 'Grammar', match: (p: string) => p.startsWith('/grammar') },
@@ -31,6 +32,8 @@ function Page() {
       return <LibraryPage />
     case 'read':
       return <ReaderPage id={parts[1]} />
+    case 'series':
+      return <SeriesPage id={parts[1]} />
     case 'import':
       return <ImportPage />
     case 'review':

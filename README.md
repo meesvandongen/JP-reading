@@ -10,6 +10,9 @@ desktop and it works offline.
 - Graded stories in seven levels (Beginner 1–3, Elementary, Intermediate,
   Advanced, Master) and topics such as daily life, food, travel, culture,
   folktales, history, science, news and conversation.
+- **Series (連載)**: stories at one level that are read in order and tell one
+  bigger story, with a series page, per-episode progress and a "Next
+  episode" button at the end of each episode.
 - Public-domain classics from Aozora Bunko: Akutagawa, Natsume Sōseki, Dazai
   Osamu, Miyazawa Kenji, Niimi Nankichi and others.
 - Recommendations based on your level and reading history, a "Continue
@@ -79,7 +82,8 @@ Everything runs client-side. Your data stays in your browser (IndexedDB).
 
 ## Adding texts
 
-Texts are Markdown files in [`content/stories/<level>/`](content/stories). See
+Texts are Markdown files in [`content/stories/<level>/`](content/stories), and a
+series is a folder of them with a `series.yml`. See
 [`content/README.md`](content/README.md) for the format: YAML front matter,
 one sentence per line, `> ` translation lines, `## ` chapters, and
 `漢字《かんじ》` reading hints, a `names:` list for proper nouns, and [`content/STYLE.md`](content/STYLE.md) for

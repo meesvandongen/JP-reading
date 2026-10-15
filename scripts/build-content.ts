@@ -1,12 +1,12 @@
 // Builds the reading library from content/ into public/data/library/:
-//   index.json                 list of stories + grammar articles
+//   index.json                 list of stories, series + grammar articles
 //   stories/<id>.json          pre-tokenized story (StoryDoc)
 //   grammar/<id>.json          grammar article (rendered HTML)
 // Also copies the kuromoji dictionary to public/kuromoji/ for in-browser
 // tokenizing of imported texts.
 
 import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
-import { dirname, join, basename, relative } from 'node:path'
+import { dirname, join, basename, relative, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { execFileSync } from 'node:child_process'
 import { parse as parseYaml } from 'yaml'
@@ -18,10 +18,11 @@ import { textStats } from '../src/lib/stats'
 import { parseStoryBody, parseTerms, splitFrontMatter } from '../src/lib/text'
 import { Dictionary, headword } from '../src/lib/dict'
 import { LEVELS, levelJlpt } from '../src/lib/levels'
-import type { GrammarMeta, Keyword, KToken, LibraryIndex, StoryDoc, StoryMeta, Word } from '../src/lib/types'
+import type { GrammarMeta, Keyword, KToken, LibraryIndex, SeriesMeta, StoryDoc, StoryMeta, Word } from '../src/lib/types'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const CONTENT = join(ROOT, 'content')
+const STORIES = join(CONTENT, 'stories')
 const OUT = join(ROOT, 'public', 'data', 'library')
 const DICT = join(ROOT, 'public', 'data', 'dict')
 const KUROMOJI_SRC = join(ROOT, 'node_modules', '@patdx', 'kuromoji', 'dict')
@@ -63,11 +64,45 @@ async function main() {
   mkdirSync(join(OUT, 'stories'), { recursive: true })
   mkdirSync(join(OUT, 'grammar'), { recursive: true })
 
+  const errors: string[] = []
+
+  // ---- series: content/stories/<level>/<series-id>/series.yml + one .md per episode
+  const seriesFm = new Map<string, Record<string, unknown>>()
+  for (const levelDir of existsSync(STORIES) ? readdirSync(STORIES) : []) {
+    if (!statSync(join(STORIES, levelDir)).isDirectory()) continue
+    for (const f of readdirSync(join(STORIES, levelDir))) {
+      const dir = join(STORIES, levelDir, f)
+      if (!statSync(dir).isDirectory()) continue
+      const rel = relative(ROOT, dir)
+      const yml = join(dir, 'series.yml')
+      if (!existsSync(yml)) {
+        errors.push(`${rel}: a series folder needs a series.yml`)
+        continue
+      }
+      try {
+        const fm = (parseYaml(readFileSync(yml, 'utf8')) ?? {}) as Record<string, unknown>
+        if (!fm.title) errors.push(`${rel}/series.yml: missing title`)
+        if (!Array.isArray(fm.episodes) || !fm.episodes.length) errors.push(`${rel}/series.yml: missing episodes list`)
+        if (seriesFm.has(f)) errors.push(`${rel}: duplicate series id "${f}"`)
+        seriesFm.set(f, { ...fm, level: levelDir })
+      } catch (err) {
+        errors.push(`${rel}/series.yml: invalid YAML: ${(err as Error).message}`)
+      }
+    }
+  }
+  const episodeOf = new Map<string, { series: string; episode: number }>()
+  for (const [sid, fm] of seriesFm) {
+    const eps = Array.isArray(fm.episodes) ? fm.episodes.map(String) : []
+    eps.forEach((id, i) => {
+      if (episodeOf.has(id)) errors.push(`series ${sid}: episode "${id}" is listed twice`)
+      else episodeOf.set(id, { series: sid, episode: i + 1 })
+    })
+  }
+
   // ---- stories
   const stories: StoryMeta[] = []
   const ids = new Set<string>()
-  const errors: string[] = []
-  for (const file of walk(join(CONTENT, 'stories'))) {
+  for (const file of walk(STORIES)) {
     const id = basename(file, '.md')
     const rel = relative(ROOT, file)
     if (ids.has(id)) {
@@ -75,6 +110,13 @@ async function main() {
       continue
     }
     ids.add(id)
+    const [levelDir, ...sub] = relative(STORIES, file).split(sep)
+    const seriesId = sub.length === 2 ? sub[0] : undefined
+    if (sub.length > 2) errors.push(`${rel}: stories go in content/stories/<level>/ or content/stories/<level>/<series>/`)
+    const ep = episodeOf.get(id)
+    if (seriesId && ep?.series !== seriesId) errors.push(`${rel}: not listed in ${seriesId}/series.yml`)
+    if (!seriesId && ep) errors.push(`${rel}: listed in series "${ep.series}" but not in its folder`)
+    const inSeries = seriesId ? seriesFm.get(seriesId) : undefined
     const { front, body } = splitFrontMatter(readFileSync(file, 'utf8'))
     let fm: Record<string, unknown>
     try {
@@ -83,8 +125,9 @@ async function main() {
       errors.push(`${rel}: invalid front matter: ${(err as Error).message}`)
       continue
     }
-    const level = String(fm.level ?? basename(dirname(file)))
+    const level = String(fm.level ?? levelDir)
     if (!LEVELS.some((l) => l.id === level)) errors.push(`${rel}: unknown level "${level}"`)
+    if (inSeries && level !== inSeries.level) errors.push(`${rel}: every episode of a series is at the series' level (${inSeries.level})`)
     if (!fm.title) errors.push(`${rel}: missing title`)
 
     let terms
@@ -114,6 +157,7 @@ async function main() {
       ...(fm.year ? { year: Number(fm.year) } : {}),
       ...stats,
       added: (fm.added ? String(fm.added) : undefined) ?? gitAddedDate(file) ?? new Date().toISOString(),
+      ...(inSeries && ep ? { series: ep.series, episode: ep.episode } : {}),
     }
 
     const keywords = await buildKeywords(tokenizer, fm.keywords, words, level, dict)
@@ -148,16 +192,48 @@ async function main() {
   grammar.sort((a, b) => (a.order ?? 999) - (b.order ?? 999) || a.title.localeCompare(b.title))
 
   const levelOrder = (l: string) => LEVELS.findIndex((x) => x.id === l)
-  stories.sort((a, b) => levelOrder(a.level) - levelOrder(b.level) || a.chars - b.chars)
+  // episodes of a series stay together and in order, at the place of the first episode
+  const firstEp = new Map<string, number>()
+  for (const s of stories) if (s.series && s.episode === 1) firstEp.set(s.series, s.chars)
+  const sortChars = (s: StoryMeta) => (s.series ? (firstEp.get(s.series) ?? s.chars) : s.chars)
+  stories.sort(
+    (a, b) =>
+      levelOrder(a.level) - levelOrder(b.level) ||
+      sortChars(a) - sortChars(b) ||
+      (a.series ?? '').localeCompare(b.series ?? '') ||
+      (a.episode ?? 0) - (b.episode ?? 0),
+  )
 
-  const index: LibraryIndex = { built: new Date().toISOString(), stories, grammar }
+  const series: SeriesMeta[] = []
+  for (const [id, fm] of seriesFm) {
+    const eps = (Array.isArray(fm.episodes) ? fm.episodes.map(String) : []).map((e) => stories.find((s) => s.id === e))
+    eps.forEach((s, i) => {
+      if (!s) errors.push(`series ${id}: episode "${(fm.episodes as unknown[])[i]}" has no file in its folder`)
+    })
+    const found = eps.filter((s): s is StoryMeta => !!s)
+    series.push({
+      id,
+      title: String(fm.title ?? id),
+      ...(fm.title_en ? { title_en: String(fm.title_en) } : {}),
+      level: fm.level as SeriesMeta['level'],
+      category: String(fm.category ?? found[0]?.category ?? 'misc'),
+      ...(fm.summary ? { summary: String(fm.summary) } : {}),
+      ...(fm.author ? { author: String(fm.author) } : {}),
+      episodes: found.map((s) => s.id),
+      chars: found.reduce((a, s) => a + s.chars, 0),
+      added: found.map((s) => s.added ?? '').sort().pop(),
+    })
+  }
+  series.sort((a, b) => levelOrder(a.level) - levelOrder(b.level) || a.title.localeCompare(b.title))
+
+  const index: LibraryIndex = { built: new Date().toISOString(), stories, series, grammar }
   writeFileSync(join(OUT, 'index.json'), JSON.stringify(index))
 
   // ---- kuromoji dictionary for the browser
   mkdirSync(KUROMOJI_OUT, { recursive: true })
   for (const f of readdirSync(KUROMOJI_SRC)) copyFileSync(join(KUROMOJI_SRC, f), join(KUROMOJI_OUT, f))
 
-  console.log(`library: ${stories.length} stories, ${grammar.length} grammar articles → ${relative(ROOT, OUT)}`)
+  console.log(`library: ${stories.length} stories, ${series.length} series, ${grammar.length} grammar articles → ${relative(ROOT, OUT)}`)
   if (errors.length) {
     console.error(errors.map((e) => `✗ ${e}`).join('\n'))
     process.exit(1)
