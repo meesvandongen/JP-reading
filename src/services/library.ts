@@ -1,6 +1,6 @@
 import { signal } from '@preact/signals'
-import type { LibraryIndex, StoryDoc, GrammarMeta } from '../lib/types'
-import { getText } from '../state/db'
+import type { LibraryIndex, StoryDoc, GrammarMeta, SeriesMeta } from '../lib/types'
+import { getText, progress } from '../state/db'
 
 export const library = signal<LibraryIndex | null>(null)
 export const libraryError = signal<string | null>(null)
@@ -9,7 +9,7 @@ export async function loadLibrary() {
   try {
     const res = await fetch('data/library/index.json')
     if (!res.ok) throw new Error(`HTTP ${res.status}`)
-    library.value = await res.json()
+    library.value = { series: [], ...(await res.json()) }
   } catch (err) {
     libraryError.value = `Could not load the library (${(err as Error).message}).`
   }
@@ -44,4 +44,17 @@ export async function getGrammar(id: string): Promise<{ meta: GrammarMeta; html:
 
 export function grammarTitle(id: string): string | undefined {
   return library.value?.grammar.find((g) => g.id === id)?.title
+}
+
+export function getSeries(id: string | undefined): SeriesMeta | undefined {
+  return id ? library.value?.series.find((s) => s.id === id) : undefined
+}
+
+/** How many episodes are finished, and the episode to read next (the first unfinished one). */
+export function seriesProgress(series: SeriesMeta): { done: number; next?: string } {
+  const prog = progress.value
+  return {
+    done: series.episodes.filter((id) => prog.get(id)?.completedAt).length,
+    next: series.episodes.find((id) => !prog.get(id)?.completedAt),
+  }
 }

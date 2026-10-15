@@ -893,6 +893,162 @@ textarea {
   color: var(--muted);
   margin: 8px 0;
 }
+/* series (連載): a card with pages stacked behind it, and one track segment per episode */
+.series-card {
+  box-shadow:
+    4px 4px 0 -1px var(--surface),
+    4px 4px 0 0 var(--border),
+    8px 8px 0 -1px var(--surface),
+    8px 8px 0 0 var(--border),
+    var(--shadow);
+  margin: 0 8px 8px 0;
+}
+.h-scroll.stacked {
+  grid-auto-columns: minmax(220px, 260px);
+}
+.series-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.ep-track {
+  display: inline-flex;
+  gap: 3px;
+  flex: 1;
+  max-width: 120px;
+}
+.ep-track > span {
+  flex: 1;
+  height: 5px;
+  border-radius: 9px;
+  background: var(--surface-2);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+.ep-track > .done {
+  background: var(--n5);
+  box-shadow: none;
+}
+.ep-track > .now {
+  background: linear-gradient(90deg, var(--accent) 50%, var(--surface-2) 50%);
+}
+.series-hero h1 {
+  font-size: 1.8rem;
+  margin: 8px 0 2px;
+}
+.series-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0 16px;
+}
+.series-progress .ep-track {
+  max-width: none;
+}
+.series-done {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--n5);
+  font-weight: 600;
+}
+.episode-list {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+  position: relative;
+}
+.episode {
+  display: flex;
+  gap: 14px;
+  padding: 12px 4px 16px;
+  cursor: pointer;
+  position: relative;
+}
+/* the line that joins the episodes */
+.episode:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: 44px;
+  bottom: -8px;
+  width: 2px;
+  background: var(--border);
+}
+.episode.done:not(:last-child)::before {
+  background: var(--n5);
+}
+.ep-num {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  border: 2px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  position: relative;
+}
+.episode.done .ep-num {
+  background: var(--n5);
+  border-color: var(--n5);
+  color: #fff;
+}
+.episode.next .ep-num {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.episode.later .ep-body {
+  opacity: 0.75;
+}
+.ep-body {
+  min-width: 0;
+}
+.ep-body b {
+  font-size: 1.1rem;
+}
+.ep-body p {
+  margin: 4px 0 0;
+}
+.episode:hover b {
+  color: var(--accent);
+}
+.series-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 3px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.next-episode .story-card {
+  border-color: var(--accent);
+}
+.series-finale {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  margin-top: 24px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  cursor: pointer;
+  text-align: center;
+}
 .level-progress {
   display: flex;
   align-items: center;

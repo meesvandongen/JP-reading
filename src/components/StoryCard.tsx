@@ -1,6 +1,7 @@
 import type { StoryMeta } from '../lib/types'
 import { CATEGORIES, levelInfo } from '../lib/levels'
 import { progress, updateProgress } from '../state/db'
+import { getSeries } from '../services/library'
 import { navigate } from '../router'
 import { Icon } from './Icon'
 
@@ -10,6 +11,7 @@ export function StoryCard({ meta, compact = false }: { meta: StoryMeta; compact?
   const p = progress.value.get(meta.id)
   const info = levelInfo(meta.level)
   const isNew = meta.added && Date.now() - Date.parse(meta.added) < NEW_DAYS * 86400_000 && !p
+  const series = getSeries(meta.series)
   const pct = p && !p.completedAt && meta.sentences ? Math.min(100, Math.round(((p.position + 1) / meta.sentences) * 100)) : 0
   return (
     <article
@@ -22,7 +24,13 @@ export function StoryCard({ meta, compact = false }: { meta: StoryMeta; compact?
         <span class="level-dot" style={{ background: info.color }} title={info.label}>
           {info.short}
         </span>
-        <span class="muted small">{CATEGORIES[meta.category] ?? meta.category}</span>
+        {series ? (
+          <span class="series-tag" title={`Episode ${meta.episode} of ${series.title_en ?? series.title}`}>
+            Ep. {meta.episode} · <span lang="ja">{series.title}</span>
+          </span>
+        ) : (
+          <span class="muted small">{CATEGORIES[meta.category] ?? meta.category}</span>
+        )}
         {isNew && <span class="badge new">NEW</span>}
         <button
           class={`icon-btn fav ${p?.favorite ? 'on' : ''}`}

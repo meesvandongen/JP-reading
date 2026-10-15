@@ -17,7 +17,7 @@ import { ReaderSettings } from '../components/ReaderSettings'
 import { Sheet } from '../components/Sheet'
 import { recommend } from './LibraryPage'
 import { StoryCard } from '../components/StoryCard'
-import { grammarTitle } from '../services/library'
+import { getSeries, grammarTitle } from '../services/library'
 
 interface Flat {
   s: Sentence
@@ -348,7 +348,10 @@ function Reader({ doc }: { doc: StoryDoc }) {
   const completed = !!prog?.completedAt
   const font = FONTS[s.fontFamily].css
   const style = { fontFamily: font, fontSize: `${s.fontSize}px`, lineHeight: s.lineHeight }
-  const next = useMemo(() => recommend(4, id), [id, progress.value])
+  const series = getSeries(doc.meta.series)
+  const nextEpisodeId = series && doc.meta.episode ? series.episodes[doc.meta.episode] : undefined
+  const nextEpisode = nextEpisodeId ? library.value?.stories.find((m) => m.id === nextEpisodeId) : undefined
+  const next = useMemo(() => recommend(5, id).filter((m) => m.id !== nextEpisodeId).slice(0, 4), [id, progress.value])
   const grammarInStory = useMemo(() => {
     const counts = new Map<string, number>()
     for (const f of flat) for (const w of f.s.w) for (const g of w.t ?? []) counts.set(g, (counts.get(g) ?? 0) + 1)
@@ -387,6 +390,12 @@ function Reader({ doc }: { doc: StoryDoc }) {
 
       <div class="reader-scroll">
         <div class="reader-head">
+          {series && (
+            <button class="series-link" onClick={() => navigate(`/series/${encodeURIComponent(series.id)}`)}>
+              <span lang="ja">{series.title}</span> · Episode {doc.meta.episode} of {series.episodes.length}
+              <Icon name="list" size={14} />
+            </button>
+          )}
           <div class="reader-meta">
             <LevelBadge level={doc.meta.level} />
             <span class="muted small">
@@ -468,6 +477,18 @@ function Reader({ doc }: { doc: StoryDoc }) {
               </a>{' '}
               · {doc.meta.license}
             </p>
+          )}
+          {completed && nextEpisode && (
+            <div class="next-up next-episode">
+              <h3>Next episode</h3>
+              <StoryCard meta={nextEpisode} />
+            </div>
+          )}
+          {completed && series && !nextEpisode && (
+            <button class="series-finale" onClick={() => navigate(`/series/${encodeURIComponent(series.id)}`)}>
+              <b>That was the last episode of <span lang="ja">{series.title}</span>.</b>
+              <span class="muted small">See the whole series</span>
+            </button>
           )}
           {completed && next.length > 0 && (
             <div class="next-up">

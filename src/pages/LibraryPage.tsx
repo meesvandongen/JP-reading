@@ -1,11 +1,12 @@
 import { useMemo, useState } from 'preact/hooks'
 import type { StoryMeta } from '../lib/types'
 import { CATEGORIES, LEVELS, levelInfo } from '../lib/levels'
-import { library, libraryError } from '../services/library'
+import { library, libraryError, seriesProgress } from '../services/library'
 import { customTexts, progress, cards } from '../state/db'
 import { settings, updateSettings } from '../state/settings'
 import { navigate, route } from '../router'
 import { StoryCard } from '../components/StoryCard'
+import { SeriesCard } from '../components/SeriesCard'
 import { Icon } from '../components/Icon'
 import { isDue } from '../services/srs'
 import { streak } from './ProgressPage'
@@ -27,6 +28,8 @@ export function recommend(n: number, exclude?: string): StoryMeta[] {
   if (recent.length) target = Math.max(target, Math.round(recent.reduce((a, s) => a + levelIndex(s.level), 0) / recent.length))
   const cats = new Map<string, number>()
   for (const s of recent) cats.set(s.category, (cats.get(s.category) ?? 0) + 1)
+  // of a series, only the episode to read next
+  const nextEpisode = new Set(lib.series.map((s) => seriesProgress(s).next))
   // stable daily shuffle
   const seed = new Date().toDateString()
   const jitter = (id: string) => {
@@ -35,7 +38,7 @@ export function recommend(n: number, exclude?: string): StoryMeta[] {
     return (Math.abs(h) % 100) / 100
   }
   return lib.stories
-    .filter((s) => s.id !== exclude && !prog.get(s.id)?.completedAt)
+    .filter((s) => s.id !== exclude && !prog.get(s.id)?.completedAt && (!s.series || nextEpisode.has(s.id)))
     .map((s) => {
       const li = levelIndex(s.level)
       const p = prog.get(s.id)
@@ -97,6 +100,20 @@ export function LibraryPage() {
     })
   }, [lib, search, level, cat, filter, prog])
 
+  const seriesShown = useMemo(() => {
+    if (!lib || filter !== 'all') return []
+    const term = search.trim().toLowerCase()
+    return lib.series.filter((s) => {
+      if (level !== 'all' && s.level !== level) return false
+      if (cat !== 'all' && s.category !== cat) return false
+      if (term) {
+        const hay = [s.title, s.title_en, s.summary, s.author].join(' ').toLowerCase()
+        if (!hay.includes(term)) return false
+      }
+      return true
+    })
+  }, [lib, search, level, cat, filter])
+
   const dueCount = useMemo(() => [...cards.value.values()].filter((c) => isDue(c)).length, [cards.value])
   const st = streak()
   const cats = lib ? [...new Set(lib.stories.map((s) => s.category))] : []
@@ -144,6 +161,17 @@ export function LibraryPage() {
           <div class="h-scroll">
             {recs.map((m) => (
               <StoryCard meta={m} compact />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {!browsing && lib.series.length > 0 && (
+        <section>
+          <h2 class="section-title">Series</h2>
+          <div class="h-scroll stacked">
+            {lib.series.map((s) => (
+              <SeriesCard series={s} compact />
             ))}
           </div>
         </section>
@@ -217,11 +245,12 @@ export function LibraryPage() {
           <LevelProgress level={level} />
         ) : null}
         <div class="story-grid">
+          {browsing && seriesShown.map((s) => <SeriesCard series={s} />)}
           {filtered.map((m) => (
             <StoryCard meta={m} />
           ))}
         </div>
-        {filtered.length === 0 && <p class="muted">No stories match.</p>}
+        {filtered.length === 0 && seriesShown.length === 0 && <p class="muted">No stories match.</p>}
         <p class="muted small contribute">
           Want more? Texts live in the repository as Markdown files — anyone can add one with a pull request.
         </p>

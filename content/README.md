@@ -6,8 +6,10 @@ dictionary forms and keyword lists) that the app loads.
 
 ```
 content/
-  stories/<level>/<slug>.md   reading texts
-  grammar/<id>.md             grammar articles
+  stories/<level>/<slug>.md               reading texts
+  stories/<level>/<series>/series.yml     a series (連載) …
+  stories/<level>/<series>/<slug>.md      … and its episodes
+  grammar/<id>.md                         grammar articles
 ```
 
 Adding a text is a pull request that adds one Markdown file. No code changes.
@@ -106,6 +108,51 @@ Rules:
 - Dialogue in 「」 is fine. Keep 「」 on the same line as the rest of the
   sentence.
 - Use full-width Japanese punctuation (。、「」！？).
+
+## Series
+
+A series (連載, *rensai*) is a set of stories that are read in order and
+together tell one bigger story, like the chapters of a book or the episodes
+of a TV show. Each episode is a normal story file with its own keywords and
+translations, short enough for its level, and should end with a reason to
+read the next one.
+
+All episodes of a series are at the same level: the series is a folder
+inside a level folder, and the build fails if an episode's `level:` differs.
+
+```
+content/stories/beginner-3/library-letters/
+  series.yml
+  the-letter-in-the-book.md
+  the-second-letter.md
+  under-the-cherry-tree.md
+```
+
+`series.yml`:
+
+```yaml
+title: 図書館の手紙
+title_en: Letters in the Library Books
+category: daily-life
+summary: Mina finds a letter hidden in an old library book. It tells her where to find the next one.
+author: JP Reading (original)
+episodes:            # story ids (file names without .md), in reading order
+  - the-letter-in-the-book
+  - the-second-letter
+  - under-the-cherry-tree
+```
+
+The folder name is the series id (lowercase ASCII and dashes). Every `.md`
+in the folder must be listed in `episodes`, and every listed episode must
+be in the folder. Keep names and their readings the same across episodes
+(each episode has its own `names:` list). Add a new episode by adding its
+file and appending it to `episodes`; the series shows as NEW in the app.
+
+In the app a series has its own card on the home screen and in the library,
+and a page with its episodes (`#/series/<id>`). Episodes show "Ep. n" on
+their cards, the reader links back to the series and offers the next
+episode when you finish one, and recommendations only suggest the next
+unread episode of a series.
 
 ## Grammar articles
 
