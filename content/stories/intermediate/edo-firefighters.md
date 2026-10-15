@@ -18,6 +18,8 @@ keywords:
   - 伝統|でんとう|tradition
   - はしご|はしご|ladder
   - 纏|まとい|matoi (a firefighting brigade's standard)
+names:
+  - 大岡忠相|おおおかただすけ|Ōoka Tadasuke (Edo city magistrate, 1677–1752)
 ---
 
 ## 第一章　火事の多い町

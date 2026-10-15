@@ -15,6 +15,8 @@ keywords:
   - かばん|かばん|bag
   - 開ける|あける|to open
   - 秘密|ひみつ|secret
+names:
+  - ケン|Ken (given name)
 ---
 
 学校が終わりました。

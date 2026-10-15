@@ -15,6 +15,9 @@ keywords:
   - こおる|こおる|to freeze
   - 星|ほし|star
   - おみやげ|おみやげ|souvenir
+names:
+  - 由香|ゆか|Yuka (given name)
+  - 美咲|みさき|Misaki (given name)
 ---
 
 由香《ゆか》さん、お元気ですか。

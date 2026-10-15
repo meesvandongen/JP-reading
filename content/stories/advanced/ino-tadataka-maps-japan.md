@@ -18,6 +18,18 @@ keywords:
   - 算出|さんしゅつ|calculation, computing
   - 師|し|teacher, master
   - 伏せる|ふせる|to keep secret, to conceal
+names:
+  - 伊能忠敬|いのうただたか|Inō Tadataka (surveyor and mapmaker, 1745–1818)
+  - 忠敬|ただたか|Tadataka (given name; here Inō Tadataka)
+  - 伊能家|いのうけ|the Inō family
+  - 伊能図|いのうず|the Inō maps
+  - 佐原|さわら|Sawara (merchant town in present-day Chiba)
+  - 高橋至時|たかはしよしとき|Takahashi Yoshitoki (shogunate astronomer, 1764–1804)
+  - 至時|よしとき|Yoshitoki (given name; here Takahashi Yoshitoki)
+  - 深川|ふかがわ|Fukagawa (area of Edo, now Tokyo)
+  - 浅草|あさくさ|Asakusa (area of Edo, now Tokyo)
+  - 大日本沿海輿地全図|だいにほんえんかいよちぜんず|Complete Map of the Coastal Regions of Great Japan (1821)
+  - シーボルト|Siebold (Philipp Franz von Siebold, German physician, 1796–1866)
 ---
 
 ## 第一章　五十歳の弟子

@@ -18,6 +18,10 @@ keywords:
   - 募集|ぼしゅう|recruitment
   - 指摘|してき|to point out
   - 人手不足|ひとでぶそく|labor shortage
+names:
+  - 花咲|はなさき|Hanasaki (name of a town)
+  - 石原|いしはら|Ishihara (family name)
+  - 道子|みちこ|Michiko (given name)
 ---
 
 ## 一　レジも店員もない古本屋

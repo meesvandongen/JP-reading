@@ -1556,6 +1556,13 @@ ruby {
 .lp-more {
   margin-top: 4px;
 }
+.story-meaning {
+  margin: 6px 0;
+  font-size: 1.05rem;
+}
+.story-meaning .badge {
+  margin-right: 4px;
+}
 .lp-hint {
   margin: 10px 0 0;
 }

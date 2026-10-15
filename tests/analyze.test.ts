@@ -1,9 +1,9 @@
 import { beforeAll, describe, expect, it } from 'vitest'
 import * as kuromoji from '@patdx/kuromoji'
 import NodeDictionaryLoader from '@patdx/kuromoji/node'
-import { analyzeSentence, type Tokenizer } from '../src/lib/analyze'
+import { analyzeSentence, isKatakanaScript, type Tokenizer } from '../src/lib/analyze'
 import { alignFurigana } from '../src/lib/furigana'
-import { extractRuby, parsePlainText, parseStoryBody, splitSentences } from '../src/lib/text'
+import { extractRuby, parsePlainText, parseStoryBody, parseTerms, splitSentences } from '../src/lib/text'
 import type { KToken, Word } from '../src/lib/types'
 
 let tokenizer: Tokenizer
@@ -129,5 +129,73 @@ describe('text parsing', () => {
     const ch = parsePlainText('一行目です。二文目。\n\n　次の段落。')
     expect(ch[0].p).toHaveLength(2)
     expect(ch[0].p[0].s).toHaveLength(2)
+  })
+})
+
+describe('katakana', () => {
+  const surfaces = (s: string) => words(s).map((w) => w.s)
+
+  it('keeps a run of katakana together as one word', () => {
+    // IPADIC: スマート/フォン, ドア/ノブ, メロン/パン, ツヤ/ツヤ, チー/ン
+    expect(surfaces('スマートフォンで調べた。')).toEqual(['スマートフォン', 'で', '調べた', '。'])
+    expect(find(words('ドアノブとメロンパン。'), 'ドアノブ')!.p).toBe('n')
+    expect(find(words('ドアノブとメロンパン。'), 'メロンパン')).toBeTruthy()
+    expect(surfaces('髪がツヤツヤだ。')).toContain('ツヤツヤ')
+    expect(surfaces('チーンと鳴った。')).toContain('チーン')
+  })
+
+  it('does not merge a katakana counter into its number', () => {
+    const w = words('三リットルの水。')[0]
+    expect([w.s, w.p]).toEqual(['三リットル', 'num'])
+  })
+
+  it('keeps サ変 katakana nouns working with する', () => {
+    const w = find(words('ダブルチェックしました。'), 'ダブルチェックしました')!
+    expect(w.b).toBe('ダブルチェックする')
+  })
+
+  it('tokenizes katakana-script text through hiragana', () => {
+    const poem = ['雨ニモマケズ', '風ニモマケズ', '雪ニモ夏ノ暑サニモマケヌ', '丈夫ナカラダヲモチ', 'イツモシヅカニワラッテヰル']
+    expect(isKatakanaScript(poem.join('\n'))).toBe(true)
+    expect(isKatakanaScript('スマートフォン、インスタントラーメン、カップヌードル。')).toBe(false)
+    const ws = analyzeSentence(tokenizer, '雨ニモマケズ', { katakanaScript: true })
+    expect(ws.map((w) => w.s)).toEqual(['雨', 'ニ', 'モ', 'マケズ'])
+    expect(ws[3].b).toBe('まける')
+    const te = analyzeSentence(tokenizer, 'イツモシヅカニワラッテヰル', { katakanaScript: true })
+    expect(find(te, 'ワラッテ')!.b).toBe('わらう')
+  })
+
+  it('keeps declared names whole in katakana-script mode', () => {
+    const terms = parseTerms({ names: ['メロス|Melos'] })
+    expect(analyzeSentence(tokenizer, 'メロスハ激怒シタ。', { katakanaScript: true, terms })[0]).toMatchObject({ s: 'メロス', p: 'name' })
+  })
+})
+
+describe('names', () => {
+  it('marks a person\'s name before an honorific', () => {
+    const ws = words('大野さんとルーカスさんが来た。')
+    expect(find(ws, '大野')).toMatchObject({ p: 'name', ps: 1 })
+    expect(find(ws, 'ルーカス')).toMatchObject({ p: 'name', ps: 1 })
+    expect(find(words('大野の家。'), '大野')!.ps).toBeUndefined()
+  })
+
+  it('applies the story\'s names and glosses', () => {
+    const terms = parseTerms({
+      names: ['清水寺|きよみずでら|Kiyomizu-dera (temple in Kyoto)', 'エマ|Emma (given name)', 'ラン|Lan (given name)'],
+      glosses: ['ワン|woof'],
+    })
+    const ws = analyzeSentence(tokenizer, 'エマさんは清水寺に行った。', { terms })
+    expect(find(ws, 'エマ')).toMatchObject({ p: 'name', m: 'Emma (given name)' })
+    expect(find(ws, '清水寺')).toMatchObject({ p: 'name', r: 'きよみずでら', m: 'Kiyomizu-dera (temple in Kyoto)' })
+    expect(find(analyzeSentence(tokenizer, '「ワン、ワン。」', { terms }), 'ワン')!.m).toBe('woof')
+    // a katakana name is a whole word: ランチ is not ラン + チ
+    const lunch = analyzeSentence(tokenizer, 'ランさんとランチを食べた。', { terms })
+    expect(find(lunch, 'ラン')!.m).toBe('Lan (given name)')
+    expect(find(lunch, 'ランチ')!.m).toBeUndefined()
+  })
+
+  it('rejects malformed terms', () => {
+    expect(() => parseTerms({ names: ['エマ'] })).toThrow(/malformed/)
+    expect(parseTerms({ names: ['山田|やまだ|Yamada'] })).toEqual([{ s: '山田', r: 'やまだ', m: 'Yamada', name: true }])
   })
 })

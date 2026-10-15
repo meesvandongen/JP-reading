@@ -16,6 +16,8 @@ keywords:
   - 恥ずかしい|はずかしい|embarrassed, shy
   - 注文|ちゅうもん|order
   - 弁当屋|べんとうや|bento shop
+names:
+  - 美咲|みさき|Misaki (given name)
 ---
 
 ## 一　二つのお弁当

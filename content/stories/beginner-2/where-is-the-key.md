@@ -14,6 +14,8 @@ keywords:
   - 冷蔵庫|れいぞうこ|refrigerator
   - 牛乳|ぎゅうにゅう|milk
   - おくれます|おくれます|to be late
+names:
+  - 田中|たなか|Tanaka (family name)
 ---
 
 田中《たなか》さんは今から会社に行きます。

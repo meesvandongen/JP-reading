@@ -16,6 +16,8 @@ keywords:
   - 虹|にじ|rainbow
   - 夕焼け|ゆうやけ|sunset (glow), red evening sky
   - 理科|りか|science (as a school subject)
+names:
+  - ミナ|Mina (given name)
 ---
 
 ## 青い空

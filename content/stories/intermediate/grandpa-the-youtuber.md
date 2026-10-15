@@ -17,6 +17,8 @@ keywords:
   - 刃物|はもの|bladed tools, knives
   - 子守唄|こもりうた|lullaby
   - 言い返す|いいかえす|to talk back, to retort
+names:
+  - シゲ|Shige (short for Shigeru)
 ---
 
 ## 第一章　店を閉めた祖父

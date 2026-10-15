@@ -15,7 +15,7 @@ import * as kuromoji from '@patdx/kuromoji'
 import NodeDictionaryLoader from '@patdx/kuromoji/node'
 import { analyzeChapters, allWords, lemmaKey, type Tokenizer } from '../src/lib/analyze'
 import { textStats } from '../src/lib/stats'
-import { parseStoryBody, splitFrontMatter } from '../src/lib/text'
+import { parseStoryBody, parseTerms, splitFrontMatter } from '../src/lib/text'
 import { Dictionary, headword } from '../src/lib/dict'
 import { LEVELS, levelJlpt } from '../src/lib/levels'
 import type { GrammarMeta, Keyword, KToken, LibraryIndex, StoryDoc, StoryMeta, Word } from '../src/lib/types'
@@ -87,7 +87,14 @@ async function main() {
     if (!LEVELS.some((l) => l.id === level)) errors.push(`${rel}: unknown level "${level}"`)
     if (!fm.title) errors.push(`${rel}: missing title`)
 
-    const chapters = analyzeChapters(tokenizer, parseStoryBody(body))
+    let terms
+    try {
+      terms = parseTerms(fm)
+    } catch (err) {
+      errors.push(`${rel}: ${(err as Error).message}`)
+      continue
+    }
+    const chapters = analyzeChapters(tokenizer, parseStoryBody(body), terms)
     const words = allWords(chapters)
     if (dict) await dict.annotate(words)
 

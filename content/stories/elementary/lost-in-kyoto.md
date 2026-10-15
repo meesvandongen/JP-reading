@@ -16,6 +16,9 @@ keywords:
   - 不安|ふあん|anxious, uneasy
   - 声をかける|こえをかける|to call out to, to speak to
   - お礼|おれい|thanks
+names:
+  - 清水寺|きよみずでら|Kiyomizu-dera (famous temple in Kyoto)
+  - 田村|たむら|Tamura (family name)
 ---
 
 修学旅行で、ぼくのクラスは京都に行きました。

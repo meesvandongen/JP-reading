@@ -15,6 +15,8 @@ keywords:
   - へた|へた|bad at
   - 兄|あに|(my) older brother
   - くつ|くつ|shoes
+names:
+  - ポチ|Pochi (the dog's name)
 ---
 
 わたしの家族は六人です。

@@ -17,6 +17,10 @@ keywords:
   - 心配性|しんぱいしょう|worrier, prone to worry
   - 準備|じゅんび|preparation
   - おごる|おごる|to treat (someone to food or drink)
+names:
+  - 拓也|たくや|Takuya (given name)
+  - 陽菜|ひな|Hina (given name)
+  - 山下|やました|Yamashita (family name)
 ---
 
 ## 第一章　カフェで

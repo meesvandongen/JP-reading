@@ -15,6 +15,9 @@ keywords:
   - アルバイト|アルバイト|part-time job
   - ていねい|ていねい|careful, polite
   - 野菜|やさい|vegetables
+names:
+  - 大野|おおの|Ōno (family name)
+  - 翔太|しょうた|Shōta (given name)
 ---
 
 駅の近くに、小さいラーメン屋があります。

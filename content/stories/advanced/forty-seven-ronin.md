@@ -18,6 +18,28 @@ keywords:
   - 遺恨|いこん|grudge
   - 再興|さいこう|revival, restoration
   - 上演|じょうえん|staging, performance (of a play)
+names:
+  - 赤穂|あこう|Akō (castle town and domain in present-day Hyōgo)
+  - 浅野内匠頭|あさのたくみのかみ|Asano Takumi-no-Kami (lord of Akō, 1667–1701)
+  - 浅野大学|あさのだいがく|Asano Daigaku (younger brother of Asano Takumi-no-Kami)
+  - 浅野家|あさのけ|the Asano family / house
+  - 浅野|あさの|Asano (family name; here Asano Takumi-no-Kami)
+  - 吉良上野介|きらこうずけのすけ|Kira Kōzuke-no-Suke (shogunate master of ceremonies, 1641–1703)
+  - 吉良|きら|Kira (family name; here Kira Kōzuke-no-Suke)
+  - 徳川綱吉|とくがわつなよし|Tokugawa Tsunayoshi (fifth shogun, 1646–1709)
+  - 大石内蔵助|おおいしくらのすけ|Ōishi Kuranosuke (chief retainer of Akō, 1659–1703)
+  - 大石|おおいし|Ōishi (family name; here Ōishi Kuranosuke)
+  - 山科|やましな|Yamashina (area on the eastern edge of Kyoto)
+  - 高輪|たかなわ|Takanawa (area of Edo, now Tokyo)
+  - 泉岳寺|せんがくじ|Sengaku-ji (temple in Takanawa, Tokyo)
+  - 寺坂吉右衛門|てらさかきちえもん|Terasaka Kichiemon (one of the forty-seven ronin)
+  - 仮名手本忠臣蔵|かなでほんちゅうしんぐら|Kanadehon Chūshingura (1748 puppet play about the ronin)
+  - 塩冶判官|えんやはんがん|En'ya Hangan (the Asano character in the play)
+  - 高師直|こうのもろなお|Kō no Moronao (the Kira character in the play)
+  - 大星由良助|おおぼしゆらのすけ|Ōboshi Yuranosuke (the Ōishi character in the play)
+
+glosses:
+  - 高家|こうけ|kōke (shogunate officials in charge of ceremonies)
 ---
 
 ## 一　松の廊下

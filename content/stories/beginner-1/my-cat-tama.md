@@ -14,6 +14,8 @@ keywords:
   - 夜|よる|night
   - 元気|げんき|lively, energetic
   - 顔|かお|face
+names:
+  - タマ|Tama (the cat's name)
 ---
 
 わたしの家《いえ》にねこがいます。

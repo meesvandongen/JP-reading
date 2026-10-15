@@ -16,6 +16,9 @@ keywords:
   - 受け取る|うけとる|to receive
   - ころぶ|ころぶ|to fall over
   - ぬく|ぬく|to overtake, to pass
+names:
+  - 大輝|だいき|Daiki (given name)
+  - 美月|みづき|Mizuki (given name)
 ---
 
 ## くじ

@@ -17,6 +17,10 @@ keywords:
   - 冷凍庫|れいとうこ|freezer
   - 凍る|こおる|to freeze
   - 名探偵|めいたんてい|great detective
+names:
+  - 佐藤|さとう|Satō (family name)
+  - 小林|こばやし|Kobayashi (family name)
+  - 田中|たなか|Tanaka (family name)
 ---
 
 ## 第一章　事件

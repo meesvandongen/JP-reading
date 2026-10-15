@@ -17,6 +17,8 @@ keywords:
   - 店長|てんちょう|store manager
   - 用意|ようい|preparation; to get ready
   - 名札|なふだ|name tag
+names:
+  - ラン|Lan (given name)
 ---
 
 ## 一　敬語の練習

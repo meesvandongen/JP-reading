@@ -18,6 +18,11 @@ keywords:
   - 歌人|かじん|(waka) poet
   - 序文|じょぶん|preface
   - 赴任|ふにん|taking up a post (in another place)
+names:
+  - 紫式部|むらさきしきぶ|Murasaki Shikibu (author of The Tale of Genji)
+  - 清少納言|せいしょうなごん|Sei Shōnagon (author of The Pillow Book)
+  - 紀貫之|きのつらゆき|Ki no Tsurayuki (poet, author of the Tosa Diary)
+  - 貫之|つらゆき|Tsurayuki (given name; here Ki no Tsurayuki)
 ---
 
 ## 一　文字のない言葉

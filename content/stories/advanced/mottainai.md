@@ -18,6 +18,10 @@ keywords:
   - 矛盾|むじゅん|contradiction
   - 包装|ほうそう|packaging, wrapping
   - 食品ロス|しょくひんロス|food loss, food waste
+names:
+  - ワンガリ・マータイ|Wangari Maathai (Kenyan environmental activist, 1940–2011)
+  - マータイ|Maathai (family name; here Wangari Maathai)
+  - ノーベル|Nobel (as in the Nobel Prize)
 ---
 
 ## 一　祖母の声

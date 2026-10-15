@@ -9,6 +9,8 @@ author: 宮沢賢治 (Miyazawa Kenji)
 year: 1924
 source: "https://www.aozora.gr.jp/cards/000081/card43754.html"
 license: "Public domain (Aozora Bunko); English translation CC BY 4.0"
+glosses:
+  - タンタアーン|bang (sound of a gunshot)
 ---
 
 二人《ふたり》の若い紳士《しんし》が、すっかりイギリスの兵隊のかたちをして、ぴかぴかする鉄砲《てっぽう》をかついで、白熊《しろくま》のような犬を二｜疋《ひき》つれて、だいぶ山奥《やまおく》の、木の葉のかさかさしたとこを、こんなことを云《い》いながら、あるいておりました。

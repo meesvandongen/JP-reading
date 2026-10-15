@@ -17,6 +17,9 @@ keywords:
   - 非常持ち出し袋|ひじょうもちだしぶくろ|emergency grab bag
   - 避難所|ひなんじょ|evacuation shelter
   - 防災訓練|ぼうさいくんれん|disaster drill
+names:
+  - エマ|Emma (given name)
+  - 大川|おおかわ|Ōkawa (family name)
 ---
 
 ## 第一章　夜中の音
