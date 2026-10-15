@@ -127,6 +127,33 @@ function posMatches(e: Entry, w: Partial<Pick<Word, 'c' | 'p'>>): boolean {
   return true
 }
 
+/**
+ * Does the entry name something (Kyoto, Momotarō, Ise Grand Shrine) rather than
+ * being a common word ("large field", "Japanese beautyberry")? JMdict capitalizes
+ * every word of a proper noun's first gloss.
+ */
+export function isProperNoun(e: Entry): boolean {
+  const g = (e.s[0]?.g[0] ?? '').replace(/\([^)]*\)/g, ' ')
+  const words = g.split(/\s+/).filter((w) => w && !/^(of|the|and|a|an|in|on|de|no|period|era|peninsula)$/i.test(w))
+  return words.length > 0 && words.every((w) => /^[\p{Lu}\d]/u.test(w))
+}
+
+/**
+ * A name only matches entries that are names too: エマ (Emma) is not 絵馬
+ * "votive tablet", 大野さん is not 大野 "large field". Applies to a person's name
+ * (`ps`) and to katakana names, which otherwise match any native word in kanji
+ * read the same way. Loanwords (katakana in JMdict) and kana-only words (ニャー)
+ * still match.
+ */
+export function nameMismatch(e: Entry, r: RawReading, word: Partial<Pick<Word, 's' | 'p' | 'ps'>>): boolean {
+  if (word.p !== 'name' || isProperNoun(e)) return false
+  if (word.ps) return true
+  if (!word.s || !/^[ァ-ヺー・]+$/.test(word.s) || !e.k.length) return false
+  // JMdict lists a katakana reading for words often written so (寒緋桜 カンヒザクラ)
+  const kata = toHiragana(word.s)
+  return !/[ァ-ヺ]/.test(r.t) && !readings(e).some((x) => /[ァ-ヺ]/.test(x.t) && toHiragana(x.t) === kata)
+}
+
 export type Loader = (path: string) => Promise<unknown>
 
 export class Dictionary {
@@ -211,7 +238,7 @@ export class Dictionary {
   }
 
   /** Best entry for a word from a text, preferring entries whose reading matches. */
-  async bestEntry(word: Pick<Word, 's'> & Partial<Pick<Word, 'b' | 'br' | 'r' | 'c' | 'p'>>): Promise<{ entry: Entry; reading: RawReading } | undefined> {
+  async bestEntry(word: Pick<Word, 's'> & Partial<Pick<Word, 'b' | 'br' | 'r' | 'c' | 'p' | 'ps'>>): Promise<{ entry: Entry; reading: RawReading } | undefined> {
     const reading = word.b ? word.br : word.r ?? toHiragana(word.s)
     const keys = [...new Set([word.b, word.s].filter((x): x is string => !!x))]
     for (const key of keys) {
@@ -225,7 +252,7 @@ export class Dictionary {
         let best: { entry: Entry; reading: RawReading; score: number } | undefined
         entries.forEach((e, rank) => {
           const r = readings(e).find((x) => toHiragana(x.t) === rh)
-          if (!r) return
+          if (!r || nameMismatch(e, r, word)) return
           // common words written in hiragana: usually-kana words and kana-only entries
           // (not katakana loanwords that happen to read the same, ナカ, カゼ)
           const kanaWord = e.c && (e.uk || (!e.k.length && r.t === key))
@@ -240,8 +267,8 @@ export class Dictionary {
         if (best) return { entry: best.entry, reading: best.reading }
       }
       // No reading match: only trust it when the key is a kanji form, or we have no reading
-      const e = entries[0]
-      if (!reading || hasKanji(key)) return { entry: e, reading: readings(e)[0] }
+      const e = entries.find((x) => !nameMismatch(x, readings(x)[0], word))
+      if (e && (!reading || hasKanji(key))) return { entry: e, reading: readings(e)[0] }
     }
     // する verbs are listed under their noun: 紹介する → 紹介
     if (word.b && word.b.length > 2 && word.b.endsWith('する')) {
@@ -255,6 +282,8 @@ export class Dictionary {
     await Promise.all(
       words.map(async (w) => {
         if (w.p === 'sym' || w.p === 'prt' || w.p === 'aux' || w.p === 'x') return
+        // the story says what this word means: the dictionary's homograph doesn't apply
+        if (w.m) return
         if (!/[぀-ヿ㐀-鿿]/.test(w.s)) return
         const hit = await this.bestEntry(w)
         if (!hit) return

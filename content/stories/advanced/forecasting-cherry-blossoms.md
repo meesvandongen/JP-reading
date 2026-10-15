@@ -17,6 +17,8 @@ keywords:
   - 目安|めやす|rough guide, yardstick
   - 標本木|ひょうほんぼく|sample tree
   - 温暖化|おんだんか|global warming
+names:
+  - 染井|そめい|Somei (old village in Edo, now part of Tokyo)
 ---
 
 ## 一　毎年の「桜前線」

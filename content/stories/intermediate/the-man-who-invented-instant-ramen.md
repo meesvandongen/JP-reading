@@ -18,6 +18,16 @@ keywords:
   - 揚げる|あげる|to deep-fry
   - 乾燥|かんそう|drying
   - 宇宙|うちゅう|outer space
+names:
+  - 梅田|うめだ|Umeda (district of Osaka)
+  - 安藤百福|あんどうももふく|Andō Momofuku (founder of Nissin Foods, 1910–2007)
+  - 安藤|あんどう|Andō (family name; here Andō Momofuku)
+  - 池田|いけだ|Ikeda (city in Osaka Prefecture)
+  - 野口聡一|のぐちそういち|Noguchi Sōichi (astronaut)
+  - チキンラーメン|Chicken Ramen (the first instant noodles, 1958)
+
+glosses:
+  - ジュッ|sizzle
 ---
 
 ## 第一章　闇市の行列

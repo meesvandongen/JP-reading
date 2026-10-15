@@ -15,6 +15,8 @@ keywords:
   - 味|あじ|taste, flavor
   - 雪だるま|ゆきだるま|snowman
   - 冷凍庫|れいとうこ|freezer
+names:
+  - ルーカス|Lucas (given name)
 ---
 
 ルーカスくんは、ブラジルから来ました。

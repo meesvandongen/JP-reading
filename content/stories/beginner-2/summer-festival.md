@@ -16,6 +16,8 @@ keywords:
   - やぶれる|やぶれる|to tear, to rip
   - じっと|じっと|still, without moving
   - そっと|そっと|gently, softly
+names:
+  - 美咲|みさき|Misaki (given name)
 ---
 
 今日は町の夏祭りです。

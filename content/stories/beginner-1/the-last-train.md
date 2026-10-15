@@ -15,6 +15,8 @@ keywords:
   - 終点|しゅうてん|last stop, end of the line
   - 娘|むすめ|daughter
   - お疲れさま|おつかれさま|thanks for your hard work (said to someone tired)
+names:
+  - 山田|やまだ|Yamada (family name)
 ---
 
 山田《やまだ》さんは会社員です。

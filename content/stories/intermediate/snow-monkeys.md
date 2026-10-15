@@ -17,11 +17,18 @@ keywords:
   - 追い払う|おいはらう|to chase away
   - 温める|あたためる|to warm
   - 研究|けんきゅう|research, study
+names:
+  - 山ノ内町|やまのうちまち|Yamanouchi (town in Nagano Prefecture)
+  - 地獄谷|じごくだに|Jigokudani ("Hell's Valley", a valley in Nagano)
+
+glosses:
+  - スノーモンキー|snow monkey
+  - ストレスホルモン|stress hormone
 ---
 
 ## 第一章　雪の道
 
-一月の終わり、わたしはカメラを持って長野県の山ノ内町《やまのうちまち》に来た。
+一月の終わり、わたしはカメラを持って長野県の｜山ノ内町《やまのうちまち》に来た。
 > At the end of January, I came to the town of Yamanouchi in Nagano Prefecture with my camera.
 目的は、地獄谷《じごくだに》野猿公苑《やえんこうえん》のサルを撮ることだ。
 > My goal was to photograph the monkeys of Jigokudani Yaen-kōen.

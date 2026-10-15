@@ -14,6 +14,8 @@ keywords:
   - ろうそく|ろうそく|candle
   - いぬ|いぬ|dog
   - 雪|ゆき|snow
+names:
+  - 結衣|ゆい|Yui (given name)
 ---
 
 今日はお母さんの誕生日《たんじょうび》です。

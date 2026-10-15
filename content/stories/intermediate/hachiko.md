@@ -17,6 +17,12 @@ keywords:
   - 剥製|はくせい|stuffed animal (taxidermy)
   - 溶かす|とかす|to melt
   - 再会|さいかい|reunion
+names:
+  - 大館|おおだて|Ōdate (city in Akita Prefecture)
+  - 上野英三郎|うえのひでさぶろう|Ueno Hidesaburō (agriculture professor, 1872–1925)
+  - 青山霊園|あおやまれいえん|Aoyama Cemetery (in Tokyo)
+  - ハチ公|ハチこう|Hachikō (Hachi + 公, an affectionate title)
+  - ハチ|Hachi (the dog's name; はち means "eight")
 ---
 
 ## 第一章　博士と子犬

@@ -17,6 +17,8 @@ keywords:
   - すべる|すべる|to slip
   - 枝|えだ|branch
   - びしょびしょ|びしょびしょ|soaking wet
+glosses:
+  - ドボン|splash (something falling into water)
 ---
 
 ## 朝

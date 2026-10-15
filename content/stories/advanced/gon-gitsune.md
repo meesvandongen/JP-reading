@@ -9,6 +9,10 @@ author: 新美南吉 (Niimi Nankichi)
 year: 1932
 source: "https://www.aozora.gr.jp/cards/000121/card628.html"
 license: "Public domain (Aozora Bunko); English translation CC BY 4.0"
+glosses:
+  - カーン|clang (sound of a bell)
+  - キュッ|squeak
+  - ポンポンポンポン|pok pok pok pok (sound of a wooden temple drum)
 ---
 
 ## 一

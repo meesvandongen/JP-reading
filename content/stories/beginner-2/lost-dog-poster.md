@@ -16,6 +16,8 @@ keywords:
   - はる|はる|to stick, to put up
   - こたつ|こたつ|kotatsu (low table with a heater and a quilt)
   - ずっと|ずっと|the whole time
+names:
+  - コロ|Koro (the dog's name)
 ---
 
 土曜日の朝、犬のコロがいません。

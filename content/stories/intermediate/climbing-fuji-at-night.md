@@ -17,6 +17,8 @@ keywords:
   - 焼き印|やきいん|brand (mark burned into wood)
   - 薄い|うすい|thin
   - 下山|げざん|descending a mountain
+names:
+  - 美穂|みほ|Miho (given name)
 ---
 
 ## 第一章　五合目から

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'preact/hooks'
 import type { Sentence, Word } from '../lib/types'
 import type { Entry, RawReading } from '../lib/dict'
-import { headword, readings } from '../lib/dict'
+import { headword, nameMismatch, readings } from '../lib/dict'
 import { isLookupWord, lemmaKey, sentenceText } from '../lib/analyze'
 import { breakdownChain, shortGloss } from '../lib/gloss'
 import { hasKanji, toHiragana, toRomaji } from '../lib/kana'
@@ -20,15 +20,31 @@ interface Result {
   entry: Entry
   reading?: RawReading
   label: string
+  /** one part of a word the dictionary doesn't have as a whole */
+  part?: boolean
+}
+
+/** Cut a word the dictionary doesn't know into the longest words it does (ストレス + ホルモン). */
+async function dictionaryParts(text: string): Promise<{ text: string; entries: Entry[] }[]> {
+  const out: { text: string; entries: Entry[] }[] = []
+  let i = 0
+  while (i < text.length) {
+    const [longest] = await dictionary.prefixes(text.slice(i), 12)
+    if (longest) {
+      out.push(longest)
+      i += longest.text.length
+    } else i++
+  }
+  return out
 }
 
 async function findResults(word: Word, rest: string): Promise<Result[]> {
   const out: Result[] = []
   const seen = new Set<number>()
-  const add = (entry: Entry, reading: RawReading | undefined, label: string) => {
+  const add = (entry: Entry, reading: RawReading | undefined, label: string, part?: boolean) => {
     if (seen.has(entry.i)) return
     seen.add(entry.i)
-    out.push({ entry, reading, label })
+    out.push({ entry, reading, label, ...(part ? { part } : {}) })
   }
   const best = await dictionary.bestEntry(word)
   // Compounds that start at this word and are longer than it (e.g. 日本 + 語 → 日本語).
@@ -52,15 +68,20 @@ async function findResults(word: Word, rest: string): Promise<Result[]> {
   let extra = 0
   for (const e of await dictionary.lookup(key).catch(() => [] as Entry[])) {
     const r = readings(e).find((x) => rh && toHiragana(x.t) === toHiragana(rh))
+    // a name's common-word homographs (大野さん: 大野 "large field") would read as its meaning
+    if (nameMismatch(e, r ?? readings(e)[0], word)) continue
     // For kana words, other entries read the same way are homophones: show only a few
     if (!hasKanji(key) && out.length && ++extra > 3) break
     if (grammatical && out.length) break
     add(e, r, headword(e).word)
     if (out.length >= 8) break
   }
-  if (!out.length) {
-    // Unknown to the tokenizer and dictionary as a whole: try shorter prefixes of the surface
-    for (const p of prefixes) add(p.entries[0], undefined, p.text)
+  // (not for katakana names: ルーカス isn't ルー + カス)
+  if (!out.length && !word.m && (word.p !== 'name' || hasKanji(word.s))) {
+    // Unknown to the dictionary as a whole: show the words it is made of (清水 + 寺, ストレス + ホルモン)
+    const parts = await dictionaryParts(word.s)
+    if (parts.length > 1 || (parts.length === 1 && word.p !== 'name'))
+      for (const p of parts) add(p.entries[0], undefined, p.text, word.p === 'name' || parts.length > 1)
   }
   return out
 }
@@ -311,7 +332,19 @@ function WordView({
 
       {error && <div class="notice">{error}</div>}
       {!results && !error && <div class="loading">Looking up…</div>}
-      {results && results.length === 0 && <div class="muted">No dictionary entry found.</div>}
+      {word.m && (
+        <div class="story-meaning">
+          <span class="badge">{word.p === 'name' ? 'Name' : 'In this story'}</span> {word.m}
+        </div>
+      )}
+      {!word.m && word.p === 'name' && results && !results.some((r) => !r.part) && (
+        <div class="story-meaning">
+          <span class="badge">Name</span> {word.ps ? 'A person’s name.' : 'A proper noun (name of a person, place or thing).'}
+        </div>
+      )}
+      {results && results.length === 0 && !word.m && word.p !== 'name' && <div class="muted">No dictionary entry found.</div>}
+      {results?.[0]?.part && <div class="muted small">Not in the dictionary as one word. Its parts:</div>}
+      {word.m && results && results.length > 0 && <div class="muted small">Dictionary:</div>}
       {results && results.length > 1 && (
         <div class="result-tabs" role="tablist">
           {results.map((r, i) => (
@@ -358,8 +391,9 @@ async function sentenceGlosses(sentence: Sentence): Promise<Gloss[]> {
       // Particles and auxiliaries: the grammar point says more than a dictionary gloss
       const grammar = (word.p === 'prt' || word.p === 'aux') && word.t?.map(grammarTitle).find(Boolean)
       if (grammar) return { wi, word, gloss: grammar }
+      if (word.m) return { wi, word, gloss: word.m }
       const hit = await dictionary.bestEntry(word).catch(() => undefined)
-      return { wi, word, gloss: hit ? shortGloss(hit.entry, hit.reading) : undefined }
+      return { wi, word, gloss: hit ? shortGloss(hit.entry, hit.reading) : word.p === 'name' ? '(name)' : undefined }
     }),
   ).then((gs) => gs.filter((g): g is Gloss => !!g))
 }

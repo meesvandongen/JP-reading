@@ -16,6 +16,9 @@ keywords:
   - 恥ずかしい|はずかしい|embarrassed
   - 気持ちいい|きもちいい|feels good
   - 決まり|きまり|rule, custom
+names:
+  - エマ|Emma (given name)
+  - 由香|ゆか|Yuka (given name)
 ---
 
 留学生のエマさんは、東京の古いアパートに住んでいます。

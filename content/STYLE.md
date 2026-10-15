@@ -44,7 +44,18 @@ translation.
   `scripts/show-words.ts`.
 - **Every personal name in kanji gets ruby** (`大野《おおの》さん`) on every
   occurrence. Add ruby wherever the tokenizer would guess wrong (place names,
-  rare readings, counters like 八《やっ》つ).
+  rare readings, counters like 八《やっ》つ). If the ruby has to cover kana
+  inside the name, mark its start with ｜ (`｜山ノ内町《やまのうちまち》`).
+- **List every name in `names:`** in the front matter: people, pets, places,
+  temples, shops, companies, in kanji, kana or katakana. JMdict has no names,
+  so otherwise a name shows a common word that happens to be spelled or read
+  the same (エマ → 絵馬 "votive tablet", 山本 → "foot of a mountain") or
+  nothing at all (清水寺). The audit lists the names it finds.
+- **Katakana**: a run of katakana is kept as one word (スマートフォン, メロンパン).
+  A katakana word that is a sound or a name (ワン, カーン, コロ) can match a native
+  word read the same way; the audit reports those, and `glosses:` or `names:`
+  fixes them. Texts written in katakana instead of hiragana (雨ニモマケズ) are
+  detected and tokenized as hiragana.
 - Full-width punctuation only: 。、「」！？…… Keep dialogue in 「」 on one line
   with its sentence.
 
@@ -80,6 +91,6 @@ npx tsx scripts/audit-content.ts <path-part>   # report for matching stories
 npx tsx scripts/show-words.ts "文を一つ。"      # how a line is tokenized
 ```
 
-A new story should come out of the audit with no ERROR, no "possible
-misparse" and no "reading guessed" lines, and with few words far above its
-level.
+A new story should come out of the audit with no ERROR (this includes names
+missing from `names:`), no "possible misparse", "reading guessed" or
+"katakana … read as" lines, and with few words far above its level.

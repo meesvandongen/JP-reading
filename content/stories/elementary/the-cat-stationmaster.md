@@ -16,6 +16,8 @@ keywords:
   - 笑顔|えがお|smiling face
   - 給料|きゅうりょう|salary, pay
   - うらやましい|うらやましい|envious
+names:
+  - コハク|Kohaku (the cat's name; 琥珀 means "amber")
 ---
 
 ある小さな町に、一日に十人ぐらいしか使わない駅がありました。

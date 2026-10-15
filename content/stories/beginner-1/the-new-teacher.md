@@ -14,6 +14,8 @@ keywords:
   - 声|こえ|voice
   - 小さい|ちいさい|small
   - 赤い|あかい|red
+names:
+  - 山田|やまだ|Yamada (family name)
 ---
 
 四月です。

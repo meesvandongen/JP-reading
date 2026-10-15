@@ -8,6 +8,12 @@ summary: "An old woman finds a giant peach floating down the river, and out of i
 author: 楠山正雄 (Kusuyama Masao)
 source: "https://www.aozora.gr.jp/cards/000329/card18376.html"
 license: "Public domain (Aozora Bunko); English translation CC BY 4.0"
+glosses:
+  - ワン|woof (a dog's bark)
+  - ケン|ken (a pheasant's cry)
+  - ドンブラコッコ|splish-splash (sound of the floating peach)
+  - スッコッコ|splish-splash (sound of the floating peach)
+  - スウッ|smoothly, swiftly
 ---
 
 ## 一

@@ -9,6 +9,14 @@ author: 太宰治 (Dazai Osamu)
 year: 1940
 source: "https://www.aozora.gr.jp/cards/000035/card1567.html"
 license: Public domain (Aozora Bunko)
+names:
+  - メロス|Melos
+  - シラクス|Syracuse (city in Sicily)
+  - セリヌンティウス|Selinuntius (Melos's friend)
+  - アレキス|Alexis (a minister)
+  - ディオニス|Dionys (the tyrant king)
+  - フィロストラトス|Philostratus (Selinuntius's apprentice)
+  - シルレル|Schiller (German poet)
 ---
 
 メロスは激怒した。

@@ -15,6 +15,8 @@ keywords:
   - 大吉|だいきち|great luck
   - むすびます|むすびます|to tie
   - かさ|かさ|umbrella
+names:
+  - エマ|Emma (given name)
 ---
 
 エマさんはオーストラリアから来ました。

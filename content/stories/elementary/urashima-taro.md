@@ -18,6 +18,9 @@ keywords:
   - 煙|けむり|smoke
   - いじめる|いじめる|to bully, to torment
   - 浜|はま|beach, seashore
+names:
+  - 浦島太郎|うらしまたろう|Urashima Tarō (fisherman in the folktale)
+  - 太郎|たろう|Tarō (given name; here Urashima Tarō)
 ---
 
 ## 一　浜の亀

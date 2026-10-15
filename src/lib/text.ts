@@ -1,5 +1,7 @@
 // Parsing of story bodies (see content/README.md) and of arbitrary pasted text.
 
+import type { Term } from './types'
+
 export interface RawSentence {
   text: string
   en?: string
@@ -10,6 +12,26 @@ export interface RawParagraph {
 export interface RawChapter {
   title?: string
   p: RawParagraph[]
+}
+
+/**
+ * Story-specific words from the front matter: `names:` (proper nouns) and
+ * `glosses:` (sound words and other words the dictionary gets wrong). Each item
+ * is `word|reading|meaning`, or `word|meaning` for a word in kana.
+ */
+export function parseTerms(fm: Record<string, unknown>): Term[] {
+  const out: Term[] = []
+  for (const [field, name] of [['names', true], ['glosses', false]] as const) {
+    const list = fm[field]
+    if (!Array.isArray(list)) continue
+    for (const item of list) {
+      const parts = String(item).split('|').map((x) => x.trim())
+      const [s, r, m] = parts.length >= 3 ? parts : [parts[0], '', parts[1]]
+      if (!s || !m) throw new Error(`malformed ${field} item "${item}" (expected word|reading|meaning)`)
+      out.push({ s, ...(r ? { r } : {}), m, ...(name ? { name } : {}) })
+    }
+  }
+  return out
 }
 
 export interface Hint {

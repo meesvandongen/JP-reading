@@ -9,6 +9,10 @@ author: 新美南吉 (Niimi Nankichi)
 year: 1943
 source: "https://www.aozora.gr.jp/cards/000121/card637.html"
 license: "Public domain (Aozora Bunko); English translation CC BY 4.0"
+glosses:
+  - カチ|click, clink (hard things knocking together)
+  - チンチン|clink, jingle (sound of coins)
+  - ゴロリ|with a rumble (of a heavy door rolling open)
 ---
 
 寒い冬が北方から、狐《きつね》の親子の棲《す》んでいる森へもやって来ました。

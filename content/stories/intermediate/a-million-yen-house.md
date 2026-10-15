@@ -18,6 +18,10 @@ keywords:
   - 孫|まご|grandchild
   - 移住|いじゅう|moving (to settle somewhere new)
   - 自治体|じちたい|local government
+names:
+  - 健二|けんじ|Kenji (given name)
+  - 早紀|さき|Saki (given name)
+  - 松本|まつもと|Matsumoto (family name)
 ---
 
 ## 第一章　一軒百万円

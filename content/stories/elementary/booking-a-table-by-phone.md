@@ -16,6 +16,10 @@ keywords:
   - 誕生日|たんじょうび|birthday
   - 伝える|つたえる|to tell, to convey
   - はっきり|はっきり|clearly
+names:
+  - ソーレ|Sole (name of a restaurant; Italian for "sun")
+  - まゆみ|Mayumi (given name)
+  - まゆこ|Mayuko (given name)
 ---
 
 来週の土曜日は、母の誕生日です。

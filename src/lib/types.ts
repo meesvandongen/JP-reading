@@ -59,6 +59,22 @@ export interface Word {
   c?: string
   /** pronunciation in hiragana when it differs from the reading (は → わ) */
   pr?: string
+  /** meaning given by the story (front matter `names:` / `glosses:`); wins over the dictionary */
+  m?: string
+  /** a person's name (the tokenizer says so and an honorific like さん follows): common-noun homographs don't apply */
+  ps?: 1
+}
+
+/** A story-specific word from the front matter: `names:` (proper nouns) or `glosses:` (other words). */
+export interface Term {
+  /** surface as written in the text */
+  s: string
+  /** reading in hiragana */
+  r?: string
+  /** English meaning */
+  m: string
+  /** a proper noun */
+  name?: boolean
 }
 
 export interface Sentence {
@@ -153,4 +169,6 @@ export interface KToken {
   pronunciation?: string
   word_type?: string
   word_position?: number
+  /** the story term this token was cut for (not from kuromoji) */
+  term?: Term
 }

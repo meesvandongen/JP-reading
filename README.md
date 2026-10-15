@@ -82,7 +82,7 @@ Everything runs client-side. Your data stays in your browser (IndexedDB).
 Texts are Markdown files in [`content/stories/<level>/`](content/stories). See
 [`content/README.md`](content/README.md) for the format: YAML front matter,
 one sentence per line, `> ` translation lines, `## ` chapters, and
-`漢字《かんじ》` reading hints, and [`content/STYLE.md`](content/STYLE.md) for
+`漢字《かんじ》` reading hints, a `names:` list for proper nouns, and [`content/STYLE.md`](content/STYLE.md) for
 the house style. Check a story with `npm run audit -- <slug>`. Open a pull request. CI validates the files, and
 the text appears in the app after merge.
 

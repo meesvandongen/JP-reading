@@ -9,6 +9,8 @@ author: 夏目漱石 (Natsume Sōseki)
 year: 1908
 source: "https://www.aozora.gr.jp/cards/000148/card799.html"
 license: Public domain (Aozora Bunko)
+glosses:
+  - サローン|salon, saloon (lounge on a ship)
 ---
 
 ## 第一夜

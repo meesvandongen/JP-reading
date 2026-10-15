@@ -15,6 +15,9 @@ keywords:
   - くつした|くつした|sock
   - 床|ゆか|floor
   - かたづける|かたづける|to tidy up
+names:
+  - マル|Maru (the robot's name; まる means "circle")
+  - ミケ|Mike (the cat's name; 三毛 means "calico")
 ---
 
 父は新しいものが大好きです。

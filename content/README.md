@@ -13,7 +13,8 @@ content/
 Adding a text is a pull request that adds one Markdown file. No code changes.
 For how to write a good story and translation, see [STYLE.md](STYLE.md).
 `npm run audit -- <slug>` reports missing translations, keywords that aren't in
-the text, readings the tokenizer guessed, and vocabulary above the level.
+the text, readings the tokenizer guessed, names that need a `names:` entry,
+katakana words the dictionary misreads, and vocabulary above the level.
 
 ## Stories
 
@@ -54,6 +55,8 @@ license: CC BY 4.0
 keywords:
   - 雨|あめ|rain
   - 喫茶店|きっさてん|coffee shop, café
+names:
+  - ゆき|Yuki (given name)
 ---
 
 ## 第一章
@@ -76,6 +79,17 @@ Rules:
 - **`keywords`** (optional) is the pre-reading vocabulary list shown before the
   story, one `word|reading|meaning` per item. If omitted, the build picks
   keywords automatically from the text.
+- **`names`** lists the proper nouns in the story (people, places, temples,
+  shops, pets), one `word|reading|meaning` per item, or `word|meaning` for a
+  word in kana: `清水寺|きよみずでら|Kiyomizu-dera (famous temple in Kyoto)`,
+  `エマ|Emma (given name)`. The dictionary has no names: without this, tapping
+  エマ shows 絵馬 "votive tablet" and 大野 shows "large field". A listed name is
+  always cut as one word, gets its reading on every occurrence, and the lookup
+  shows the meaning given here. Write the meaning as the English name plus what
+  it is, in brackets.
+- **`glosses`** (optional) is the same for other words the dictionary gets
+  wrong in this story, usually sound words: `ワン|woof (a dog's bark)` (the
+  dictionary reads it as 湾 "bay").
 - **One sentence per line.** A line of Japanese is one sentence.
 - **Translation**: a line starting with `> ` directly after a Japanese line is
   that sentence's English translation. Translations are optional (classic

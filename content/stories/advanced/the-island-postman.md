@@ -18,6 +18,14 @@ keywords:
   - 便箋|びんせん|letter paper
   - 仕分け|しわけ|sorting
   - 定年|ていねん|retirement age
+names:
+  - 小鷺島|こさぎじま|Kosagijima (a small island)
+  - 岡部|おかべ|Okabe (family name)
+  - 浦野|うらの|Urano (family name)
+  - キヨ|Kiyo (given name)
+  - 沢井|さわい|Sawai (family name)
+  - 正吾|しょうご|Shōgo (given name)
+  - 美咲|みさき|Misaki (given name)
 ---
 
 ## 一　坂の多い島

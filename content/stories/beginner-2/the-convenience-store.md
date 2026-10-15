@@ -15,6 +15,8 @@ keywords:
   - 電子レンジ|でんしレンジ|microwave oven
   - 払う|はらう|to pay
   - 袋|ふくろ|bag
+names:
+  - 健太|けんた|Kenta (given name)
 ---
 
 夜の十二時です。

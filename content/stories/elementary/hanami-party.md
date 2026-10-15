@@ -17,6 +17,9 @@ keywords:
   - 町内会|ちょうないかい|neighborhood association
   - 水筒|すいとう|thermos, water bottle
   - 勘違い|かんちがい|mistaken idea, mix-up
+names:
+  - 小川|おがわ|Ogawa (family name)
+  - 山本|やまもと|Yamamoto (family name)
 ---
 
 ## 朝五時の公園

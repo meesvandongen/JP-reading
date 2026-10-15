@@ -9,6 +9,12 @@ author: 宮沢賢治 (Miyazawa Kenji)
 year: 1934
 source: "https://www.aozora.gr.jp/cards/000081/card473.html"
 license: Public domain (Aozora Bunko)
+names:
+  - カシオピア|Cassiopeia (constellation)
+
+glosses:
+  - ヘン|hmph (scornful)
+  - キシキシキシキシキシッ|kishi-kishi (a shrill bird cry)
 ---
 
 よだかは、実にみにくい鳥です。
