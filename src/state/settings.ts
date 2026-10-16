@@ -44,6 +44,10 @@ export interface Settings {
   /** chosen during onboarding */
   level: string
   onboarded: boolean
+  /** library filters, remembered across visits ('all' = no filter) */
+  libraryLevel: string
+  libraryCategory: string
+  libraryFilter: string
 }
 
 const DEFAULTS: Settings = {
@@ -73,6 +77,9 @@ const DEFAULTS: Settings = {
   reminderTime: '20:00',
   level: 'beginner-1',
   onboarded: false,
+  libraryLevel: 'all',
+  libraryCategory: 'all',
+  libraryFilter: 'all',
 }
 
 const KEY = 'jp-reading:settings'
