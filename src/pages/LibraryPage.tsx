@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'preact/hooks'
+import { useEffect, useMemo, useState } from 'preact/hooks'
 import type { StoryMeta } from '../lib/types'
 import { CATEGORIES, LEVELS, levelInfo } from '../lib/levels'
 import { library, libraryError, seriesProgress } from '../services/library'
@@ -10,6 +10,18 @@ import { SeriesCard } from '../components/SeriesCard'
 import { Icon } from '../components/Icon'
 import { isDue } from '../services/srs'
 import { streak } from './ProgressPage'
+
+const FILTERS = [
+  ['all', 'Everything'],
+  ['unread', 'Unread'],
+  ['read', 'Finished'],
+  ['favorites', 'Favorites'],
+]
+
+/** A remembered or linked filter value, or 'all' if it no longer exists. */
+function valid(v: string, ok: (v: string) => boolean) {
+  return v !== 'all' && ok(v) ? v : 'all'
+}
 
 function levelIndex(l: string) {
   const i = LEVELS.findIndex((x) => x.id === l)
@@ -57,13 +69,20 @@ export function LibraryPage() {
   const lib = library.value
   const q = route.value.query
   const [search, setSearch] = useState(q.get('q') ?? '')
-  const level = q.get('level') ?? 'all'
-  const cat = q.get('cat') ?? 'all'
-  const filter = q.get('filter') ?? 'all'
+  // filters come from the URL (links like #/?level=…) or else the remembered choice
+  const saved = settings.value
+  const level = valid(q.get('level') ?? saved.libraryLevel, (v) => LEVELS.some((l) => l.id === v))
+  const cat = valid(q.get('cat') ?? saved.libraryCategory, (v) => v in CATEGORIES)
+  const filter = valid(q.get('filter') ?? saved.libraryFilter, (v) => FILTERS.some(([k]) => k === v))
+  useEffect(() => {
+    if (level !== saved.libraryLevel || cat !== saved.libraryCategory || filter !== saved.libraryFilter)
+      updateSettings({ libraryLevel: level, libraryCategory: cat, libraryFilter: filter })
+  }, [level, cat, filter])
   const setQuery = (k: string, v: string) => {
     const next = new URLSearchParams(q)
     if (v === 'all') next.delete(k)
     else next.set(k, v)
+    updateSettings(k === 'level' ? { libraryLevel: v } : k === 'cat' ? { libraryCategory: v } : { libraryFilter: v })
     navigate(`/?${next.toString()}`, { replace: true })
   }
 
@@ -230,12 +249,7 @@ export function LibraryPage() {
           ))}
         </div>
         <div class="chips-scroll" aria-label="Filter">
-          {[
-            ['all', 'Everything'],
-            ['unread', 'Unread'],
-            ['read', 'Finished'],
-            ['favorites', 'Favorites'],
-          ].map(([k, label]) => (
+          {FILTERS.map(([k, label]) => (
             <button class={`chip small ${filter === k ? 'on' : ''}`} onClick={() => setQuery('filter', k)}>
               {label}
             </button>
