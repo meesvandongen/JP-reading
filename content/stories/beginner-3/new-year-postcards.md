@@ -18,7 +18,6 @@ keywords:
   - 友だち|ともだち|friend
 names:
   - 健|けん|Ken (given name)
-  - 田中|たなか|Tanaka (family name)
 ---
 
 十二月《じゅうにがつ》になりました。
