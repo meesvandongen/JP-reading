@@ -22,7 +22,7 @@
     "@preact/signals": "^2.11.3",
     "idb": "^8.0.4",
     "marked": "^18.1.1",
-    "preact": "^11.0.1",
+    "preact": "^11.0.2",
     "wanakana": "^5.3.1"
   },
   "devDependencies": {
@@ -34,10 +34,10 @@
     "typescript": "^7.0.2",
     "vite": "catalog:",
     "vite-plugin-pwa": "^2.0.0",
+    "vite-plus": "catalog:",
     "workbox-window": "^7.4.1",
     "wrangler": "^4.151.0",
-    "yaml": "^2.9.1",
-    "vite-plus": "catalog:"
+    "yaml": "^2.9.1"
   },
   "packageManager": "pnpm@12.15.0+sha512.b3951d6d6ff4a9f13dc7cf56cd28d2b8eb37dbcc9c68e52e1e1191873ea9f82a017287ab50baadc5ccc494f036c67c0e47eb13608c2fa36f47711b61ea128e61"
 }
