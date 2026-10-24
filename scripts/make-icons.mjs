@@ -1,5 +1,5 @@
 // Generates the app icons from the KanjiVG strokes of 読 (CC BY-SA 3.0).
-// Usage: npm i --no-save playwright-core && node scripts/make-icons.mjs <path-to-kanjivg-08aad.svg>
+// Usage: pnpm add -D playwright-core && node scripts/make-icons.mjs <path-to-kanjivg-08aad.svg> (then pnpm remove playwright-core)
 // (uses a local Chromium; set CHROME to its path)
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import { join, dirname } from 'node:path'
