@@ -1,7 +1,7 @@
 # Content library
 
 Everything under `content/` is plain text that lives in git. The build step
-(`npm run build:content`) turns it into JSON (pre-tokenized, with furigana,
+(`pnpm run build:content`) turns it into JSON (pre-tokenized, with furigana,
 dictionary forms and keyword lists) that the app loads.
 
 ```
@@ -14,7 +14,7 @@ content/
 
 Adding a text is a pull request that adds one Markdown file. No code changes.
 For how to write a good story and translation, see [STYLE.md](STYLE.md).
-`npm run audit -- <slug>` reports missing translations, keywords that aren't in
+`pnpm run audit -- <slug>` reports missing translations, keywords that aren't in
 the text, readings the tokenizer guessed, names that need a `names:` entry,
 katakana words the dictionary misreads, and vocabulary above the level.
 
