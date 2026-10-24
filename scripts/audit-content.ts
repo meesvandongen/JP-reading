@@ -1,5 +1,5 @@
-// Content quality report for content/stories. Run after `npm run data`:
-//   npm run audit -- [filter] [--errors]
+// Content quality report for content/stories. Run after `pnpm run data`:
+//   pnpm run audit -- [filter] [--errors]
 // Prints, per story, problems a reviewer should look at:
 //   - original (non-Aozora) stories with sentences that have no translation
 //   - lines that contain more than one sentence
@@ -61,7 +61,7 @@ async function main() {
     loader: new NodeDictionaryLoader({ dic_path: join(ROOT, 'node_modules', '@patdx', 'kuromoji', 'dict') } as never),
   }).build()
   const tokenizer: Tokenizer = { tokenize: (t) => tk.tokenize(t) as unknown as KToken[] }
-  if (!existsSync(join(DICT, 'meta.json'))) throw new Error('dictionary not built: run `npm run data` first')
+  if (!existsSync(join(DICT, 'meta.json'))) throw new Error('dictionary not built: run `pnpm run data` first')
   const dict = new Dictionary(async (p) => JSON.parse(readFileSync(join(DICT, p), 'utf8')))
 
   let failed = 0

@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it } from 'vite-plus/test'
 import { breakdownChain, shortGloss } from '../src/lib/gloss'
 import { isProperNoun, nameMismatch, type Entry } from '../src/lib/dict'
 import type { Word } from '../src/lib/types'

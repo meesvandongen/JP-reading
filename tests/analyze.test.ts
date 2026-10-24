@@ -1,4 +1,4 @@
-import { beforeAll, describe, expect, it } from 'vitest'
+import { beforeAll, describe, expect, it } from 'vite-plus/test'
 import * as kuromoji from '@patdx/kuromoji'
 import NodeDictionaryLoader from '@patdx/kuromoji/node'
 import { analyzeSentence, isKatakanaScript, type Tokenizer } from '../src/lib/analyze'
