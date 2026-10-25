@@ -57,7 +57,7 @@ async function main() {
   const tokenizer: Tokenizer = { tokenize: (t) => tk.tokenize(t) as unknown as KToken[] }
 
   const hasDict = existsSync(join(DICT, 'meta.json'))
-  if (!hasDict) console.warn('! dictionary not built (run `npm run data`); skipping pitch accent / JLPT / keywords')
+  if (!hasDict) console.warn('! dictionary not built (run `pnpm run data`); skipping pitch accent / JLPT / keywords')
   const dict = hasDict ? new Dictionary(async (p) => JSON.parse(readFileSync(join(DICT, p), 'utf8'))) : null
 
   if (existsSync(OUT)) rmSync(OUT, { recursive: true })

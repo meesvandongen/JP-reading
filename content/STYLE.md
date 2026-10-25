@@ -86,9 +86,9 @@ keyword must appear in the text (the audit checks).
 ## Checking your work
 
 ```sh
-npm run data                                   # once: builds the dictionary
-npx tsx scripts/audit-content.ts <path-part>   # report for matching stories
-npx tsx scripts/show-words.ts "文を一つ。"      # how a line is tokenized
+pnpm run data                                        # once: builds the dictionary
+pnpm exec vpx scripts/audit-content.ts <path-part>   # report for matching stories
+pnpm exec vpx scripts/show-words.ts "文を一つ。"      # how a line is tokenized
 ```
 
 A new story should come out of the audit with no ERROR (this includes names

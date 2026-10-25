@@ -87,7 +87,7 @@ series is a folder of them with a `series.yml`. See
 [`content/README.md`](content/README.md) for the format: YAML front matter,
 one sentence per line, `> ` translation lines, `## ` chapters, and
 `漢字《かんじ》` reading hints, a `names:` list for proper nouns, and [`content/STYLE.md`](content/STYLE.md) for
-the house style. Check a story with `npm run audit -- <slug>`. Open a pull request. CI validates the files, and
+the house style. Check a story with `pnpm run audit -- <slug>`. Open a pull request. CI validates the files, and
 the text appears in the app after merge.
 
 Public-domain texts from Aozora Bunko can be imported with:
@@ -100,12 +100,12 @@ node scripts/import-aozora.mjs https://www.aozora.gr.jp/cards/000879/card92.html
 ## Development
 
 ```sh
-npm install
-npm run data         # download sources and build the dictionary into public/data/dict (~25 s)
-npm run dev          # tokenizes content/ into public/data/library, then starts Vite
-npm test
-npm run audit        # content quality report (translations, readings, keywords, level)
-npm run build        # content + typecheck + production build into dist/
+pnpm install
+pnpm run data         # download sources and build the dictionary into public/data/dict (~25 s)
+pnpm run dev          # tokenizes content/ into public/data/library, then starts Vite (via `vp dev`)
+pnpm test
+pnpm run audit        # content quality report (translations, readings, keywords, level)
+pnpm run build        # content + typecheck + production build into dist/
 ```
 
 How it works:
@@ -132,17 +132,17 @@ Workers Builds settings (**Workers & Pages → jp-reading → Settings → Build
 
 | Setting | Value |
 | --- | --- |
-| Build command | `npm run build:cf` |
-| Deploy command | `npx wrangler deploy` |
-| Preview command | `npx wrangler preview` (with preview builds enabled for all non-production branches) |
+| Build command | `pnpm run build:cf` |
+| Deploy command | `pnpm exec wrangler deploy` |
+| Preview command | `pnpm exec wrangler preview` (with preview builds enabled for all non-production branches) |
 | Root directory | `/` |
 
-`npm run build:cf` unshallows the clone (stories get their "added" date from
+`pnpm run build:cf` unshallows the clone (stories get their "added" date from
 git history), downloads the dictionary sources and builds into `dist/`.
 `.github/workflows/ci.yml` runs the tests and the build on every push and pull
 request.
 
-To deploy by hand: `npm run data && npm run build && npm run deploy`.
+To deploy by hand: `pnpm run data && pnpm run build && pnpm run deploy`.
 
 ## Credits
 
