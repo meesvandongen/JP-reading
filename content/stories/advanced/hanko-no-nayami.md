@@ -14,7 +14,6 @@ keywords:
   - 課長|かちょう|section chief
   - 根回し|ねまわし|behind-the-scenes groundwork
   - 慣例|かんれい|custom, convention
-  - 押印|おういん|affixing a seal
   - 傾ける|かたむける|to tilt
   - 鉛筆|えんぴつ|pencil
   - 不在|ふざい|absence
