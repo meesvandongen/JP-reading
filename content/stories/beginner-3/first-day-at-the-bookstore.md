@@ -11,11 +11,11 @@ keywords:
   - アルバイト|アルバイト|part-time job
   - 本屋|ほんや|bookstore
   - 店長|てんちょう|store manager
-  - 働く|はたらく|to work
+  - 本|ほん|book
   - 間違える|まちがえる|to make a mistake
   - 棚|たな|shelf
   - 客|きゃく|customer
-  - 謝る|あやまる|to apologize
+  - すみません|すみません|sorry, excuse me
 names:
   - 健太|けんた|Kenta (given name)
   - 森|もり|Mori (family name)

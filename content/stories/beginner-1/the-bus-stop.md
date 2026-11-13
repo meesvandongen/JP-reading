@@ -10,11 +10,11 @@ license: CC BY 4.0
 keywords:
   - バス|ばす|bus
   - うんてんしゅ|うんてんしゅ|driver
-  - 朝|あさ|morning
+  - あさ|あさ|morning
   - あめ|あめ|rain
   - 大きい|おおきい|big, loud
   - こえ|こえ|voice
-  - あいさつ|あいさつ|greeting
+  - おはよう|おはよう|good morning
 names:
   - けん|けん|Ken (given name)
 ---
