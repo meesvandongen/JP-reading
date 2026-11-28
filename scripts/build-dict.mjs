@@ -13,7 +13,17 @@
 // source host does not break the build. Under GitHub Actions the step output
 // `fresh` says whether every source was downloaded anew.
 
-import { createReadStream, existsSync, mkdirSync, rmSync, writeFileSync, readFileSync, createWriteStream, renameSync, appendFileSync } from 'node:fs'
+import {
+  createReadStream,
+  existsSync,
+  mkdirSync,
+  rmSync,
+  writeFileSync,
+  readFileSync,
+  createWriteStream,
+  renameSync,
+  appendFileSync,
+} from 'node:fs'
 import { pipeline } from 'node:stream/promises'
 import { createGunzip } from 'node:zlib'
 import { join, dirname } from 'node:path'
