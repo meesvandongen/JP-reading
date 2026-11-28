@@ -7,8 +7,13 @@
 //
 // Sources are downloaded once into .cache/ (see SOURCES below). The output is
 // not committed; CI runs this script before building the site.
+//
+// --refresh downloads every source again even when it is already cached. If a
+// download fails, the cached copy is used instead (with a warning), so a flaky
+// source host does not break the build. Under GitHub Actions the step output
+// `fresh` says whether every source was downloaded anew.
 
-import { createReadStream, existsSync, mkdirSync, rmSync, writeFileSync, readFileSync, createWriteStream } from 'node:fs'
+import { createReadStream, existsSync, mkdirSync, rmSync, writeFileSync, readFileSync, createWriteStream, renameSync, appendFileSync } from 'node:fs'
 import { pipeline } from 'node:stream/promises'
 import { createGunzip } from 'node:zlib'
 import { join, dirname } from 'node:path'
@@ -42,9 +47,13 @@ const FILES = {
   n1: 'jlpt-n1.csv',
 }
 
+const REFRESH = process.argv.includes('--refresh')
+let stale = false
+
 async function download(name) {
   const file = join(CACHE, FILES[name])
-  if (existsSync(file)) return file
+  const cached = existsSync(file)
+  if (cached && !REFRESH) return file
   const url = SOURCES[name]
   console.log(`downloading ${url}`)
   for (let attempt = 1; ; attempt++) {
@@ -52,11 +61,16 @@ async function download(name) {
       const res = await fetch(url)
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
       await pipeline(res.body, createWriteStream(file + '.part'))
-      const { renameSync } = await import('node:fs')
       renameSync(file + '.part', file)
       return file
     } catch (err) {
-      if (attempt >= 4) throw new Error(`failed to download ${url}: ${err.message}`)
+      if (attempt >= 4) {
+        rmSync(file + '.part', { force: true })
+        if (!cached) throw new Error(`failed to download ${url}: ${err.message}`)
+        console.warn(`warning: failed to download ${url} (${err.message}); using the cached copy`)
+        stale = true
+        return file
+      }
       await new Promise((r) => setTimeout(r, 2000 * 2 ** (attempt - 1)))
     }
   }
@@ -437,6 +451,7 @@ async function main() {
   mkdirSync(CACHE, { recursive: true })
   const files = {}
   for (const name of Object.keys(SOURCES)) files[name] = await download(name)
+  if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `fresh=${!stale}\n`)
 
   if (existsSync(OUT)) rmSync(OUT, { recursive: true })
   mkdirSync(OUT, { recursive: true })

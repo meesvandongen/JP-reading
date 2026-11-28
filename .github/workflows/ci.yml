@@ -37,16 +37,28 @@ jobs:
 
       # Dictionary sources (JMdict, KANJIDIC2, pitch accents, JLPT lists).
       # Refreshed weekly; the build is deterministic for the same sources.
+      # On the first run of a week, last week's sources are restored and then
+      # downloaded again. If a download fails, the build uses last week's copy,
+      # and the cache is not saved so the next run tries again.
       - name: Week number
         id: week
         run: echo "week=$(date -u +%G-%V)" >> "$GITHUB_OUTPUT"
-      - uses: actions/cache@v6
+      - uses: actions/cache/restore@v6
+        id: dict-cache
         with:
           path: .cache
           key: dict-sources-${{ steps.week.outputs.week }}
+          restore-keys: dict-sources-
 
       - name: Build dictionary
-        run: pnpm run data
+        id: dict
+        run: pnpm run data ${{ steps.dict-cache.outputs.cache-hit != 'true' && '-- --refresh' || '' }}
+
+      - if: steps.dict-cache.outputs.cache-hit != 'true' && steps.dict.outputs.fresh == 'true'
+        uses: actions/cache/save@v6
+        with:
+          path: .cache
+          key: dict-sources-${{ steps.week.outputs.week }}
 
       - name: Lint
         run: pnpm run lint
