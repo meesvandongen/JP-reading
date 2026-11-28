@@ -1,4 +1,12 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>meesvandongen/renovate-config"]
+  "extends": ["github>meesvandongen/renovate-config"],
+  "packageRules": [
+    {
+      "description": "vite-plus pins an exact vite-plus-core version, which the `vite` catalog alias must match. Update them together.",
+      "matchPackageNames": ["vite-plus", "@voidzero-dev/vite-plus-core"],
+      "groupName": "vite-plus",
+      "separateMajorMinor": false
+    }
+  ]
 }
