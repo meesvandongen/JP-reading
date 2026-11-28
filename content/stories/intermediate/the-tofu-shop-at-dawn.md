@@ -10,18 +10,17 @@ license: CC BY 4.0
 keywords:
   - 豆腐|とうふ|tofu
   - 大豆|だいず|soybeans
-  - 固める|かためる|to make firm, to set
+  - 豆乳|とうにゅう|soy milk
+  - 固まる|かたまる|to set, to become firm
   - にがり|にがり|nigari (coagulant)
-  - 絞る|しぼる|to squeeze, to wring
-  - 職人|しょくにん|craftsman, artisan
-  - 跡を継ぐ|あとをつぐ|to take over (a family business)
+  - しぼる|しぼる|to squeeze, to wring
+  - かき混ぜる|かきまぜる|to stir
   - 湯気|ゆげ|steam
   - 常連|じょうれん|regular customer
-  - 手間|てま|time and effort
+  - 手を抜く|てをぬく|to cut corners
 names:
   - 健太|けんた|Kenta (given name)
   - 島田|しまだ|Shimada (family name)
-  - 昭和|しょうわ|Shōwa (era)
 ---
 
 ## 第一章　午前二時
@@ -97,6 +96,8 @@ names:
 > As the sky was turning pale, the freshly made tofu was lined up in a large tank of water.
 店のシャッターを開けると、もう、年配のお客さんが二人、待っていた。
 > When he opened the shop shutter, two elderly customers were already waiting.
+二人とも、もう何十年もこの店に通っている常連さんだ。
+> Both of them were regulars who had been coming to this shop for decades.
 「おはよう。あら、健太くん？　大きくなったねえ。」
 > "Good morning. Oh, Kenta? You've grown."
 「いえ、もう三十ですから……。」
